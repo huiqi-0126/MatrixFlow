@@ -385,12 +385,14 @@ Ip Routing Channel: ${device.ip} (${device.region})
                   {/* APP STATE: Home Springboard with 24 apps list */}
                   {phoneScreen === 'home' && (
                     <div className="flex-1 relative bg-black select-none overflow-hidden h-full">
-                      {/* Image representation of iOS screen exactly matching user uploaded screenshot */}
-                      <img
-                        src="/images/ios_springboard_mockup.png"
+                      {/* Video representation of screen simulation */}
+                      <video
+                        src="/tk1.mp4"
                         className="absolute inset-0 w-full h-full object-cover select-none pointer-events-none"
-                        alt="iOS Screen Mock"
-                        referrerPolicy="no-referrer"
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
                       />
 
                       {/* Absolute overlaid translucent grid for interactive feedback mapping exactly to the 4x6 grid */}

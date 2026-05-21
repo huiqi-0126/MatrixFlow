@@ -132,7 +132,7 @@ export default function ContentPlanner({ device, onAddRecreatedVideo }: ContentP
         </div>
 
         {/* 30-Day mini grid selection */}
-        <div className="grid grid-cols-5 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 xl:grid-cols-5 gap-4 mb-2 max-h-[140px] overflow-y-auto pr-1 scrollbar-narrow">
+        <div className="grid grid-cols-5 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 xl:grid-cols-5 gap-1.5 mb-4 overflow-y-auto pr-1 scrollbar-narrow">
           {Array.from({ length: 30 }).map((_, id) => {
             const hasDraft = id < plans.length;
             const isSelected = selectedDayIndex === id;
