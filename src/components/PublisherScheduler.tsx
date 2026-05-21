@@ -181,7 +181,7 @@ export default function PublisherScheduler({
             }`}
           >
             <span>{item.label}</span>
-            <span className="font-mono font-bold text-sm bg-black/40 px-2 py-0.5 rounded-md ml-2">{item.count}</span>
+            <span className="font-mono font-bold text-xs bg-black/40 px-2 py-0.5 rounded-md ml-2">{item.count}</span>
           </button>
         ))}
       </div>
@@ -195,7 +195,7 @@ export default function PublisherScheduler({
           <div className="flex items-center justify-between border-b border-slate-800 pb-4 mb-4">
             <div className="flex items-center gap-2">
               <Clock className="text-indigo-400 w-5 h-5" />
-              <h3 className="text-base font-bold text-slate-150">自动定时发帖任务队列</h3>
+              <h3 className="text-xs font-bold text-slate-150">自动定时发帖任务队列</h3>
             </div>
             
             <button 
@@ -209,7 +209,7 @@ export default function PublisherScheduler({
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs text-slate-300 antialiased font-mono">
               <thead>
-                <tr className="border-b border-slate-850 text-slate-500 text-xxs font-bold select-none uppercase">
+                <tr className="border-b border-slate-850 text-slate-500 text-xs font-bold select-none uppercase">
                   <th className="py-2.5 px-3">视频元文件 info</th>
                   <th className="py-2.5 px-3">发布文案 Caption</th>
                   <th className="py-2.5 px-3">SEO 优化标签</th>
@@ -255,7 +255,7 @@ export default function PublisherScheduler({
                             </div>
                             <div className="overflow-hidden max-w-[140px]">
                               <span className="font-bold text-slate-200 block truncate">{asset?.title || 'Unknown.mp4'}</span>
-                              <span className="text-[10px] text-slate-500 block truncate">Duration: {asset?.duration || 15}s</span>
+                              <span className="text-xs text-slate-500 block truncate">Duration: {asset?.duration || 15}s</span>
                             </div>
                           </div>
                         </td>
@@ -271,7 +271,7 @@ export default function PublisherScheduler({
                         <td className="py-3 px-3 max-w-[120px]">
                           <div className="flex flex-wrap gap-1">
                             {task.tags.map((t, idx) => (
-                              <span key={idx} className="text-[9px] bg-slate-850 border border-slate-800 text-indigo-400 px-1 py-0.5 rounded leading-none">
+                              <span key={idx} className="text-xs bg-slate-850 border border-slate-800 text-indigo-400 px-1 py-0.5 rounded leading-none">
                                 {t}
                               </span>
                             ))}
@@ -281,7 +281,7 @@ export default function PublisherScheduler({
                         {/* 4. Target device binded IP */}
                         <td className="py-3 px-3">
                           <span className="text-slate-400 block">{device.name}</span>
-                          <span className="text-xxs text-slate-500 block">{device.ip}</span>
+                          <span className="text-xs text-slate-500 block">{device.ip}</span>
                         </td>
 
                         {/* 5. Publish plan time */}
@@ -289,7 +289,7 @@ export default function PublisherScheduler({
 
                         {/* 6. Status Badges */}
                         <td className="py-3 px-3">
-                          <span className={`text-[9px] px-2 py-0.5 rounded border ${statusClass}`}>
+                          <span className={`text-xs px-2 py-0.5 rounded border ${statusClass}`}>
                             {statusLabel}
                           </span>
                         </td>
@@ -300,7 +300,7 @@ export default function PublisherScheduler({
                             {task.status === 'pending' && (
                               <button 
                                 onClick={() => triggerVisualPostingSequence(task)}
-                                className="p-1 px-2.5 text-black bg-emerald-400 hover:bg-emerald-500 rounded font-bold text-[10px] transition cursor-pointer flex items-center gap-1 shadow"
+                                className="p-1 px-2.5 text-black bg-emerald-400 hover:bg-emerald-500 rounded font-bold text-xs transition cursor-pointer flex items-center gap-1 shadow"
                                 title="手动强制现在执行发帖"
                               >
                                 <Play className="w-3 h-3 fill-currentScale" /> 立即发布
@@ -335,7 +335,7 @@ export default function PublisherScheduler({
           <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 w-full max-w-lg text-left shadow-2xl">
             
             <div className="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
-              <span className="text-sm font-bold text-slate-150">创建定时自动化发帖任务 (New scheduled Task)</span>
+              <span className="text-xs font-bold text-slate-150">创建定时自动化发帖任务 (New scheduled Task)</span>
               <button 
                 onClick={() => setShowCreateModal(false)}
                 className="text-xs text-slate-400 hover:text-white"
@@ -362,7 +362,7 @@ export default function PublisherScheduler({
                   ))}
                 </select>
                 {videoAssets.filter(a => a.niche === device.niche || a.niche === 'all').length === 0 && (
-                  <span className="text-[10px] text-red-400 mt-1 block">
+                  <span className="text-xs text-red-400 mt-1 block">
                     ⚠️ 当前人设垂类下无导入视频大纲！请先前往【人设与资源管理】选项导入几份视频文件。
                   </span>
                 )}
@@ -402,7 +402,7 @@ export default function PublisherScheduler({
                 </div>
               </div>
 
-              <div className="bg-slate-950 p-3 rounded border border-slate-850 text-[10px] text-slate-400 leading-relaxed font-mono">
+              <div className="bg-slate-950 p-3 rounded border border-slate-850 text-xs text-slate-400 leading-relaxed font-mono">
                 <span className="font-bold text-slate-350 block mb-0.5">🚀 自动化推送原理:</span>
                 本定时任务一旦保存，系统将在指定的时间节点全自动使用 MCP 服务连接到 IP 为【{device.ip}】的 iPhone 设备。通过注入模拟原生手势点击把视频、标题及设定标签发布到账号【@{device.username}】，全程无需人工盯梢。
               </div>
@@ -437,7 +437,7 @@ export default function PublisherScheduler({
             
             <div className="flex items-center gap-2 border-b border-slate-800 pb-3 mb-4">
               <Smartphone className="w-5 h-5 text-emerald-400" />
-              <span className="text-sm font-bold text-white leading-none">MCP 远程自动化：正在对齐 iPhone 执行发帖任务...</span>
+              <span className="text-xs font-bold text-white leading-none">MCP 远程自动化：正在对齐 iPhone 执行发帖任务...</span>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -451,14 +451,14 @@ export default function PublisherScheduler({
                     else if (lg.includes('SUCCESS') || lg.includes('✓')) col = 'text-emerald-400';
                     else if (lg.includes('ADB') || lg.includes('CO')) col = 'text-indigo-400';
                     return (
-                      <div key={i} className="text-[9px] break-all leading-relaxed">
+                      <div key={i} className="text-xs break-all leading-relaxed">
                         {lg}
                       </div>
                     );
                   })}
                 </div>
 
-                <div className="mt-3 text-xxs flex items-center gap-1 text-slate-550 border-t border-slate-900 pt-2">
+                <div className="mt-3 text-xs flex items-center gap-1 text-slate-550 border-t border-slate-900 pt-2">
                   <RefreshCw className="w-3 h-3 animate-spin text-emerald-450" />
                   <span>Interactive Agent Connection (ADB shell)</span>
                 </div>
@@ -467,11 +467,11 @@ export default function PublisherScheduler({
               {/* Right: Phone Simulation Typewriter Frame */}
               <div className="bg-slate-950 rounded-xl border border-slate-800 p-4 h-[280px] flex flex-col justify-between text-left">
                 <div>
-                  <span className="text-[8px] text-slate-500 uppercase font-bold font-mono tracking-wider block">Screen Output Monitor</span>
+                  <span className="text-xs text-slate-500 uppercase font-bold font-mono tracking-wider block">Screen Output Monitor</span>
                   <div className="h-0.5 bg-slate-850 my-1"></div>
                   
                   {/* Mock content loader on video form */}
-                  <div className="space-y-2 mt-3 text-xxs">
+                  <div className="space-y-2 mt-3 text-xs">
                     <div className="flex justify-between font-bold text-slate-350 bg-slate-900 p-1.5 rounded border border-slate-850">
                       <span>Video Asset Attached:</span>
                       <span className="text-emerald-400 truncate max-w-[80px]">Recreated.mp4</span>
@@ -479,7 +479,7 @@ export default function PublisherScheduler({
 
                     <div>
                       <span className="text-slate-500">Caption typing simulation:</span>
-                      <div className="bg-black/60 p-2 rounded border border-slate-900 min-h-[50px] text-sky-300 break-all leading-normal text-[10px]">
+                      <div className="bg-black/60 p-2 rounded border border-slate-900 min-h-[50px] text-sky-300 break-all leading-normal text-xs">
                         {typewriterText}
                         <span className="w-1.5 h-3.5 bg-sky-400 animate-ping inline-block align-middle ml-0.5"></span>
                       </div>
@@ -494,7 +494,7 @@ export default function PublisherScheduler({
                   </div>
                 </div>
 
-                <div className="bg-slate-900 p-2 rounded border border-slate-850 text-center flex items-center justify-center gap-1.5 text-xxs font-mono">
+                <div className="bg-slate-900 p-2 rounded border border-slate-850 text-center flex items-center justify-center gap-1.5 text-xs font-mono">
                   {visualizerStep === 10 ? (
                     <span className="text-emerald-400 font-bold flex items-center gap-1">
                       <Check className="w-3 h-3 text-emerald-400" /> PUBLISHED SUCCESS

@@ -159,7 +159,7 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
         
         <div className="flex items-center gap-2 border-b border-slate-800 pb-4 mb-4">
           <Sliders className="text-indigo-400 w-5 h-5" />
-          <h3 className="text-base font-bold text-slate-150">养号自动化行为参数配置</h3>
+          <h3 className="text-xs font-bold text-slate-150">养号自动化行为参数配置</h3>
         </div>
 
         <div className="space-y-4 text-xs font-mono">
@@ -191,11 +191,11 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
           </div>
 
           <div className="border-t border-slate-800 pt-3">
-            <span className="text-[10px] text-slate-500 font-bold block mb-2 uppercase">互动概率参数控制 (Action Rates %)</span>
+            <span className="text-xs text-slate-500 font-bold block mb-2 uppercase">互动概率参数控制 (Action Rates %)</span>
             
             <div className="space-y-3">
               <div>
-                <div className="flex justify-between items-center mb-1 text-[11px]">
+                <div className="flex justify-between items-center mb-1 text-xs">
                   <span className="text-slate-400">双击点赞率</span>
                   <span className="text-slate-200">{likeProb}%</span>
                 </div>
@@ -208,7 +208,7 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
               </div>
 
               <div>
-                <div className="flex justify-between items-center mb-1 text-[11px]">
+                <div className="flex justify-between items-center mb-1 text-xs">
                   <span className="text-slate-400">单次养号点赞数上限</span>
                   <span className="text-slate-200">{maxLikes} 个</span>
                 </div>
@@ -221,7 +221,7 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
               </div>
 
               <div>
-                <div className="flex justify-between items-center mb-1 text-[11px]">
+                <div className="flex justify-between items-center mb-1 text-xs">
                   <span className="text-slate-400">视频收藏率 (Bookmark)</span>
                   <span className="text-slate-200">{bookmarkProb}%</span>
                 </div>
@@ -234,7 +234,7 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
               </div>
 
               <div>
-                <div className="flex justify-between items-center mb-1 text-[11px]">
+                <div className="flex justify-between items-center mb-1 text-xs">
                   <span className="text-slate-400">进入评论区及停留</span>
                   <span className="text-slate-200">{commentAreaProb}%</span>
                 </div>
@@ -247,7 +247,7 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
               </div>
 
               <div>
-                <div className="flex justify-between items-center mb-1 text-[11px]">
+                <div className="flex justify-between items-center mb-1 text-xs">
                   <span className="text-slate-400">查看作者主页可能性</span>
                   <span className="text-slate-200">{visitAuthorProb}%</span>
                 </div>
@@ -262,7 +262,7 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
 
           </div>
 
-          <div className="bg-slate-950/60 p-3 rounded-lg border border-slate-850 mt-4 leading-normal text-[10px] text-slate-400">
+          <div className="bg-slate-950/60 p-3 rounded-lg border border-slate-850 mt-4 leading-normal text-xs text-slate-400">
             <span className="font-bold text-slate-300 block mb-1">🛠️ 反反作弊防封设计 (Anti-Ban Design):</span>
             使用基于特定概率的非固定动作时间（如浏览时长30-50s随机分布），有效模拟海外真实用户在手势滑动、停留聚焦上的不规则行为特征。
           </div>
@@ -278,7 +278,7 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
         <div className="bg-slate-800/40 border border-slate-800 rounded-2xl p-5 flex flex-col text-left bento-glow-indigo">
           <div className="flex items-center gap-2 border-b border-slate-800 pb-4 mb-4">
             <Calendar className="text-indigo-400 w-5 h-5" />
-            <h3 className="text-base font-bold text-slate-150">5天拟真梯度算法养号计划</h3>
+            <h3 className="text-xs font-bold text-slate-150">5天拟真梯度算法养号计划</h3>
           </div>
 
           {/* Days buttons row */}
@@ -311,11 +311,11 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
                 <span className="text-xs text-slate-300 font-bold truncate">养号脚本选择</span>
               </div>
               
-              <p className="text-[11px] text-slate-400 mb-4 text-left leading-relaxed">
+              <p className="text-xs text-slate-400 mb-4 text-left leading-relaxed">
                 选择养号脚本类型，系统将自动执行相应的模拟操作流程。
               </p>
 
-              <span className="text-[10px] text-slate-500 font-bold block mb-2">养号脚本选择:</span>
+              <span className="text-xs text-slate-500 font-bold block mb-2">养号脚本选择:</span>
               
               <div className="space-y-2">
                 {/* Script Option 1 */}
@@ -328,14 +328,14 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
                   onClick={() => setSelectedDay(1)}
                 >
                   <div className="flex items-center gap-2 overflow-hidden mr-2">
-                    <span className="text-lg">🎵</span>
+                    <span className="text-xs">🎵</span>
                     <div className="truncate text-left">
-                      <span className="font-bold text-slate-200 text-[11px]">TikTok浏览养号+评论</span>
-                      <span className="text-slate-500 block text-[9px]">自动浏览推荐页视频并随机评论互动</span>
+                      <span className="font-bold text-slate-200 text-xs">TikTok浏览养号+评论</span>
+                      <span className="text-slate-500 block text-xs">自动浏览推荐页视频并随机评论互动</span>
                     </div>
                   </div>
                   <div className="shrink-0">
-                    <span className={`text-[9px] px-2 py-0.5 rounded ${
+                    <span className={`text-xs px-2 py-0.5 rounded ${
                       selectedDay === 1 ? 'bg-purple-500 text-white' : 'bg-slate-800 text-slate-400'
                     }`}>
                       {selectedDay === 1 ? '已选择' : '选择'}
@@ -353,14 +353,14 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
                   onClick={() => setSelectedDay(2)}
                 >
                   <div className="flex items-center gap-2 overflow-hidden mr-2">
-                    <span className="text-lg">🔍</span>
+                    <span className="text-xs">🔍</span>
                     <div className="truncate text-left">
-                      <span className="font-bold text-slate-200 text-[11px]">TikTok搜索养号</span>
-                      <span className="text-slate-500 block text-[9px]">根据人设兴趣关键词搜索并浏览视频</span>
+                      <span className="font-bold text-slate-200 text-xs">TikTok搜索养号</span>
+                      <span className="text-slate-500 block text-xs">根据人设兴趣关键词搜索并浏览视频</span>
                     </div>
                   </div>
                   <div className="shrink-0">
-                    <span className={`text-[9px] px-2 py-0.5 rounded ${
+                    <span className={`text-xs px-2 py-0.5 rounded ${
                       selectedDay === 2 ? 'bg-purple-500 text-white' : 'bg-slate-800 text-slate-400'
                     }`}>
                       {selectedDay === 2 ? '已选择' : '选择'}
@@ -378,14 +378,14 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
                   onClick={() => setSelectedDay(3)}
                 >
                   <div className="flex items-center gap-2 overflow-hidden mr-2">
-                    <span className="text-lg">❤️</span>
+                    <span className="text-xs">❤️</span>
                     <div className="truncate text-left">
-                      <span className="font-bold text-slate-200 text-[11px]">TikTok点赞+访问感兴趣主页</span>
-                      <span className="text-slate-500 block text-[9px]">对目标视频点赞并访问创作者主页</span>
+                      <span className="font-bold text-slate-200 text-xs">TikTok点赞+访问感兴趣主页</span>
+                      <span className="text-slate-500 block text-xs">对目标视频点赞并访问创作者主页</span>
                     </div>
                   </div>
                   <div className="shrink-0">
-                    <span className={`text-[9px] px-2 py-0.5 rounded ${
+                    <span className={`text-xs px-2 py-0.5 rounded ${
                       selectedDay === 3 ? 'bg-purple-500 text-white' : 'bg-slate-800 text-slate-400'
                     }`}>
                       {selectedDay === 3 ? '已选择' : '选择'}
@@ -414,11 +414,11 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
           <div className="flex items-center gap-2 border-b border-slate-800 pb-4 mb-4 justify-between">
             <div className="flex items-center gap-2">
               <Terminal className="text-emerald-400 w-5 h-5" />
-              <h3 className="text-base font-bold text-slate-150">脚本执行控制台日志 (Console Logs)</h3>
+              <h3 className="text-xs font-bold text-slate-150">脚本执行控制台日志 (Console Logs)</h3>
             </div>
             
             {isSimulating && (
-              <span className="text-[9px] bg-red-950 text-red-400 border border-red-900/40 px-1.5 py-0.5 rounded animate-pulse font-mono tracking-tight">
+              <span className="text-xs bg-red-950 text-red-400 border border-red-900/40 px-1.5 py-0.5 rounded animate-pulse font-mono tracking-tight">
                 EXECUTING...
               </span>
             )}
@@ -428,7 +428,7 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
             {/* Logs viewport */}
             <div 
               ref={logScrollRef}
-              className="flex-1 overflow-y-auto space-y-1 bg-black/40 p-3 rounded border border-slate-900 font-mono text-xxs text-left text-slate-400 select-all scrollbar-narrow"
+              className="flex-1 overflow-y-auto space-y-1 bg-black/40 p-3 rounded border border-slate-900 font-mono text-xs text-left text-slate-400 select-all scrollbar-narrow"
             >
               {simLogs.length === 0 ? (
                 <div className="h-full flex flex-col items-center justify-center text-center text-slate-600">
@@ -456,7 +456,7 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
             {/* Run dynamic progress bar */}
             {isSimulating && (
               <div className="mt-3.5 pt-3.5 border-t border-slate-900">
-                <div className="flex justify-between items-center text-[10px] text-slate-400 font-mono mb-1.5">
+                <div className="flex justify-between items-center text-xs text-slate-400 font-mono mb-1.5">
                   <span>总计进度 (Accumulated progress):</span>
                   <span>{Math.round(simProgress)}%</span>
                 </div>

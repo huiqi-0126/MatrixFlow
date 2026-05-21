@@ -59,16 +59,16 @@ export default function AnalyticsAdvisor({ device }: AnalyticsAdvisorProps) {
         <div className="flex items-center justify-between border-b border-slate-800 pb-4 mb-4">
           <div className="flex items-center gap-2">
             <Play className="text-indigo-400 w-5 h-5" />
-            <span className="text-base font-bold text-slate-150">已发布视频列表 (Published Videos)</span>
+            <span className="text-xs font-bold text-slate-150">已发布视频列表 (Published Videos)</span>
           </div>
           
-          <span className="text-xxs font-mono text-slate-500 block uppercase">
+          <span className="text-xs font-mono text-slate-500 block uppercase">
             @{device.username}
           </span>
         </div>
 
         {/* Video List */}
-        <div className="space-y-3 overflow-y-auto max-h-[520px] pr-1 scrollbar-narrow">
+        <div className="space-y-3 overflow-y-auto h-full min-h-[520px] pr-1 scrollbar-narrow">
           {stats.topVideos.map((vd, i) => {
             const engRate = ((vd.likes + vd.comments + vd.shares) / vd.views * 100).toFixed(1);
             const retentionMin = Math.floor(vd.retentionRate * 60);
@@ -85,12 +85,12 @@ export default function AnalyticsAdvisor({ device }: AnalyticsAdvisorProps) {
                   {/* Video Info */}
                   <div className="flex-1 min-w-0">
                     <h4 className="text-xs font-bold text-slate-100 truncate leading-tight">{vd.title}</h4>
-                    <p className="text-[10px] text-slate-500 mt-1 font-mono">
+                    <p className="text-xs text-slate-500 mt-1 font-mono">
                       📅 05/{15 + i * 2} 18:00 • 🎬 {vd.retentionRate > 0 ? `${retentionMin}:${retentionSec.toString().padStart(2, '0')} 完播` : 'N/A'}
                     </p>
                     
                     {/* Stats Row */}
-                    <div className="flex items-center gap-4 mt-2 text-[10px] font-mono">
+                    <div className="flex items-center gap-4 mt-2 text-xs font-mono">
                       <div className="flex items-center gap-1">
                         <span className="text-slate-500">播放</span>
                         <span className="text-sky-400 font-bold">{vd.views.toLocaleString()}</span>
@@ -113,12 +113,12 @@ export default function AnalyticsAdvisor({ device }: AnalyticsAdvisorProps) {
                   {/* Right Side Metrics */}
                   <div className="flex flex-col items-end gap-2 shrink-0">
                     <div className="flex items-center gap-2">
-                      <span className="text-[10px] text-emerald-400 font-mono font-bold">
+                      <span className="text-xs text-emerald-400 font-mono font-bold">
                         {(vd.fypFraction * 100).toFixed(0)}% FYP
                       </span>
                       <div className={`w-2 h-2 rounded-full ${vd.fypFraction > 0.9 ? 'bg-emerald-400' : vd.fypFraction > 0.8 ? 'bg-sky-400' : 'bg-slate-500'}`}></div>
                     </div>
-                    <div className="text-[10px] text-slate-400 font-mono">
+                    <div className="text-xs text-slate-400 font-mono">
                       <span className={parseFloat(engRate) > 5 ? 'text-emerald-400' : 'text-slate-400'}>
                         {engRate}%
                       </span> 互动率
@@ -138,7 +138,7 @@ export default function AnalyticsAdvisor({ device }: AnalyticsAdvisorProps) {
         <div>
           <div className="flex items-center gap-2 border-b border-slate-800 pb-4 mb-4">
             <Sparkles className="text-indigo-400 w-5 h-5 animate-pulse" />
-            <h3 className="text-base font-bold text-slate-150">MCN 黄金运营大模型审计顾问</h3>
+            <h3 className="text-xs font-bold text-slate-150">MCN 黄金运营大模型审计顾问</h3>
           </div>
 
           <p className="text-xs text-slate-400 leading-relaxed mb-4">
@@ -169,7 +169,7 @@ export default function AnalyticsAdvisor({ device }: AnalyticsAdvisorProps) {
               <div className="space-y-3 pr-1 max-h-[310px] overflow-y-auto scrollbar-narrow">
                 {aiSuggestions.map((sug, i) => (
                   <div key={i} className="bg-slate-900 p-3 rounded-lg border border-slate-850 border-l-4 border-l-emerald-450 text-left">
-                    <p className="text-[11px] text-slate-200 leading-relaxed font-sans">{sug}</p>
+                    <p className="text-xs text-slate-200 leading-relaxed font-sans">{sug}</p>
                   </div>
                 ))}
               </div>
@@ -177,7 +177,7 @@ export default function AnalyticsAdvisor({ device }: AnalyticsAdvisorProps) {
               <div className="flex-1 flex flex-col items-center justify-center text-center text-slate-600">
                 <Sparkles className="w-8 h-8 text-slate-755 mb-2" />
                 <span>暂无诊断报告</span>
-                <p className="text-[10px] text-slate-550 max-w-xs mt-1">
+                <p className="text-xs text-slate-550 max-w-xs mt-1">
                   点击上方按钮，系统将分析当前 iPhone 的 ForYou 底层权重、首发推荐率并加载大模型运营调整优化方案。
                 </p>
               </div>
@@ -185,7 +185,7 @@ export default function AnalyticsAdvisor({ device }: AnalyticsAdvisorProps) {
           </div>
         </div>
 
-        <div className="bg-slate-950/40 p-3 rounded-lg border border-slate-850 mt-4 leading-normal text-[10px] text-slate-400 text-left">
+        <div className="bg-slate-950/40 p-3 rounded-lg border border-slate-850 mt-4 leading-normal text-xs text-slate-400 text-left">
           <span className="font-bold text-slate-300 block mb-0.5">🔥 算法权重递增法则:</span>
           社媒的推流公式是基于：完播率(30%) + 5s驻留率(25%) + 评论率(20%) + 点赞(15%) + 转发(10%)。根据本平台的审计建议调节下一批视频的卡点音效与字幕设置，可实现指数级跃升。
         </div>

@@ -128,7 +128,7 @@ export default function ContentPlanner({ device, onAddRecreatedVideo }: ContentP
         
         <div className="flex items-center gap-2 border-b border-slate-800 pb-4 mb-4">
           <Calendar className="text-indigo-400 w-5 h-5" />
-          <h3 className="text-base font-bold text-slate-150">30天月度选题与内容规划表</h3>
+          <h3 className="text-xs font-bold text-slate-150">30天月度选题与内容规划表</h3>
         </div>
 
         {/* 30-Day mini grid selection */}
@@ -160,22 +160,22 @@ export default function ContentPlanner({ device, onAddRecreatedVideo }: ContentP
           <div>
             <div className="flex justify-between items-center mb-1 bg-slate-900/55 p-2 rounded border border-slate-850">
               <span className="text-xs font-mono text-indigo-400 font-bold uppercase">DAY {selectedDayIndex + 1} TOPIC (ENGLISH)</span>
-              <span className="text-[10px] text-slate-500 font-mono">Month: Cycle #1</span>
+              <span className="text-xs text-slate-500 font-mono">Month: Cycle #1</span>
             </div>
 
             {selectedDayIndex < plans.length ? (
               <div className="space-y-3.5 mt-3 text-left">
                 <div>
-                  <h4 className="text-sm font-bold text-slate-100 font-mono tracking-wide">
+                  <h4 className="text-xs font-bold text-slate-100 font-mono tracking-wide">
                     {currentPlanDay.topic}
                   </h4>
-                  <p className="text-[11px] text-slate-400 mt-1 italic font-mono leading-relaxed bg-black/40 p-2 border border-slate-900 rounded">
+                  <p className="text-xs text-slate-400 mt-1 italic font-mono leading-relaxed bg-black/40 p-2 border border-slate-900 rounded">
                     "AI generated hook direction"
                   </p>
                 </div>
 
                 <div>
-                  <span className="text-[10px] text-slate-500 font-bold block mb-1">
+                  <span className="text-xs text-slate-500 font-bold block mb-1">
                     🎥 画面拍摄与节奏技巧 (Shooting Style)
                   </span>
                   <p className="text-xs text-slate-300 font-mono leading-relaxed">
@@ -184,21 +184,21 @@ export default function ContentPlanner({ device, onAddRecreatedVideo }: ContentP
                 </div>
 
                 <div>
-                  <span className="text-[10px] text-slate-500 font-bold block mb-1">
+                  <span className="text-xs text-slate-500 font-bold block mb-1">
                     ✍️ 脚本大模型推荐提示 (English Writing Prompt)
                   </span>
-                  <div className="p-2 border border-slate-850 bg-slate-900/60 rounded text-[11px] font-mono text-slate-400 max-h-[80px] overflow-y-auto">
+                  <div className="p-2 border border-slate-850 bg-slate-900/60 rounded text-xs font-mono text-slate-400 max-h-[80px] overflow-y-auto">
                     {currentPlanDay.scriptPrompt}
                   </div>
                 </div>
 
                 <div>
-                  <span className="text-[10px] text-slate-500 font-bold block mb-1">
+                  <span className="text-xs text-slate-500 font-bold block mb-1">
                     🏷️ 关键字标签 (Core SEO tags)
                   </span>
                   <div className="flex flex-wrap gap-1.5">
                     {currentPlanDay.suggestedTags.map((t, idx) => (
-                      <span key={idx} className="text-[10px] bg-slate-850 border border-slate-800 text-slate-400 font-mono px-2 py-0.5 rounded">
+                      <span key={idx} className="text-xs bg-slate-850 border border-slate-800 text-slate-400 font-mono px-2 py-0.5 rounded">
                         {t}
                       </span>
                     ))}
@@ -210,12 +210,12 @@ export default function ContentPlanner({ device, onAddRecreatedVideo }: ContentP
               <div className="h-40 flex flex-col items-center justify-center text-center text-slate-500">
                 <BookOpen className="w-8 h-8 text-slate-700 mb-1" />
                 <span className="text-xs font-bold block">尚未激活该天数选题</span>
-                <p className="text-[10px] text-slate-500 max-w-xs mt-1 leading-normal">
+                <p className="text-xs text-slate-500 max-w-xs mt-1 leading-normal">
                   该自媒体平台现支持定制 5 天前置精选黄金选题。请参照现有方案进行实操，或点击下方【大模型内容扩产】进行拟定。
                 </p>
                 <button 
                   onClick={() => alert('已自动调用大模型生成器补充剩余日度题材，选题规划加载至 Day30 完毕！')}
-                  className="mt-3.5 px-3 py-1 bg-sky-950 border border-sky-900/40 text-sky-400 hover:bg-sky-900 hover:text-white rounded text-[10px] font-mono font-bold tracking-tight cursor-pointer"
+                  className="mt-3.5 px-3 py-1 bg-sky-950 border border-sky-900/40 text-sky-400 hover:bg-sky-900 hover:text-white rounded text-xs font-mono font-bold tracking-tight cursor-pointer"
                 >
                   ⚡ 一键指令扩充选题至 30 天
                 </button>
@@ -223,7 +223,7 @@ export default function ContentPlanner({ device, onAddRecreatedVideo }: ContentP
             )}
           </div>
 
-          <div className="border-t border-slate-900 pt-3.5 mt-3 text-xxs text-slate-500 text-left">
+          <div className="border-t border-slate-900 pt-3.5 mt-3 text-xs text-slate-500 text-left">
             <span>ℹ️ 说明: 该日度排片表与 [定时发布] 队列模块完全挂钩，有助于实现多设备间的内容交叉不重叠。</span>
           </div>
 
@@ -236,7 +236,7 @@ export default function ContentPlanner({ device, onAddRecreatedVideo }: ContentP
         
         <div className="flex items-center gap-2 border-b border-slate-800 pb-4 mb-4">
           <Film className="text-indigo-400 w-5 h-5" />
-          <h3 className="text-base font-bold text-slate-150">对标账号自动化复刻剪辑方案</h3>
+          <h3 className="text-xs font-bold text-slate-150">对标账号自动化复刻剪辑方案</h3>
         </div>
 
         <p className="text-xs text-slate-400 leading-relaxed max-w-2xl mb-4">
@@ -277,9 +277,9 @@ export default function ContentPlanner({ device, onAddRecreatedVideo }: ContentP
             <div className="space-y-4 pr-1 max-h-[360px] overflow-y-auto scrollbar-narrow text-left">
               
               <div className="flex justify-between items-center bg-slate-900 p-2 rounded border border-slate-800">
-                <span className="text-[10px] text-emerald-400 font-mono font-bold">1. 提取的原版英文文案 scripts</span>
+                <span className="text-xs text-emerald-400 font-mono font-bold">1. 提取的原版英文文案 scripts</span>
                 <button 
-                  className="text-[9px] hover:text-white flex items-center gap-1 cursor-pointer"
+                  className="text-xs hover:text-white flex items-center gap-1 cursor-pointer"
                   onClick={() => {
                     navigator.clipboard.writeText(analysisReport.extractedScript);
                     alert('原版文案已复制到剪切板！');
@@ -293,14 +293,14 @@ export default function ContentPlanner({ device, onAddRecreatedVideo }: ContentP
               </p>
 
               <div>
-                <span className="text-[10px] text-slate-500 font-bold block mb-2 font-mono">2. 多模态分析关键帧序列 keyframe timestamps</span>
+                <span className="text-xs text-slate-500 font-bold block mb-2 font-mono">2. 多模态分析关键帧序列 keyframe timestamps</span>
                 <div className="space-y-2">
                   {analysisReport.keyframes.map((frame, i) => (
                     <div key={i} className="flex gap-2.5 bg-slate-900/60 p-2 rounded border border-slate-850 text-xs font-mono">
                       <span className="text-emerald-400 font-bold shrink-0">{frame.time}</span>
                       <div className="flex-1 min-w-0">
-                        <span className="text-slate-200 block text-[11px] leading-tight font-medium">{frame.action}</span>
-                        <span className="text-[10px] text-slate-500 font-mono block leading-none mt-1">
+                        <span className="text-slate-200 block text-xs leading-tight font-medium">{frame.action}</span>
+                        <span className="text-xs text-slate-500 font-mono block leading-none mt-1">
                           Audio Trigger: {frame.cue}
                         </span>
                       </div>
@@ -311,26 +311,26 @@ export default function ContentPlanner({ device, onAddRecreatedVideo }: ContentP
 
               {/* Blueprint suggestion for automatic cloning */}
               <div className="p-3 border border-indigo-900/40 bg-indigo-950/20 rounded-lg">
-                <span className="text-[10px] text-indigo-400 font-bold block mb-2 uppercase font-mono tracking-wider">
+                <span className="text-xs text-indigo-400 font-bold block mb-2 uppercase font-mono tracking-wider">
                   ⚡ 推荐自动化克隆重构指导 (English Reproduction Blueprint)
                 </span>
                 
-                <div className="text-[11px] font-mono text-slate-300 space-y-2 leading-relaxed">
+                <div className="text-xs font-mono text-slate-300 space-y-2 leading-relaxed">
                   <div>
                     <span className="text-slate-500">Suggested Audio BPM:</span>
-                    <p className="text-emerald-400 text-xxs font-bold mt-0.5">{analysisReport.recreateBlueprint.audioBpm}</p>
+                    <p className="text-emerald-400 text-xs font-bold mt-0.5">{analysisReport.recreateBlueprint.audioBpm}</p>
                   </div>
                   <div>
                     <span className="text-slate-500">Visual Aesthetic Direction:</span>
-                    <p className="text-xxs mt-0.5">{analysisReport.recreateBlueprint.visualTone}</p>
+                    <p className="text-xs mt-0.5">{analysisReport.recreateBlueprint.visualTone}</p>
                   </div>
                   <div>
                     <span className="text-slate-500">Voiceover Narrative Style:</span>
-                    <p className="text-xxs mt-0.5">{analysisReport.recreateBlueprint.voiceoverPrompt}</p>
+                    <p className="text-xs mt-0.5">{analysisReport.recreateBlueprint.voiceoverPrompt}</p>
                   </div>
                   <div>
                     <span className="text-slate-500">SEO Suggested Caption & Hashtags:</span>
-                    <p className="text-sky-400 text-xxs font-bold mt-0.5">
+                    <p className="text-sky-400 text-xs font-bold mt-0.5">
                       {analysisReport.recreateBlueprint.captionSuggest} {analysisReport.recreateBlueprint.recommendedTags.join(' ')}
                     </p>
                   </div>
@@ -352,13 +352,13 @@ export default function ContentPlanner({ device, onAddRecreatedVideo }: ContentP
             <div className="flex-1 flex flex-col items-center justify-center text-center p-6 bg-slate-900/10 rounded border border-dashed border-slate-800">
               <Film className="w-9 h-9 text-slate-700 mb-2" />
               <span className="text-xs font-bold text-slate-300">暂无待分析视频</span>
-              <p className="text-[10px] text-slate-500 max-w-sm mt-1 leading-normal">
+              <p className="text-xs text-slate-500 max-w-sm mt-1 leading-normal">
                 粘贴链接并点击“提取文案与关键帧”，多模态模型即可实现精准的逐帧解析和复刻文案。
               </p>
             </div>
           )}
 
-          <div className="bg-slate-900/50 p-2.5 rounded border border-slate-850 text-[10px] text-slate-500 text-left mt-4 flex gap-1.5 items-start">
+          <div className="bg-slate-900/50 p-2.5 rounded border border-slate-850 text-xs text-slate-500 text-left mt-4 flex gap-1.5 items-start">
             <Info className="w-3.5 h-3.5 shrink-0 text-sky-400 mt-0.5" />
             <p className="leading-normal">
               本模块模拟对海外多媒体片段中音轨(Audio Extraction)及画面快照转换。多模态在提取文案时已经全自动将可能含有拼写错误的口语化歌词或台词过滤，输出标准、无语法毛病的英文配音提纲。

@@ -135,25 +135,25 @@ export default function App() {
             <Globe className="w-5.5 h-5.5 text-white" />
           </div>
           <div className="text-left">
-            <h1 className="text-base font-bold font-sans tracking-tight text-white flex items-center gap-1.5 leading-none">
+            <h1 className="text-xs font-bold font-sans tracking-tight text-white flex items-center gap-1.5 leading-none">
               海外自媒体模拟培育与代运营控制系统
-              <span className="text-[14px] bg-indigo-950/60 border border-indigo-900/40 text-indigo-400 px-2 py-0.5 rounded font-mono font-bold">
+              <span className="text-xs bg-indigo-950/60 border border-indigo-900/40 text-indigo-400 px-2 py-0.5 rounded font-mono font-bold">
                 MCN FARM PRO
               </span>
             </h1>
-            <p className="text-[13px] text-slate-500 mt-1.5 leading-none">
+            <p className="text-xs text-slate-500 mt-1.5 leading-none">
               每台设备独立住宅IP与专属人设 • OCR多模态视觉审计发帖 • 大模型自动克隆复刻
             </p>
           </div>
         </div>
 
         {/* Global Summary Statistics bar */}
-        <div className="flex items-center gap-4 text-sm font-mono">
+        <div className="flex items-center gap-4 text-xs font-mono">
           <div className="bg-slate-800/40 border border-slate-800 px-3 py-1.5 rounded-lg text-left flex items-center gap-2 transition hover:bg-slate-800/60">
             <Smartphone className="w-4 h-4 text-indigo-400" />
             <div>
-              <span className="text-slate-500 block text-[13px] leading-none">ONLINE DEVICES</span>
-              <span className="text-sm font-bold font-mono text-white leading-tight">
+              <span className="text-slate-500 block text-xs leading-none">ONLINE DEVICES</span>
+              <span className="text-xs font-bold font-mono text-white leading-tight">
                 {devices.length} 台
               </span>
             </div>
@@ -162,8 +162,8 @@ export default function App() {
           <div className="bg-slate-800/40 border border-slate-800 px-3 py-1.5 rounded-lg text-left flex items-center gap-2 transition hover:bg-slate-800/60">
             <Users className="w-4 h-4 text-emerald-400" />
             <div>
-              <span className="text-slate-500 block text-[13px] leading-none">ACCUMULATED FOLLOWERS</span>
-              <span className="text-sm font-bold font-mono text-emerald-400 leading-tight">
+              <span className="text-slate-500 block text-xs leading-none">ACCUMULATED FOLLOWERS</span>
+              <span className="text-xs font-bold font-mono text-emerald-400 leading-tight">
                 {totalFollowersCount.toLocaleString()}
               </span>
             </div>
@@ -172,8 +172,8 @@ export default function App() {
           <div className="bg-slate-800/40 border border-slate-800 px-3 py-1.5 rounded-lg text-left flex items-center gap-2 transition hover:bg-slate-800/60">
             <Flame className="w-4 h-4 text-orange-400" />
             <div>
-              <span className="text-slate-500 block text-[13px] leading-none">TOTAL VIDEO VIEWS</span>
-              <span className="text-sm font-bold font-mono text-orange-400 leading-tight">
+              <span className="text-slate-500 block text-xs leading-none">TOTAL VIDEO VIEWS</span>
+              <span className="text-xs font-bold font-mono text-orange-400 leading-tight">
                 {totalViewsCalculated.toLocaleString()}
               </span>
             </div>
@@ -186,20 +186,20 @@ export default function App() {
       <div className="flex-1 grid grid-cols-1 xl:grid-cols-12 gap-6 p-4 xl:p-6 overflow-hidden relative">
         
         {/* 2.1 Sidebar Panel: Active iPhone devices listing (3 columns) */}
-        <aside className="xl:col-span-3 bg-slate-900/40 border border-slate-800 rounded-2xl p-4 xl:p-5 flex flex-col text-left overflow-y-auto max-h-[calc(100vh-100px)] scrollbar-narrow bento-glow-indigo">
+        <aside className="xl:col-span-3 2xl:col-span-3 bg-slate-900/40 border border-slate-800 rounded-2xl p-4 xl:p-5 flex flex-col text-left overflow-y-auto h-[calc(100vh-80px)] scrollbar-narrow bento-glow-indigo">
           
           <div className="flex items-center justify-between mb-4 border-b border-slate-800 pb-2.5">
-            <span className="text-sm font-bold font-mono text-slate-400">
+            <span className="text-xs font-bold font-mono text-slate-400">
               设备农场 (Device Matrix)
             </span>
-            <span className="text-sm px-1.5 py-0.5 rounded bg-indigo-950/60 text-indigo-400 border border-indigo-900/30 font-mono tracking-tight font-bold">
+            <span className="text-xs px-1.5 py-0.5 rounded bg-indigo-950/60 text-indigo-400 border border-indigo-900/30 font-mono tracking-tight font-bold">
               ROUTER OK
             </span>
           </div>
 
           {/* Quick instructions widget top of list */}
-          <div className="bg-slate-800/30 p-3 rounded-xl border border-slate-800/80 mb-4 text-sm text-slate-450 leading-relaxed">
-            <div className="flex gap-1.5 text-[14px] font-bold text-slate-300 items-center mb-1 leading-none">
+          <div className="bg-slate-800/30 p-3 rounded-xl border border-slate-800/80 mb-4 text-xs text-slate-450 leading-relaxed">
+            <div className="flex gap-1.5 text-xs font-bold text-slate-300 items-center mb-1 leading-none">
               <Shield className="w-3.5 h-3.5 text-indigo-400" />
               <span>设备状态机机制 (State Mapping)</span>
             </div>
@@ -245,10 +245,10 @@ export default function App() {
                   {/* Device Header line */}
                   <div className="flex items-start justify-between">
                     <div>
-                      <span className="text-[14px] font-mono text-slate-500 block leading-none font-bold uppercase uppercase-wide mb-1">
+                      <span className="text-xs font-mono text-slate-500 block leading-none font-bold uppercase uppercase-wide mb-1">
                         PROXY IP BOUND
                       </span>
-                      <h4 className="text-sm font-bold text-slate-100 font-mono tracking-tight leading-none">
+                      <h4 className="text-xs font-bold text-slate-100 font-mono tracking-tight leading-none">
                         {dev.name}
                       </h4>
                     </div>
@@ -256,25 +256,25 @@ export default function App() {
                     {/* State dot */}
                     <div className="flex items-center gap-1.5 shrink-0">
                       <span className={`w-2 h-2 rounded-full ${statusDot}`}></span>
-                      <span className="text-[13px] font-mono text-slate-400">{dev.platform}</span>
+                      <span className="text-xs font-mono text-slate-400">{dev.platform}</span>
                     </div>
                   </div>
 
                   {/* Device mid metadata */}
-                  <div className="grid grid-cols-2 gap-2 mt-3.5 pt-3.5 border-t border-slate-800/80 text-[14px] font-mono text-slate-400 leading-tight">
+                  <div className="grid grid-cols-2 gap-2 mt-3.5 pt-3.5 border-t border-slate-800/80 text-xs font-mono text-slate-400 leading-tight">
                     <div>
-                      <span className="text-slate-500 block text-[10px] leading-none mb-0.5">BOUND ID</span>
+                      <span className="text-slate-500 block text-xs leading-none mb-0.5">BOUND ID</span>
                       <span className="text-slate-200 font-semibold truncate block">@{dev.username}</span>
                     </div>
                     <div>
-                      <span className="text-slate-500 block text-[10px] leading-none mb-0.5">PROXY ROUTE</span>
+                      <span className="text-slate-500 block text-xs leading-none mb-0.5">PROXY ROUTE</span>
                       <span className="text-slate-300 truncate block">{dev.ip}</span>
                     </div>
                   </div>
 
                   {/* Bottom channel statistics snapshot */}
-                  <div className="flex justify-between items-center mt-3 pt-2 text-[14px] font-mono border-t border-dashed border-slate-800/80">
-                    <span className="text-sm text-indigo-400 uppercase font-bold tracking-tight bg-indigo-950/60 px-1 rounded-sm">
+                  <div className="flex justify-between items-center mt-3 pt-2 text-xs font-mono border-t border-dashed border-slate-800/80">
+                    <span className="text-xs text-indigo-400 uppercase font-bold tracking-tight bg-indigo-950/60 px-1 rounded-sm">
                       {dev.niche}
                     </span>
                     <div className="flex gap-2">
@@ -288,7 +288,7 @@ export default function App() {
             })}
           </div>
 
-          <div className="mt-auto pt-6 border-t border-slate-800 text-sm text-slate-500 leading-normal">
+          <div className="mt-auto pt-6 border-t border-slate-800 text-xs text-slate-500 leading-normal">
             <span className="font-bold text-slate-450 block mb-0.5">ℹ️ MCN 控制台重要指引:</span>
             设备IP为固定独享干净美区机房代理，请勿同一时间内频繁重置连接网线以保障流量质量。
           </div>
@@ -301,23 +301,23 @@ export default function App() {
           {/* Active Device Indicator details */}
           <div className="bg-slate-800/40 p-4 border border-slate-800 rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-4 text-left bento-glow-indigo">
             <div>
-              <span className="text-[14px] text-indigo-455 uppercase font-mono font-bold tracking-wider">
+              <span className="text-xs text-indigo-455 uppercase font-mono font-bold tracking-wider">
                 ACTIVE CONTROL TARGET (当前选中操控设备)
               </span>
               <div className="flex items-center gap-2 mt-1">
                 <Smartphone className="w-5 h-5 text-indigo-400" />
-                <h2 className="text-lg font-bold font-mono text-white leading-none tracking-tight">
+                <h2 className="text-xs font-bold font-mono text-white leading-none tracking-tight">
                   {activeDevice.name}
                 </h2>
-                <span className="text-sm text-slate-400 font-mono ml-1">
+                <span className="text-xs text-slate-400 font-mono ml-1">
                   (IP: {activeDevice.ip} — {activeDevice.region})
                 </span>
               </div>
             </div>
 
             {/* Platform Selection Buttons - Tiktok, Instagram, youtube */}
-            <div className="flex items-center gap-2 text-sm font-mono">
-              <span className="text-slate-500 text-[13px] mr-1">PLATFORM:</span>
+            <div className="flex items-center gap-2 text-xs font-mono">
+              <span className="text-slate-500 text-xs mr-1">PLATFORM:</span>
               {(['TikTok', 'Instagram', 'YouTube'] as const).map(platform => (
                 <button
                   key={platform}
@@ -326,7 +326,7 @@ export default function App() {
                       d.id === activeDevice.id ? { ...d, platform } : d
                     ));
                   }}
-                  className={`px-3 py-1.5 rounded-lg border transition-all duration-200 cursor-pointer font-bold text-[14px] ${
+                  className={`px-3 py-1.5 rounded-lg border transition-all duration-200 cursor-pointer font-bold text-xs ${
                     activeDevice.platform === platform
                       ? platform === 'TikTok' 
                         ? 'bg-black border-zinc-700 text-white shadow-lg'
@@ -343,13 +343,13 @@ export default function App() {
             </div>
 
             {/* Quick status attributes badges */}
-            <div className="flex items-center gap-2 text-sm font-mono">
+            <div className="flex items-center gap-2 text-xs font-mono">
               <div className="bg-black/40 px-3 py-1.5 rounded-lg border border-slate-800">
-                <span className="text-slate-500 block text-[13px] leading-tight mb-0.5">NICHE RANGE</span>
+                <span className="text-slate-500 block text-xs leading-tight mb-0.5">NICHE RANGE</span>
                 <span className="font-bold text-indigo-400 uppercase">{activeDevice.niche}</span>
               </div>
               <div className="bg-black/40 px-3 py-1.5 rounded-lg border border-slate-800">
-                <span className="text-slate-500 block text-[13px] leading-tight mb-0.5">TOTAL SCRIPT FLOWS</span>
+                <span className="text-slate-500 block text-xs leading-tight mb-0.5">TOTAL SCRIPT FLOWS</span>
                 <span className="font-bold text-emerald-400">
                   {videoAssets.filter(a => a.niche === activeDevice.niche || a.niche === 'all').length} 个 MP4
                 </span>
@@ -378,8 +378,8 @@ export default function App() {
                       : 'bg-slate-800/40 border-slate-800/60 text-slate-400 hover:text-slate-200 hover:bg-slate-800/60 hover:border-slate-700'
                   }`}
                 >
-                  <span className="font-bold text-sm tracking-tight">{tab.label}</span>
-                  <span className="text-[13px] text-slate-500 pt-2 leading-tight font-mono block">
+                  <span className="font-bold text-xs tracking-tight">{tab.label}</span>
+                  <span className="text-xs text-slate-500 pt-2 leading-tight font-mono block">
                     {tab.desc}
                   </span>
                 </button>
