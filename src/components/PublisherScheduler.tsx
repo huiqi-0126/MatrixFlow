@@ -68,17 +68,8 @@ export default function PublisherScheduler({
     }
   }, [device, videoAssets, selectedAssetId]);
 
-  const getCover = (id: string, index: number) => {
-    const COVER_IMAGES = [
-      'https://images.unsplash.com/photo-1563822249548-9a72b6353cd1?auto=format&fit=crop&q=80&w=300&h=400',
-      'https://images.unsplash.com/photo-1593640408182-31c70c8268f5?auto=format&fit=crop&q=80&w=300&h=400',
-      'https://images.unsplash.com/photo-1526506114642-12f5a6534e70?auto=format&fit=crop&q=80&w=300&h=400',
-      'https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=300&h=400',
-      'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?auto=format&fit=crop&q=80&w=300&h=400',
-      'https://images.unsplash.com/photo-1498837167922-41cfa6f310f1?auto=format&fit=crop&q=80&w=300&h=400'
-    ];
-    const hash = id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
-    return COVER_IMAGES[(hash + index) % COVER_IMAGES.length];
+  const getCover = (index: number) => {
+    return `/1 (${(index % 5) + 1}).png`;
   };
 
   const handleCreateTask = (e: React.FormEvent) => {
@@ -272,7 +263,7 @@ export default function PublisherScheduler({
                         <td className="py-3 px-3">
                           <div className="flex items-center gap-3">
                             <div className="relative w-14 h-14 rounded-lg shrink-0 overflow-hidden">
-                              <img src={getCover(asset?.id || task.id, index)} alt="Thumbnail" className="absolute inset-0 w-full h-full object-cover opacity-80" />
+                              <img src={getCover(index)} alt="Thumbnail" className="absolute inset-0 w-full h-full object-cover opacity-80" />
                               <div className={`absolute inset-0 ${asset?.thumbnailColor || 'bg-slate-800'} opacity-30 mix-blend-multiply`} />
                               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30" />
                               <div className="absolute inset-0 flex items-center justify-center">

@@ -14,18 +14,9 @@ export default function AssetManager({ device, videoAssets, onAddVideoAsset, onD
   const [taskType, setTaskType] = useState<'image'|'video'>('video');
   const [prompt, setPrompt] = useState('');
 
-  const getCover = (id: string, index: number) => {
-    const COVER_IMAGES = [
-      'https://images.unsplash.com/photo-1563822249548-9a72b6353cd1?auto=format&fit=crop&q=80&w=300&h=400',
-      'https://images.unsplash.com/photo-1593640408182-31c70c8268f5?auto=format&fit=crop&q=80&w=300&h=400',
-      'https://images.unsplash.com/photo-1526506114642-12f5a6534e70?auto=format&fit=crop&q=80&w=300&h=400',
-      'https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=300&h=400',
-      'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?auto=format&fit=crop&q=80&w=300&h=400',
-      'https://images.unsplash.com/photo-1498837167922-41cfa6f310f1?auto=format&fit=crop&q=80&w=300&h=400'
-    ];
-    const hash = id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
-    return COVER_IMAGES[(hash + index) % COVER_IMAGES.length];
-  };
+  const getCover = (index: number) => {
+    return `/1 (${(index % 5) + 1}).png`;
+  };;
   
   return (
     <div className="flex-1 flex gap-6 min-h-0 relative">
@@ -55,7 +46,7 @@ export default function AssetManager({ device, videoAssets, onAddVideoAsset, onD
             videoAssets.map((asset, index) => (
               <div key={asset.id} className="bg-slate-800/40 p-4 rounded-xl border border-slate-800 flex gap-4 hover:border-slate-600 transition group relative">
                 <div className={`w-24 h-32 rounded-lg bg-slate-900 border border-white/10 shrink-0 relative overflow-hidden flex items-center justify-center`}>
-                  <img src={getCover(asset.id, index)} alt="Cover" className="absolute inset-0 w-full h-full object-cover opacity-80" />
+                  <img src={getCover(index)} alt="Cover" className="absolute inset-0 w-full h-full object-cover opacity-80" />
                   <div className={`absolute inset-0 ${asset.thumbnailColor} opacity-30 mix-blend-multiply`}></div>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30"></div>
                   <div className="absolute top-1.5 right-1.5 bg-black/60 px-1.5 py-0.5 rounded text-[10px] font-mono text-white font-bold">
