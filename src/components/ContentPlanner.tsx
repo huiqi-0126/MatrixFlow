@@ -77,7 +77,7 @@ export default function ContentPlanner({ device, onAddRecreatedVideo }: ContentP
       } else {
         setGenerationMsg(messages[step]);
       }
-    }, 25000); // about 3 mins total
+    }, 4000); // about 30 secs total
   };
 
 

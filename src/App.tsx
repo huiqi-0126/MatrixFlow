@@ -295,8 +295,8 @@ export default function App() {
   };
 
   // Aggregate metrics
-  const totalFollowersCount = devices.reduce((sum, d) => sum + d.followerCount, 0);
-  const totalViewsCalculated = devices.reduce((sum, d) => sum + d.totalViews, 0);
+  const totalFollowersCount = 149; // Fixed per user request
+  const totalViewsCalculated = 9573; // Fixed per user request
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans select-none antialiased">

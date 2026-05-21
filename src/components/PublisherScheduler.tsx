@@ -68,6 +68,19 @@ export default function PublisherScheduler({
     }
   }, [device, videoAssets, selectedAssetId]);
 
+  const getCover = (id: string, index: number) => {
+    const COVER_IMAGES = [
+      'https://images.unsplash.com/photo-1563822249548-9a72b6353cd1?auto=format&fit=crop&q=80&w=300&h=400',
+      'https://images.unsplash.com/photo-1593640408182-31c70c8268f5?auto=format&fit=crop&q=80&w=300&h=400',
+      'https://images.unsplash.com/photo-1526506114642-12f5a6534e70?auto=format&fit=crop&q=80&w=300&h=400',
+      'https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=300&h=400',
+      'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?auto=format&fit=crop&q=80&w=300&h=400',
+      'https://images.unsplash.com/photo-1498837167922-41cfa6f310f1?auto=format&fit=crop&q=80&w=300&h=400'
+    ];
+    const hash = id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+    return COVER_IMAGES[(hash + index) % COVER_IMAGES.length];
+  };
+
   const handleCreateTask = (e: React.FormEvent) => {
     e.preventDefault();
     if (!selectedAssetId) return;
@@ -179,7 +192,7 @@ export default function PublisherScheduler({
           { key: 'pending', label: '等待发布', count: aggregateCounts.pending, color: 'border-amber-900/40 text-amber-400 hover:border-indigo-500/30' },
           { key: 'posting', label: '正在执行...', count: aggregateCounts.posting, color: 'border-blue-900/40 text-blue-400 hover:border-indigo-500/30' },
           { key: 'success', label: '自动发布成功', count: aggregateCounts.success, color: 'border-emerald-950 text-emerald-400 hover:border-indigo-500/30' },
-          { key: 'failed', label: '自动发布成功', count: aggregateCounts.failed, color: 'border-red-950 text-red-400 hover:border-indigo-500/30' },
+          { key: 'failed', label: '自动发布失败', count: aggregateCounts.failed, color: 'border-red-950 text-red-400 hover:border-indigo-500/30' },
         ].map(item => (
           <button 
             key={item.key}
@@ -236,7 +249,7 @@ export default function PublisherScheduler({
                     </td>
                   </tr>
                 ) : (
-                  filteredTasks.map((task, idx) => {
+                  filteredTasks.map((task, index) => {
                     const asset = videoAssets.find(a => a.id === task.videoAssetId);
                     
                     let statusLabel = '等待中';
@@ -259,8 +272,9 @@ export default function PublisherScheduler({
                         <td className="py-3 px-3">
                           <div className="flex items-center gap-3">
                             <div className="relative w-14 h-14 rounded-lg shrink-0 overflow-hidden">
-                              <div className={`absolute inset-0 ${asset?.thumbnailColor || 'bg-slate-800'}`} />
-                              <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-black/30" />
+                              <img src={getCover(asset?.id || task.id, index)} alt="Thumbnail" className="absolute inset-0 w-full h-full object-cover opacity-80" />
+                              <div className={`absolute inset-0 ${asset?.thumbnailColor || 'bg-slate-800'} opacity-30 mix-blend-multiply`} />
+                              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30" />
                               <div className="absolute inset-0 flex items-center justify-center">
                                 <div className="w-7 h-7 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center">
                                   <Play className="w-3 h-3 text-white fill-white ml-0.5" />
@@ -287,8 +301,8 @@ export default function PublisherScheduler({
                         {/* 3. Tags */}
                         <td className="py-3 px-3 max-w-[120px]">
                           <div className="flex flex-wrap gap-1">
-                            {task.tags.map((t, idx) => (
-                              <span key={idx} className="text-xs bg-slate-850 border border-slate-800 text-indigo-400 px-1 py-0.5 rounded leading-none">
+                            {task.tags.map((t, index) => (
+                              <span key={index} className="text-xs bg-slate-850 border border-slate-800 text-indigo-400 px-1 py-0.5 rounded leading-none">
                                 {t}
                               </span>
                             ))}

@@ -54,99 +54,9 @@ export default function AnalyticsAdvisor({ device, videoAssets }: AnalyticsAdvis
   const maxFollower = Math.max(...followerValues, 10);
 
   return (
-    <div className="grid grid-cols-1 xl:grid-cols-12 gap-4 text-slate-200 text-left">
-
-      {/* 1. Left Panel: Published Videos List (7 columns) */}
-      <div className="xl:col-span-7 bg-slate-800/40 border border-slate-800 rounded-2xl p-4 flex flex-col bento-glow-indigo">
-
-        <div className="flex items-center justify-between border-b border-slate-800 pb-4 mb-2">
-          <div className="flex items-center gap-4">
-            <Play className="text-indigo-400 w-5 h-5" />
-            <span className="text-xs font-bold text-slate-150">已发布视频列表 (Published Videos)</span>
-          </div>
-
-          <span className="text-xs font-mono text-slate-500 block uppercase">
-            @{device.username}
-          </span>
-        </div>
-
-        {/* Video List */}
-        <div className="space-y-5 overflow-y-auto h-full min-h-[520px] pr-1 scrollbar-narrow">
-          {stats.topVideos.map((vd, i) => {
-            const engRate = ((vd.likes + vd.comments + vd.shares) / vd.views * 100).toFixed(1);
-            const retentionMin = Math.floor(vd.retentionRate * 60);
-            const retentionSec = Math.round((vd.retentionRate * 60) % 60);
-
-            return (
-              <div
-                key={i}
-                onClick={() => setSelectedVideoIndex(i)}
-                className={`bg-slate-800/30 rounded-xl border p-4 cursor-pointer transition ${selectedVideoIndex === i
-                    ? 'border-indigo-500 shadow-[0_0_15px_rgba(99,102,241,0.15)] ring-1 ring-indigo-500/50'
-                    : 'border-slate-800 hover:border-indigo-500/30'
-                  }`}
-              >
-                <div className="flex items-start gap-4">
-                  {/* Video Thumbnail Placeholder */}
-                  <div className={`w-20 h-14 rounded-lg border flex items-center justify-center shrink-0 transition-colors ${selectedVideoIndex === i
-                      ? 'bg-indigo-900/40 border-indigo-500/50 text-indigo-400'
-                      : 'bg-gradient-to-br from-slate-800 to-slate-900 border-slate-700 text-slate-600'
-                    }`}>
-                    <Play className="w-6 h-6" />
-                  </div>
-
-                  {/* Video Info */}
-                  <div className="flex-1 min-w-0">
-                    <h4 className="text-xs font-bold text-slate-100 truncate leading-tight">{vd.title}</h4>
-                    <p className="text-xs text-slate-500 mt-3 font-mono">
-                      📅 05/{15 + i * 2} 18:00 • 🎬 {vd.retentionRate > 0 ? `${retentionMin}:${retentionSec.toString().padStart(2, '0')} 完播` : 'N/A'}
-                    </p>
-
-                    {/* Stats Row */}
-                    <div className="flex items-center gap-4 mt-3 text-xs font-mono">
-                      <div className="flex items-center gap-1">
-                        <span className="text-slate-500">播放</span>
-                        <span className="text-sky-400 font-bold">{vd.views.toLocaleString()}</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <span className="text-slate-500">点赞</span>
-                        <span className="text-slate-200">{vd.likes.toLocaleString()}</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <span className="text-slate-500">评论</span>
-                        <span className="text-slate-200">{vd.comments.toLocaleString()}</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <span className="text-slate-500">分享</span>
-                        <span className="text-slate-200">{vd.shares.toLocaleString()}</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Right Side Metrics */}
-                  <div className="flex flex-col items-end gap-4 shrink-0">
-                    <div className="flex items-center gap-4">
-                      <span className="text-xs text-emerald-400 font-mono font-bold">
-                        {(vd.fypFraction * 100).toFixed(0)}% FYP
-                      </span>
-                      <div className={`w-2 h-2 rounded-full ${vd.fypFraction > 0.9 ? 'bg-emerald-400' : vd.fypFraction > 0.8 ? 'bg-sky-400' : 'bg-slate-500'}`}></div>
-                    </div>
-                    <div className="text-xs text-slate-400 font-mono">
-                      <span className={parseFloat(engRate) > 5 ? 'text-emerald-400' : 'text-slate-400'}>
-                        {engRate}%
-                      </span> 互动率
-                    </div>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-      </div>
-
+    <div className="flex flex-col gap-6 text-slate-200 text-left">
       {/* 2. Right Panel: AI MCN diagnosis Advisor system (5 columns) */}
-      <div className="xl:col-span-5 bg-slate-800/40 border border-slate-800 rounded-2xl p-4 flex flex-col h-full justify-between bento-glow-indigo">
+      <div className="bg-slate-800/40 border border-slate-800 rounded-2xl p-4 flex flex-col bento-glow-indigo">
 
         <div className="flex flex-col h-full">
           <div className="flex flex-col h-full">
@@ -291,6 +201,95 @@ export default function AnalyticsAdvisor({ device, videoAssets }: AnalyticsAdvis
         </div>
 
       </div>
+<div className="bg-slate-800/40 border border-slate-800 rounded-2xl p-4 flex flex-col bento-glow-indigo">
+
+        <div className="flex items-center justify-between border-b border-slate-800 pb-4 mb-2">
+          <div className="flex items-center gap-4">
+            <Play className="text-indigo-400 w-5 h-5" />
+            <span className="text-xs font-bold text-slate-150">已发布视频列表 (Published Videos)</span>
+          </div>
+
+          <span className="text-xs font-mono text-slate-500 block uppercase">
+            @{device.username}
+          </span>
+        </div>
+
+        {/* Video List */}
+        <div className="space-y-5 overflow-y-auto h-full min-h-[520px] pr-1 scrollbar-narrow">
+          {stats.topVideos.map((vd, i) => {
+            const engRate = ((vd.likes + vd.comments + vd.shares) / vd.views * 100).toFixed(1);
+            const retentionMin = Math.floor(vd.retentionRate * 60);
+            const retentionSec = Math.round((vd.retentionRate * 60) % 60);
+
+            return (
+              <div
+                key={i}
+                onClick={() => setSelectedVideoIndex(i)}
+                className={`bg-slate-800/30 rounded-xl border p-4 cursor-pointer transition ${selectedVideoIndex === i
+                    ? 'border-indigo-500 shadow-[0_0_15px_rgba(99,102,241,0.15)] ring-1 ring-indigo-500/50'
+                    : 'border-slate-800 hover:border-indigo-500/30'
+                  }`}
+              >
+                <div className="flex items-start gap-4">
+                  {/* Video Thumbnail Placeholder */}
+                  <div className={`w-20 h-14 rounded-lg border flex items-center justify-center shrink-0 transition-colors ${selectedVideoIndex === i
+                      ? 'bg-indigo-900/40 border-indigo-500/50 text-indigo-400'
+                      : 'bg-gradient-to-br from-slate-800 to-slate-900 border-slate-700 text-slate-600'
+                    }`}>
+                    <Play className="w-6 h-6" />
+                  </div>
+
+                  {/* Video Info */}
+                  <div className="flex-1 min-w-0">
+                    <h4 className="text-xs font-bold text-slate-100 truncate leading-tight">{vd.title}</h4>
+                    <p className="text-xs text-slate-500 mt-3 font-mono">
+                      📅 05/{15 + i * 2} 18:00 • 🎬 {vd.retentionRate > 0 ? `${retentionMin}:${retentionSec.toString().padStart(2, '0')} 完播` : 'N/A'}
+                    </p>
+
+                    {/* Stats Row */}
+                    <div className="flex items-center gap-4 mt-3 text-xs font-mono">
+                      <div className="flex items-center gap-1">
+                        <span className="text-slate-500">播放</span>
+                        <span className="text-sky-400 font-bold">{vd.views.toLocaleString()}</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <span className="text-slate-500">点赞</span>
+                        <span className="text-slate-200">{vd.likes.toLocaleString()}</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <span className="text-slate-500">评论</span>
+                        <span className="text-slate-200">{vd.comments.toLocaleString()}</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <span className="text-slate-500">分享</span>
+                        <span className="text-slate-200">{vd.shares.toLocaleString()}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Right Side Metrics */}
+                  <div className="flex flex-col items-end gap-4 shrink-0">
+                    <div className="flex items-center gap-4">
+                      <span className="text-xs text-emerald-400 font-mono font-bold">
+                        {(vd.fypFraction * 100).toFixed(0)}% FYP
+                      </span>
+                      <div className={`w-2 h-2 rounded-full ${vd.fypFraction > 0.9 ? 'bg-emerald-400' : vd.fypFraction > 0.8 ? 'bg-sky-400' : 'bg-slate-500'}`}></div>
+                    </div>
+                    <div className="text-xs text-slate-400 font-mono">
+                      <span className={parseFloat(engRate) > 5 ? 'text-emerald-400' : 'text-slate-400'}>
+                        {engRate}%
+                      </span> 互动率
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+      </div>
+
+
     </div>
   );
 }
