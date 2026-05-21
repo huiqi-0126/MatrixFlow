@@ -3,14 +3,16 @@ import {
   BarChart, TrendingUp, Users, Play, Award, PieChart, Sparkles,
   HelpCircle, RefreshCw, AlertTriangle, ArrowUpRight, MessageSquare
 } from 'lucide-react';
-import { CreatorStats, Device } from '../types';
+import { CreatorStats, Device, VideoAsset } from '../types';
+import SharedVideoList from './SharedVideoList';
 import { MOCK_CREATOR_STATS } from '../constants';
 
 interface AnalyticsAdvisorProps {
+  videoAssets: VideoAsset[];
   device: Device;
 }
 
-export default function AnalyticsAdvisor({ device }: AnalyticsAdvisorProps) {
+export default function AnalyticsAdvisor({ device, videoAssets }: AnalyticsAdvisorProps) {
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
   const [aiSuggestions, setAiSuggestions] = useState<string[] | null>(null);
   const [selectedVideoIndex, setSelectedVideoIndex] = useState<number>(0);

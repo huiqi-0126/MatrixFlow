@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  Smartphone, Shield, Activity, Users, Flame, Globe, Sliders, 
+import {
+  Smartphone, Shield, Activity, Users, Flame, Globe, Sliders,
   Calendar, Video, Clock, BarChart, RefreshCw, Layers, Award, Info,
   Instagram, Youtube
 } from 'lucide-react';
 
 const TikTokIcon = ({ className }: { className?: string }) => (
-  <svg 
-    xmlns="http://www.w3.org/2000/svg" 
-    viewBox="0 0 24 24" 
-    fill="currentColor" 
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="currentColor"
     className={className}
   >
-    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" />
   </svg>
 );
 
@@ -23,6 +23,7 @@ import WarmupPlanner from './components/WarmupPlanner';
 import ContentPlanner from './components/ContentPlanner';
 import PublisherScheduler from './components/PublisherScheduler';
 import AnalyticsAdvisor from './components/AnalyticsAdvisor';
+import AssetManager from './components/AssetManager';
 
 // Import Types and Constants
 import { Device, Persona, VideoAsset, ScheduleTask } from './types';
@@ -33,7 +34,7 @@ export default function App() {
   const [selectedDeviceId, setSelectedDeviceId] = useState<string>('device-1');
   const [personas, setPersonas] = useState<Record<string, Persona>>(INITIAL_PERSONAS);
   const [videoAssets, setVideoAssets] = useState<VideoAsset[]>(VIDEO_RESOURCES);
-  
+
   // Preload mock publishing tasks to establish initial visual realism
   const [tasks, setTasks] = useState<ScheduleTask[]>([
     // Device-1: aesthetic-cooking (cook_with_kai)
@@ -205,7 +206,7 @@ export default function App() {
     },
   ]);
 
-  const [activeTab, setActiveTab] = useState<'simulation' | 'persona' | 'warmup' | 'content' | 'scheduler' | 'analytics'>('simulation'); 
+  const [activeTab, setActiveTab] = useState<'simulation' | 'persona' | 'warmup' | 'content' | 'scheduler' | 'analytics'>('simulation');
   useEffect(() => {
     const handleOpenScheduleModal = () => {
       setActiveTab('scheduler');
@@ -228,7 +229,6 @@ export default function App() {
     window.addEventListener('replicate-video', handleReplicateVideo);
     return () => window.removeEventListener('replicate-video', handleReplicateVideo);
   }, []);
-'persona' | 'warmup' | 'content' | 'scheduler' | 'analytics'>('simulation');
 
   // Find active selected items helper
   const activeDevice = devices.find(d => d.id === selectedDeviceId) || devices[0];
@@ -300,10 +300,10 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans select-none antialiased">
-      
+
       {/* 1. Global Navigation Top Header */}
       <header className="border-b border-slate-800 bg-slate-900/50 backdrop-blur-md px-4 xl:px-6 py-3 xl:py-4 flex flex-col md:flex-row md:items-center md:justify-between gap-2 xl:gap-4 z-40 sticky top-0">
-        
+
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/20">
             <Globe className="w-5.5 h-5.5 text-white" />
@@ -358,10 +358,10 @@ export default function App() {
 
       {/* 2. Main content Layout with grid */}
       <div className="flex-1 grid grid-cols-1 xl:grid-cols-12 gap-4 p-4 xl:p-4 overflow-hidden relative">
-        
+
         {/* 2.1 Sidebar Panel: Active iPhone devices listing (3 columns) */}
         <aside className="xl:col-span-3 2xl:col-span-3 bg-slate-900/40 border border-slate-800 rounded-2xl p-4 xl:p-5 flex flex-col text-left overflow-y-auto h-[calc(100vh-80px)] scrollbar-narrow bento-glow-indigo">
-          
+
           <div className="flex items-center justify-between mb-4 border-b border-slate-800 pb-2.5">
             <span className="text-xs font-bold font-mono text-slate-400">
               设备农场 (Device Matrix)
@@ -383,7 +383,7 @@ export default function App() {
           <div className="space-y-2">
             {devices.map(dev => {
               const isActive = dev.id === selectedDeviceId;
-              
+
               // Status Badge elements
               let statusText = '在线 / 空闲';
               let statusDot = 'bg-slate-550 border-slate-400';
@@ -402,14 +402,13 @@ export default function App() {
               }
 
               return (
-                <div 
+                <div
                   key={dev.id}
                   onClick={() => setSelectedDeviceId(dev.id)}
-                  className={`p-3.5 rounded-xl border transition-all duration-200 cursor-pointer select-none text-left flex flex-col justify-between relative overflow-hidden ${
-                    isActive 
-                      ? 'bg-indigo-600/20 border-indigo-500/50 shadow-lg bento-glow-indigo' 
+                  className={`p-3.5 rounded-xl border transition-all duration-200 cursor-pointer select-none text-left flex flex-col justify-between relative overflow-hidden ${isActive
+                      ? 'bg-indigo-600/20 border-indigo-500/50 shadow-lg bento-glow-indigo'
                       : 'bg-slate-800/40 border-slate-800/60 hover:bg-slate-800/60 hover:border-slate-700'
-                  }`}
+                    }`}
                 >
                   {/* Subtle active border light indicator */}
                   {isActive && (
@@ -426,7 +425,7 @@ export default function App() {
                         {dev.name}
                       </h4>
                     </div>
-                    
+
                     {/* State dot */}
                     <div className="flex items-center gap-1.5 shrink-0">
                       <span className={`w-2 h-2 rounded-full ${statusDot}`}></span>
@@ -471,7 +470,7 @@ export default function App() {
 
         {/* 2.2 Main View Panel (9 columns) */}
         <main className="xl:col-span-9 flex flex-col space-y-4 xl:space-y-4 overflow-y-auto max-h-[calc(100vh-100px)] scrollbar-narrow">
-          
+
           {/* Active Device Indicator details */}
           <div className="bg-slate-800/40 p-4 border border-slate-800 rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-4 text-left bento-glow-indigo">
             <div>
@@ -496,19 +495,18 @@ export default function App() {
                 <button
                   key={platform}
                   onClick={() => {
-                    setDevices(prev => prev.map(d => 
+                    setDevices(prev => prev.map(d =>
                       d.id === activeDevice.id ? { ...d, platform } : d
                     ));
                   }}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border transition-all duration-200 cursor-pointer font-bold text-xs ${
-                    activeDevice.platform === platform
-                      ? platform === 'TikTok' 
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border transition-all duration-200 cursor-pointer font-bold text-xs ${activeDevice.platform === platform
+                      ? platform === 'TikTok'
                         ? 'bg-black border-zinc-700 text-white shadow-lg'
                         : platform === 'Instagram'
-                        ? 'bg-gradient-to-tr from-amber-400 via-rose-500 to-purple-600 border-rose-500/50 text-white'
-                        : 'bg-red-600 border-red-700 text-white shadow-lg'
+                          ? 'bg-gradient-to-tr from-amber-400 via-rose-500 to-purple-600 border-rose-500/50 text-white'
+                          : 'bg-red-600 border-red-700 text-white shadow-lg'
                       : 'bg-slate-900 border-slate-700 text-slate-400 hover:text-white hover:border-slate-600'
-                  }`}
+                    }`}
                 >
                   {platform === 'TikTok' ? <TikTokIcon className="w-3.5 h-3.5" /> : platform === 'Instagram' ? <Instagram className="w-3.5 h-3.5" /> : <Youtube className="w-4 h-4" />}
                   {platform}
@@ -532,25 +530,25 @@ export default function App() {
           </div>
 
           {/* 3. Horizontal tabs selection designed as high-quality Bento Grid cards */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 pb-2 select-none">
+          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3 pb-2 select-none">
             {[
               { id: 'simulation', label: '🖥️ 远程控制', desc: '截图及视觉AI诊断' },
               { id: 'persona', label: '👤 人设仓库', desc: '肖像兴趣与视频大纲' },
               { id: 'warmup', label: '📅 养号规划', desc: '模拟浏览防反作弊' },
               { id: 'content', label: '📝 克隆选题', desc: '内容表与关键帧分析' },
+              { id: 'assets', label: '🗂️ 资源管理', desc: '视频资产与AI生成' },
               { id: 'scheduler', label: '🕒 调度队列', desc: '自动定时挂钩排期' },
               { id: 'analytics', label: '📊 账号效能', desc: 'SVG成长与诊断建议' },
             ].map(tab => {
               const isActive = activeTab === tab.id;
               return (
-                <button 
+                <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id as any)}
-                  className={`p-3 rounded-xl border transition-all duration-200 cursor-pointer text-left flex flex-col justify-between ${
-                    isActive 
-                      ? 'bg-indigo-600/20 border-indigo-500/50 text-indigo-400 bento-glow-indigo shadow-lg' 
+                  className={`p-3 rounded-xl border transition-all duration-200 cursor-pointer text-left flex flex-col justify-between ${isActive
+                      ? 'bg-indigo-600/20 border-indigo-500/50 text-indigo-400 bento-glow-indigo shadow-lg'
                       : 'bg-slate-800/40 border-slate-800/60 text-slate-400 hover:text-slate-200 hover:bg-slate-800/60 hover:border-slate-700'
-                  }`}
+                    }`}
                 >
                   <span className="font-bold text-xs tracking-tight">{tab.label}</span>
                   <span className="text-xs text-slate-500 pt-2 leading-tight font-mono block">
@@ -564,16 +562,16 @@ export default function App() {
           {/* 4. Tab views dispatcher block */}
           <div className="flex-1 min-h-[500px]">
             {activeTab === 'simulation' && (
-              <DeviceSimulator 
-                device={activeDevice} 
-                persona={activePersona} 
+              <DeviceSimulator
+                device={activeDevice}
+                persona={activePersona}
                 onUpdateDeviceStats={handleUpdateDeviceStats}
               />
             )}
             {activeTab === 'persona' && (
-              <PersonaManager 
-                device={activeDevice} 
-                persona={activePersona} 
+              <PersonaManager
+                device={activeDevice}
+                persona={activePersona}
                 videoAssets={videoAssets}
                 onUpdatePersona={handleUpdatePersona}
                 onAddVideoAsset={handleAddVideoAsset}
@@ -581,19 +579,27 @@ export default function App() {
               />
             )}
             {activeTab === 'warmup' && (
-              <WarmupPlanner 
-                device={activeDevice} 
+              <WarmupPlanner
+                device={activeDevice}
                 onUpdateDeviceStats={handleUpdateDeviceStats}
               />
             )}
             {activeTab === 'content' && (
-              <ContentPlanner 
-                device={activeDevice} 
+              <ContentPlanner
+                device={activeDevice}
                 onAddRecreatedVideo={handleAddVideoAsset}
               />
             )}
+            {activeTab === 'assets' && (
+              <AssetManager
+                device={activeDevice}
+                videoAssets={videoAssets}
+                onAddVideoAsset={handleAddVideoAsset}
+                onDeleteVideoAsset={handleDeleteVideoAsset}
+              />
+            )}
             {activeTab === 'scheduler' && (
-              <PublisherScheduler 
+              <PublisherScheduler
                 device={activeDevice}
                 videoAssets={videoAssets}
                 tasks={tasks}
@@ -605,7 +611,8 @@ export default function App() {
             )}
             {activeTab === 'analytics' && (
               <AnalyticsAdvisor 
-                device={activeDevice}
+                device={activeDevice} 
+                videoAssets={videoAssets}
               />
             )}
           </div>
