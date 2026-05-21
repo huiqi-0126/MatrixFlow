@@ -1,0 +1,6 @@
+{
+  "name": "海外自媒体账号培育平台",
+  "description": "一站式海外自媒体（TikTok, Instagram, YouTube）账号模拟培育、人设管理、排班发帖及数据分析系统",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
