@@ -62,7 +62,16 @@ export default function AnalyticsAdvisor({ device, videoAssets }: AnalyticsAdvis
           </div>
         </div>
         <div className="space-y-4 overflow-y-auto flex-1 pr-1 scrollbar-narrow">
-          {stats.topVideos.map((vd, i) => {
+          {videoAssets.map((asset, i) => {
+            const vd = {
+              title: asset.title,
+              views: 12000 - i * 1500 + Math.floor(Math.random() * 500),
+              likes: 1200 - i * 100 + Math.floor(Math.random() * 50),
+              comments: 80 - i * 5,
+              shares: 40 - i * 2,
+              retentionRate: 0.45 - i * 0.02,
+              fypFraction: 0.92 - i * 0.03
+            };
             const engRate = ((vd.likes + vd.comments + vd.shares) / vd.views * 100).toFixed(1);
             const retentionMin = Math.floor(vd.retentionRate * 60);
             const retentionSec = Math.round((vd.retentionRate * 60) % 60);
@@ -71,16 +80,16 @@ export default function AnalyticsAdvisor({ device, videoAssets }: AnalyticsAdvis
                 key={i}
                 onClick={() => setSelectedVideoIndex(i)}
                 className={`bg-slate-800/30 rounded-xl border p-3 cursor-pointer transition ${selectedVideoIndex === i
-                    ? 'border-indigo-500 shadow-[0_0_15px_rgba(99,102,241,0.15)] ring-1 ring-indigo-500/50'
-                    : 'border-slate-800 hover:border-indigo-500/30'
+                  ? 'border-indigo-500 shadow-[0_0_15px_rgba(99,102,241,0.15)] ring-1 ring-indigo-500/50'
+                  : 'border-slate-800 hover:border-indigo-500/30'
                   }`}
               >
                 <div className="flex items-start gap-3">
                   <div className={`w-16 h-12 rounded-lg border shrink-0 transition-colors relative overflow-hidden ${selectedVideoIndex === i
-                      ? 'border-indigo-500/50 ring-2 ring-indigo-500'
-                      : 'border-slate-700'
+                    ? 'border-indigo-500/50 ring-2 ring-indigo-500'
+                    : 'border-slate-700'
                     }`}>
-                    <img src={`/1 (${(i % 5) + 1}).png`} alt="cover" className="w-full h-full object-cover opacity-90" />
+                    <img src={`/1 (${(i % 8) + 1}).png`} alt="cover" className="w-full h-full object-cover opacity-90" />
                     <div className="absolute inset-0 flex items-center justify-center bg-black/20">
                       <Play className="w-4 h-4 text-white/80" />
                     </div>
@@ -110,16 +119,16 @@ export default function AnalyticsAdvisor({ device, videoAssets }: AnalyticsAdvis
 
       {/* Right Panel: Charts and Diagnostics (2/3 Width) */}
       <div className="xl:col-span-8 flex flex-col gap-4 h-full min-h-0">
-        
+
         {/* Top 4/5: 3 Charts Stacked */}
         <div className="flex-[4] grid grid-cols-2 gap-4 min-h-0 overflow-y-auto scrollbar-narrow pr-1 pb-2">
-          
+
           {/* Chart 1: Views */}
           <div className="bg-slate-900/40 p-4 rounded-xl border border-slate-800/80 flex flex-col min-h-[140px]">
             <span className="text-[10px] text-slate-400 block mb-2 shrink-0">播放量趋势 (Views)</span>
             <div className="flex-1 relative ml-6 mt-2">
               <svg className="w-full h-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 100 20">
-                <path d={selectedVideoIndex % 2 === 0 ? "M0,18 Q30,16 60,10 T100,2" : "M0,18 Q40,15 70,5 T100,5"} fill="none" stroke="#3b82f6" strokeWidth="1.2" />
+                <path d={selectedVideoIndex % 2 === 0 ? "M0,18 Q30,16 60,10 T100,2" : "M0,18 Q40,15 70,5 T100,5"} fill="none" stroke="#3b82f6" strokeWidth="2" vectorEffect="non-scaling-stroke" />
               </svg>
               <div className="absolute -left-7 top-0 bottom-0 flex flex-col justify-between text-[9px] text-slate-500 py-1">
                 <span>10k</span><span>5k</span><span>0</span>
@@ -132,7 +141,7 @@ export default function AnalyticsAdvisor({ device, videoAssets }: AnalyticsAdvis
             <span className="text-[10px] text-slate-400 block mb-2 shrink-0">点赞数趋势 (Likes)</span>
             <div className="flex-1 relative ml-6 mt-2">
               <svg className="w-full h-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 100 20">
-                <path d={selectedVideoIndex % 2 === 0 ? "M0,18 Q50,17 80,12 T100,2" : "M0,18 Q30,15 60,10 T100,5"} fill="none" stroke="#10b981" strokeWidth="1.2" />
+                <path d={selectedVideoIndex % 2 === 0 ? "M0,18 Q50,17 80,12 T100,2" : "M0,18 Q30,15 60,10 T100,5"} fill="none" stroke="#10b981" strokeWidth="2" vectorEffect="non-scaling-stroke" />
               </svg>
               <div className="absolute -left-7 top-0 bottom-0 flex flex-col justify-between text-[9px] text-slate-500 py-1">
                 <span>800</span><span>400</span><span>0</span>
@@ -145,20 +154,20 @@ export default function AnalyticsAdvisor({ device, videoAssets }: AnalyticsAdvis
             <span className="text-[10px] text-slate-400 block mb-2 shrink-0">粉丝增长 (Followers)</span>
             <div className="flex-1 relative ml-6 mt-2">
               <svg className="w-full h-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 100 20">
-                <path d={selectedVideoIndex % 2 === 0 ? "M0,15 L30,15 L30,14 L60,14 L60,13 L90,13 L90,12 L100,12" : "M0,16 L20,16 L20,13 L50,13 L50,10 L80,10 L80,8 L100,8"} fill="none" stroke="#f59e0b" strokeWidth="1.2" />
+                <path d={selectedVideoIndex % 2 === 0 ? "M0,15 L30,15 L30,14 L60,14 L60,13 L90,13 L90,12 L100,12" : "M0,16 L20,16 L20,13 L50,13 L50,10 L80,10 L80,8 L100,8"} fill="none" stroke="#f59e0b" strokeWidth="2" vectorEffect="non-scaling-stroke" />
               </svg>
               <div className="absolute -left-7 top-0 bottom-0 flex flex-col justify-between text-[9px] text-slate-500 py-1">
                 <span>50</span><span>25</span><span>0</span>
               </div>
             </div>
           </div>
-          
+
           {/* Chart 4: Comments/Engagement */}
           <div className="bg-slate-900/40 p-4 rounded-xl border border-slate-800/80 flex flex-col min-h-[140px]">
             <span className="text-[10px] text-slate-400 block mb-2 shrink-0">评论互动趋势 (Comments)</span>
             <div className="flex-1 relative ml-6 mt-2">
               <svg className="w-full h-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 100 20">
-                <path d={selectedVideoIndex % 2 === 0 ? "M0,19 L20,15 L40,15 L60,12 L80,8 L100,5" : "M0,18 L25,18 L50,14 L75,12 L100,8"} fill="none" stroke="#8b5cf6" strokeWidth="1.2" />
+                <path d={selectedVideoIndex % 2 === 0 ? "M0,19 L20,15 L40,15 L60,12 L80,8 L100,5" : "M0,18 L25,18 L50,14 L75,12 L100,8"} fill="none" stroke="#8b5cf6" strokeWidth="2" vectorEffect="non-scaling-stroke" />
               </svg>
               <div className="absolute -left-7 top-0 bottom-0 flex flex-col justify-between text-[9px] text-slate-500 py-1">
                 <span>120</span><span>60</span><span>0</span>
@@ -187,7 +196,7 @@ export default function AnalyticsAdvisor({ device, videoAssets }: AnalyticsAdvis
               )}
             </button>
           </div>
-          
+
           <div className="flex-1 flex gap-4 min-h-0">
             <div className="w-1/4 flex flex-col gap-2 shrink-0">
               <div className="bg-slate-900/60 p-2 rounded border border-slate-800 flex flex-col items-center justify-center flex-1">
@@ -203,7 +212,7 @@ export default function AnalyticsAdvisor({ device, videoAssets }: AnalyticsAdvis
                 <span className="text-sm font-bold text-indigo-400 font-mono leading-none">T1</span>
               </div>
             </div>
-            
+
             <div className="flex-1 bg-slate-800/20 rounded border border-slate-800 p-3 text-xs font-mono flex flex-col overflow-y-auto scrollbar-narrow min-h-0">
               {aiSuggestions ? (
                 <div className="space-y-3 pr-1">
