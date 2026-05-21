@@ -183,7 +183,7 @@ export default function App() {
       </header>
 
       {/* 2. Main content Layout with grid */}
-      <div className="flex-1 grid grid-cols-1 xl:grid-cols-12 gap-6 p-4 xl:p-6 overflow-hidden relative">
+      <div className="flex-1 grid grid-cols-1 xl:grid-cols-12 gap-4 p-4 xl:p-4 overflow-hidden relative">
         
         {/* 2.1 Sidebar Panel: Active iPhone devices listing (3 columns) */}
         <aside className="xl:col-span-3 2xl:col-span-3 bg-slate-900/40 border border-slate-800 rounded-2xl p-4 xl:p-5 flex flex-col text-left overflow-y-auto h-[calc(100vh-80px)] scrollbar-narrow bento-glow-indigo">
@@ -296,7 +296,7 @@ export default function App() {
         </aside>
 
         {/* 2.2 Main View Panel (9 columns) */}
-        <main className="xl:col-span-9 flex flex-col space-y-4 xl:space-y-6 overflow-y-auto max-h-[calc(100vh-100px)] scrollbar-narrow">
+        <main className="xl:col-span-9 flex flex-col space-y-4 xl:space-y-4 overflow-y-auto max-h-[calc(100vh-100px)] scrollbar-narrow">
           
           {/* Active Device Indicator details */}
           <div className="bg-slate-800/40 p-4 border border-slate-800 rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-4 text-left bento-glow-indigo">

@@ -230,30 +230,30 @@ Ip Routing Channel: ${device.ip} (${device.region})
   ];
 
   return (
-    <div className="flex flex-col text-left space-y-6 text-slate-200">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+    <div className="flex flex-col text-left space-y-4 text-slate-200">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
 
         {/* ==================== 1. LEFT PANEL: Full Device Metadata (5 Columns) ==================== */}
         <div className="lg:col-span-5 flex flex-col gap-4 text-left">
 
           {/* Main User Card with Phone Status Badge */}
-          <div className="bg-slate-800/40 border border-slate-800 rounded-2xl p-5 flex items-center gap-4 hover:border-slate-705 transition bento-glow-indigo">
-            <div className="w-14 h-14 rounded-2xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-300 shadow-inner">
+          <div className="bg-slate-800/40 border border-slate-800 rounded-2xl p-4 flex items-center gap-4 hover:border-slate-705 transition bento-glow-indigo">
+            <div className="w-10 h-10 rounded-2xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-300 shadow-inner">
               <Smartphone className="w-8 h-8 text-indigo-400" />
             </div>
             <div>
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-4">
                 <span className="text-xs font-bold text-white tracking-tight">{device.name}</span>
                 <span className="text-xs bg-rose-500/10 text-rose-400 border border-rose-500/20 px-2 py-0.5 rounded font-bold">
                   使用中
                 </span>
               </div>
-              <span className="text-xs text-slate-400 mt-1 block">iOS 16.7.12</span>
+              <span className="text-xs text-slate-400 mt-3 block">iOS 16.7.12</span>
             </div>
           </div>
 
           {/* Core Info Keys */}
-          <div className="space-y-3">
+          <div className="space-y-5">
             {[
               { key: '设备ID', val: `exgk-iphone-1` },
               { key: '分辨率', val: '750 × 1334' },
@@ -262,7 +262,7 @@ Ip Routing Channel: ${device.ip} (${device.region})
               { key: '最后在线', val: '2026/5/22 00:10:51' },
               { key: '使用人', val: `admin (${device.ip})` }
             ].map(item => (
-              <div key={item.key} className="bg-slate-905/30 border border-slate-800/80 rounded-xl p-3 flex flex-col justify-start">
+              <div key={item.key} className="bg-slate-905/30 border border-slate-800/80 rounded-xl p-4 flex flex-col justify-start">
                 <span className="text-xs text-slate-400 font-bold tracking-wider mb-0.5">{item.key}</span>
                 <span className="text-xs font-mono font-bold text-slate-100">{item.val}</span>
               </div>
@@ -272,7 +272,7 @@ Ip Routing Channel: ${device.ip} (${device.region})
           {/* Capabilities Badges list exactly matching reference photo */}
           <div className="bg-slate-800/40 border border-slate-800 rounded-2xl p-4 text-left">
             <span className="text-xs text-slate-400 font-bold block mb-2 uppercase tracking-wide">支持能力</span>
-            <div className="flex flex-wrap gap-1.5 max-h-[140px] overflow-y-auto pr-1 scrollbar-narrow">
+            <div className="flex flex-wrap gap-4 max-h-[140px] overflow-y-auto pr-1 scrollbar-narrow">
               {[
                 'screenshot', 'tap', 'swipe', 'longPress', 'input', 'home', 'updateSelf',
                 'installApp', 'installSystemApps', 'launchApp', 'killApp', 'saveMedia',
@@ -287,7 +287,7 @@ Ip Routing Channel: ${device.ip} (${device.region})
           </div>
 
           {/* Hard Release & Delete Buttons */}
-          <div className="flex gap-3 mt-1.5">
+          <div className="flex gap-4 mt-3">
             <button
               onClick={() => addLog("[SYSTEM] Process requested: Device released back to cloud node.")}
               className="flex-1 py-3 text-center bg-rose-600 hover:bg-rose-500 font-bold text-xs text-white rounded-xl shadow-lg cursor-pointer transition active:scale-95"
@@ -306,13 +306,13 @@ Ip Routing Channel: ${device.ip} (${device.region})
 
 
         {/* ==================== 2. RIGHT PANEL: Interactive Screen Casting & Core Controls (7 Columns) ==================== */}
-        <div className="lg:col-span-7 bg-slate-800/40 border border-slate-800 rounded-2xl p-5 flex flex-col items-center bento-glow-indigo">
+        <div className="lg:col-span-7 bg-slate-800/40 border border-slate-800 rounded-2xl p-4 flex flex-col items-center bento-glow-indigo">
 
           {/* Card Header matching screen simulation banner perfectly */}
           <div className="w-full flex items-center justify-between border-b border-slate-800 pb-3.5 mb-5">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-4">
               <span className="text-xs font-bold text-slate-100">屏幕模拟</span>
-              <span className="flex items-center gap-1.5 text-xs text-emerald-400 font-bold font-mono">
+              <span className="flex items-center gap-4 text-xs text-emerald-400 font-bold font-mono">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
                 ● 实时 (流畅)
               </span>
@@ -320,7 +320,7 @@ Ip Routing Channel: ${device.ip} (${device.region})
 
             <div className="flex items-center gap-4">
               {/* "省流" Checkbox */}
-              <label className="flex items-center gap-1.5 text-xs text-slate-300 font-medium cursor-pointer select-none">
+              <label className="flex items-center gap-4 text-xs text-slate-300 font-medium cursor-pointer select-none">
                 <input
                   type="checkbox"
                   checked={isSavingFlow}
@@ -340,7 +340,7 @@ Ip Routing Channel: ${device.ip} (${device.region})
                   setIsRecording(state);
                   addLog(state ? `[SYSTEM] Started screen transaction capture recorder.` : `[SYSTEM] Screen capture recording packed successfully.`);
                 }}
-                className={`text-xs font-bold px-3 py-1 rounded-lg flex items-center gap-1.5 transition ${isRecording ? 'bg-red-950 border border-red-800 text-red-500' : 'bg-slate-900 border border-slate-800 text-slate-400 hover:text-white'
+                className={`text-xs font-bold px-3 py-1 rounded-lg flex items-center gap-4 transition ${isRecording ? 'bg-red-950 border border-red-800 text-red-500' : 'bg-slate-900 border border-slate-800 text-slate-400 hover:text-white'
                   }`}
               >
                 <span className={`w-1.5 h-1.5 rounded-full bg-red-500 ${isRecording ? 'animate-pulse' : ''}`}></span>
@@ -458,14 +458,14 @@ Ip Routing Channel: ${device.ip} (${device.region})
                   {/* APP STATE: simulated TikTok stream player */}
                   {phoneScreen === 'feed' && (
                     <div className="flex-1 flex flex-col overflow-hidden bg-black relative">
-                      <div className="absolute top-2 left-0 right-0 z-10 flex justify-center gap-3 text-xs font-bold text-white/65">
+                      <div className="absolute top-2 left-0 right-0 z-10 flex justify-center gap-4 text-xs font-bold text-white/65">
                         <span>Following</span>
                         <span className="text-white border-b-1.5 border-white pb-0.5">For You</span>
                       </div>
 
-                      <div className="flex-1 flex flex-col justify-end p-3 pb-12 relative bg-gradient-to-t from-black via-transparent to-neutral-900">
+                      <div className="flex-1 flex flex-col justify-end p-4 pb-12 relative bg-gradient-to-t from-black via-transparent to-neutral-900">
                         {/* Stream graphic placeholder */}
-                        <div className="absolute inset-0 z-0 flex flex-col items-center justify-center p-3 opacity-60">
+                        <div className="absolute inset-0 z-0 flex flex-col items-center justify-center p-4 opacity-60">
                           <div className={`w-20 h-20 rounded-2xl flex items-center justify-center shadow animate-pulse mb-3 ${mockFeedVideos[activeFeedIndex].type === 'aesthetic-cooking' ? 'bg-emerald-900/50 border border-emerald-500/20' : 'bg-indigo-950/60 border border-indigo-550/20'
                             }`}>
                             <Flame className="w-8 h-8 text-indigo-400" />
@@ -476,7 +476,7 @@ Ip Routing Channel: ${device.ip} (${device.region})
                         </div>
 
                         {/* Stream Right Panel buttons */}
-                        <div className="absolute right-2 bottom-12 z-10 flex flex-col gap-3.5 items-center">
+                        <div className="absolute right-2 bottom-12 z-10 flex flex-col gap-4.5 items-center">
                           <div className="w-8 h-8 rounded-full border border-white/30 bg-indigo-950 text-indigo-300 text-xs shadow flex items-center justify-center font-bold overflow-hidden">
                             {persona.avatarUrl.startsWith('http') ? (
                               <img src={persona.avatarUrl} alt="" className="w-full h-full object-cover" />
@@ -513,7 +513,7 @@ Ip Routing Channel: ${device.ip} (${device.region})
                         {/* Title Overlay */}
                         <div className="relative z-10 text-white text-left">
                           <span className="font-bold text-xs block">{mockFeedVideos[activeFeedIndex].creator}</span>
-                          <p className="text-xs text-slate-200 mt-1 line-clamp-2 pr-10 leading-relaxed">
+                          <p className="text-xs text-slate-200 mt-3 line-clamp-2 pr-10 leading-relaxed">
                             {mockFeedVideos[activeFeedIndex].description}
                           </p>
                           <span className="text-indigo-400 text-xs mt-0.5 block font-mono">
@@ -540,18 +540,18 @@ Ip Routing Channel: ${device.ip} (${device.region})
 
                   {/* APP STATE: Creator Center Analytics */}
                   {phoneScreen === 'creator' && (
-                    <div className="flex-1 flex flex-col bg-slate-950 p-3 text-left overflow-y-auto pb-12">
-                      <div className="flex justify-between items-center border-b border-slate-800 pb-1.5 mb-2.5">
+                    <div className="flex-1 flex flex-col bg-slate-950 p-4 text-left overflow-y-auto pb-12">
+                      <div className="flex justify-between items-center border-b border-slate-800 pb-1.5 mb-2">
                         <span className="text-xs font-bold tracking-tight text-white">TikTok Creator Hub</span>
                         <button className="text-xs bg-slate-800 text-slate-300 px-1 rounded" onClick={() => setPhoneScreen('feed')}>返回 feed</button>
                       </div>
 
-                      <div className="bg-slate-900 p-2.5 rounded-lg border border-slate-800 text-left mb-2.5">
+                      <div className="bg-slate-900 p-3 rounded-lg border border-slate-800 text-left mb-2">
                         <span className="text-xs text-slate-400 block">7日播放量累积 (7d Video Views)</span>
                         <span className="text-xs font-mono font-bold text-emerald-400">
                           {device.totalViews.toLocaleString()}
                         </span>
-                        <div className="grid grid-cols-2 gap-2 mt-1.5 pt-1.5 border-t border-slate-800 text-xs">
+                        <div className="grid grid-cols-2 gap-4 mt-3 pt-1.5 border-t border-slate-800 text-xs">
                           <div>
                             <span className="text-slate-400 block">粉丝数</span>
                             <span className="font-mono text-white font-bold">{device.followerCount}</span>
@@ -563,8 +563,8 @@ Ip Routing Channel: ${device.ip} (${device.region})
                         </div>
                       </div>
 
-                      <span className="text-xs text-slate-500 font-bold block mb-1">流量拆分</span>
-                      <div className="space-y-1.5 bg-slate-900/60 p-2.5 border border-slate-800/60 rounded">
+                      <span className="text-xs text-slate-500 font-bold block mb-2">流量拆分</span>
+                      <div className="space-y-4.5 bg-slate-900/60 p-3 border border-slate-800/60 rounded">
                         <div className="h-1.5 bg-slate-850 rounded-full overflow-hidden flex">
                           <div className="bg-emerald-400 h-full" style={{ width: '89%' }}></div>
                           <div className="bg-indigo-400 h-full" style={{ width: '11%' }}></div>
@@ -579,16 +579,16 @@ Ip Routing Channel: ${device.ip} (${device.region})
 
                   {/* APP STATE: Publishing Center */}
                   {phoneScreen === 'posting' && (
-                    <div className="flex-1 flex flex-col bg-slate-950 p-3.5 text-left overflow-y-auto pb-12">
-                      <div className="flex justify-between items-center border-b border-slate-800 pb-1.5 mb-2.5">
+                    <div className="flex-1 flex flex-col bg-slate-950 p-3 text-left overflow-y-auto pb-12">
+                      <div className="flex justify-between items-center border-b border-slate-800 pb-1.5 mb-2">
                         <span className="text-xs font-bold text-amber-500">模拟自动发帖中心</span>
                         <button className="text-xs bg-slate-800 text-slate-300 px-1.5 rounded" onClick={() => setPhoneScreen('feed')}>取消</button>
                       </div>
 
-                      <div className="space-y-2.5 text-slate-300">
+                      <div className="space-y-4.5 text-slate-300">
                         <div>
                           <span className="text-xs text-slate-400 block mb-0.5">1. 视频文件</span>
-                          <div className="bg-zinc-900 border border-slate-800 p-2 rounded flex items-center gap-2">
+                          <div className="bg-zinc-900 border border-slate-800 p-4 rounded flex items-center gap-4">
                             <span className="text-xs">📹</span>
                             <div className="truncate flex-1 leading-none">
                               <span className="text-xs font-bold text-slate-200 block truncate">ASMR_Cozy_Matcha_Latte.mp4</span>
@@ -602,7 +602,7 @@ Ip Routing Channel: ${device.ip} (${device.region})
                           <textarea
                             readOnly
                             value={`POV: Whisking perfect Japanese matcha. Sensory whisper sounds on rainy day. #${device.niche} #asmr`}
-                            className="w-full text-xs p-1.5 bg-zinc-900 border border-slate-800 rounded font-mono text-slate-350 h-11 resize-none focus:outline-none"
+                            className="w-full text-xs p-4 bg-zinc-900 border border-slate-800 rounded font-mono text-slate-350 h-11 resize-none focus:outline-none"
                           />
                         </div>
 
@@ -628,13 +628,13 @@ Ip Routing Channel: ${device.ip} (${device.region})
 
                   {/* APP STATE: Warmup animation spinner */}
                   {phoneScreen === 'warmup_running' && (
-                    <div className="flex-1 flex flex-col items-center justify-center p-5 bg-slate-950">
+                    <div className="flex-1 flex flex-col items-center justify-center p-4 bg-slate-950">
                       <div className="relative w-12 h-12 mb-3.5 flex items-center justify-center">
                         <div className="absolute inset-0 rounded-full border-2 border-dashed border-indigo-400 animate-spin"></div>
                         <Cpu className="w-5 h-5 text-indigo-400" />
                       </div>
                       <span className="text-xs font-bold text-white text-center mb-2">{currentWarmupActionText}</span>
-                      <div className="w-full bg-slate-800 h-1 rounded-full overflow-hidden max-w-[120px] mb-1">
+                      <div className="w-full bg-slate-800 h-1 rounded-full overflow-hidden max-w-[120px] mb-2">
                         <div className="bg-indigo-400 h-full transition-all duration-300" style={{ width: `${simulationProgress}%` }}></div>
                       </div>
                       <span className="text-xs text-slate-500 font-mono">{simulationProgress}% completed</span>
@@ -643,15 +643,15 @@ Ip Routing Channel: ${device.ip} (${device.region})
 
                   {/* APP STATE: simulated Weather */}
                   {phoneScreen === 'weather' && (
-                    <div className="flex-1 bg-gradient-to-b from-sky-400 to-blue-600 p-4 font-sans text-white text-center flex flex-col justify-between">
+                    <div className="flex-1 bg-gradient-to-b from-sky-400 to-blue-600 p-4 font-sans text-white text-center flex flex-col justify-between flex-1">
                       <div className="pt-2">
                         <div className="text-xs font-bold block">{device.region}</div>
-                        <div className="text-4xl font-extrabold font-mono mt-2">24°</div>
-                        <div className="text-xs mt-1 text-sky-100 font-medium tracking-wide">Cloudy / Overcast</div>
+                        <div className="text-4xl font-extrabold font-mono mt-3">24°</div>
+                        <div className="text-xs mt-3 text-sky-100 font-medium tracking-wide">Cloudy / Overcast</div>
                       </div>
 
-                      <div className="bg-white/10 backdrop-blur-md rounded-xl p-2 text-left space-y-1.5 text-xs mb-4">
-                        <div className="font-bold border-b border-white/10 pb-1 mb-1 text-sky-100">7-Day Forecast</div>
+                      <div className="bg-white/10 backdrop-blur-md rounded-xl p-4 text-left space-y-4.5 text-xs mb-2">
+                        <div className="font-bold border-b border-white/10 pb-1 mb-2 text-sky-100">7-Day Forecast</div>
                         <div className="flex justify-between">
                           <span>Today</span>
                           <span className="font-mono">🌧️ 24°/16°</span>
@@ -675,12 +675,12 @@ Ip Routing Channel: ${device.ip} (${device.region})
                         📱
                       </div>
                       <span className="text-xs font-bold text-white block">{genericAppName || 'Springboard App'}</span>
-                      <span className="text-xs text-emerald-400 font-mono mt-2 bg-emerald-950/30 border border-emerald-900/40 px-2 py-1 rounded">
+                      <span className="text-xs text-emerald-400 font-mono mt-3 bg-emerald-950/30 border border-emerald-900/40 px-2 py-1 rounded">
                         ✓ Connected through proxy port OK
                       </span>
                       <button
                         onClick={() => setPhoneScreen('home')}
-                        className="mt-6 px-3 py-1 bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 text-xs font-bold rounded"
+                        className="mt-3 px-3 py-1 bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 text-xs font-bold rounded"
                       >
                         返回主屏幕
                       </button>
@@ -690,12 +690,12 @@ Ip Routing Channel: ${device.ip} (${device.region})
                   {/* APP STATE: Instagram Feed simulated screen */}
                   {phoneScreen === 'instagram' && (
                     <div className="flex-1 bg-slate-950 text-left overflow-y-auto flex flex-col justify-start">
-                      <div className="border-b border-slate-900 p-2 flex justify-between items-center bg-black/40">
+                      <div className="border-b border-slate-900 p-4 flex justify-between items-center bg-black/40">
                         <span className="text-xs font-bold text-white tracking-widest font-serif italic">Instagram</span>
                         <button className="text-xs bg-slate-800 px-1 text-slate-300 rounded" onClick={() => setPhoneScreen('home')}>Exit</button>
                       </div>
-                      <div className="p-3">
-                        <div className="flex items-center gap-1.5 mb-2">
+                      <div className="p-4">
+                        <div className="flex items-center gap-4 mb-2">
                           <div className="w-5 h-5 rounded-full bg-gradient-to-tr from-yellow-400 via-rose-500 to-purple-500" />
                           <span className="text-xs font-bold text-white">@{device.username}</span>
                         </div>
@@ -714,7 +714,7 @@ Ip Routing Channel: ${device.ip} (${device.region})
                     <div className="flex-1 bg-stone-950 flex flex-col items-center justify-center p-4 text-center">
                       <div className="text-red-500 text-xs mb-2">😜</div>
                       <span className="text-xs font-bold text-white block">TrollOS Host Control</span>
-                      <p className="text-xs text-slate-400 leading-relaxed mt-2 max-w-[180px]">
+                      <p className="text-xs text-slate-400 leading-relaxed mt-3 max-w-[180px]">
                         Residential proxy tunnel is healthy. System security is robust. Click home to exit trolling sandbox!
                       </p>
                     </div>
@@ -724,7 +724,7 @@ Ip Routing Channel: ${device.ip} (${device.region})
                     <div className="flex-1 bg-indigo-950/20 flex flex-col items-center justify-center p-4 text-center">
                       <div className="text-sky-500 text-xs mb-2">🥶</div>
                       <span className="text-xs font-bold text-white block">Blue Troll Node</span>
-                      <p className="text-xs text-slate-400 leading-relaxed mt-2 max-w-[180px]">
+                      <p className="text-xs text-slate-400 leading-relaxed mt-3 max-w-[180px]">
                         Node tunnel cleared. Safe click on bottom HOME button.
                       </p>
                     </div>
@@ -755,17 +755,17 @@ Ip Routing Channel: ${device.ip} (${device.region})
           </div>
 
           {/* Core Hardware Actions underneath the Phone exactly as requested */}
-          <div className="w-full max-w-[280px] flex flex-col gap-3 mt-4">
+          <div className="w-full max-w-[280px] flex flex-col gap-4 mt-3">
 
             {/* Row 1: "输入" & "Home" Buttons */}
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 gap-4">
               <button
                 onClick={() => {
                   if (!isPowerOn) return;
                   setShowInputModal(true);
                 }}
                 disabled={!isPowerOn}
-                className="flex items-center justify-center gap-1.5 py-2 px-3 bg-slate-900 hover:bg-slate-800 disabled:opacity-50 text-slate-200 border border-slate-800 text-xs font-bold rounded-xl cursor-pointer transition active:scale-95 shadow"
+                className="flex items-center justify-center gap-4 py-2 px-3 bg-slate-900 hover:bg-slate-800 disabled:opacity-50 text-slate-200 border border-slate-800 text-xs font-bold rounded-xl cursor-pointer transition active:scale-95 shadow"
               >
                 <Keyboard className="w-3.5 h-3.5 text-indigo-400" /> 输入
               </button>
@@ -778,14 +778,14 @@ Ip Routing Channel: ${device.ip} (${device.region})
                   addLog(`[SYSTEM] Home button pressed. Springboard springboard active.`);
                 }}
                 disabled={!isPowerOn}
-                className="flex items-center justify-center gap-1.5 py-2 px-3 bg-slate-900 hover:bg-slate-800 disabled:opacity-50 text-slate-200 border border-slate-800 text-xs font-bold rounded-xl cursor-pointer transition active:scale-95 shadow"
+                className="flex items-center justify-center gap-4 py-2 px-3 bg-slate-900 hover:bg-slate-800 disabled:opacity-50 text-slate-200 border border-slate-800 text-xs font-bold rounded-xl cursor-pointer transition active:scale-95 shadow"
               >
                 <Home className="w-3.5 h-3.5 text-indigo-400" /> Home
               </button>
             </div>
 
             {/* Row 2: "启动应用", "杀掉应用", "竖屏锁定", "语言与区域" */}
-            <div className="grid grid-cols-4 gap-1.5">
+            <div className="grid grid-cols-4 gap-4">
               <button
                 onClick={() => {
                   if (!isPowerOn) return;
@@ -860,7 +860,7 @@ Ip Routing Channel: ${device.ip} (${device.region})
           </div>
 
           {/* Operational instructions matching picture detail */}
-          <div className="w-full border-t border-slate-800/70 pt-4 mt-5 space-y-1.5 text-xs text-slate-500 leading-normal text-left">
+          <div className="w-full border-t border-slate-800/70 pt-4 mt-5 space-y-4.5 text-xs text-slate-500 leading-normal text-left">
             <p className="font-medium text-slate-400">
               操作说明：轻触 = 点击 • 拖拽 = 滑动 • 按住不动 = 长按。指令成功后会自动刷新截图。
             </p>
@@ -878,9 +878,9 @@ Ip Routing Channel: ${device.ip} (${device.region})
       {/* 3.1 Input Overlay Modal */}
       {showInputModal && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl max-w-sm w-full p-5 shadow-2xl animate-in fade-in zoom-in-95 duration-200">
-            <div className="flex justify-between items-center border-b border-slate-800 pb-3 mb-4">
-              <span className="text-xs font-bold text-white flex items-center gap-2">
+          <div className="bg-slate-900 border border-slate-800 rounded-2xl max-w-sm w-full p-4 shadow-2xl animate-in fade-in zoom-in-95 duration-200">
+            <div className="flex justify-between items-center border-b border-slate-800 pb-3 mb-2">
+              <span className="text-xs font-bold text-white flex items-center gap-4">
                 <Keyboard className="w-4 h-4 text-indigo-400" />
                 远程注入文本输入
               </span>
@@ -897,10 +897,10 @@ Ip Routing Channel: ${device.ip} (${device.region})
                 placeholder="在此输入文本并发送到远程宿主设备中..."
                 value={inputTextVal}
                 onChange={(e) => setInputTextVal(e.target.value)}
-                className="w-full h-24 bg-black text-slate-200 border border-slate-805 rounded-xl p-3 text-xs font-mono focus:outline-none focus:border-indigo-505"
+                className="w-full h-24 bg-black text-slate-200 border border-slate-805 rounded-xl p-4 text-xs font-mono focus:outline-none focus:border-indigo-505"
                 rows={3}
               />
-              <div className="flex justify-end gap-2.5">
+              <div className="flex justify-end gap-4.5">
                 <button
                   type="button"
                   onClick={() => setShowInputModal(false)}
@@ -923,12 +923,12 @@ Ip Routing Channel: ${device.ip} (${device.region})
       {/* 3.2 Dynamic App Selector panel */}
       {appSelecting && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl max-w-sm w-full p-5 shadow-2xl text-left">
+          <div className="bg-slate-900 border border-slate-800 rounded-2xl max-w-sm w-full p-4 shadow-2xl text-left">
             <div className="flex justify-between items-center border-b border-slate-800 pb-2.5 mb-3">
               <span className="text-xs font-bold text-white">📦 部署启动远程App应用</span>
               <button onClick={() => setAppSelecting(false)} className="text-slate-400 hover:text-white"><X className="w-4 h-4" /></button>
             </div>
-            <div className="space-y-2 max-h-[250px] overflow-y-auto pr-1 scrollbar-narrow py-2">
+            <div className="space-y-4 max-h-[250px] overflow-y-auto pr-1 scrollbar-narrow py-2">
               {[
                 { id: 'feed', name: '🎵 TikTok Client' },
                 { id: 'instagram', name: '📸 Instagram Reels' },
@@ -946,7 +946,7 @@ Ip Routing Channel: ${device.ip} (${device.region})
                     setAppSelecting(false);
                     addLog(`[SYSTEM] Dispatched execution launching command for payload: ${app.name}`);
                   }}
-                  className="w-full text-left p-3 rounded-xl bg-slate-950/40 hover:bg-indigo-950/30 border border-slate-805 text-xs text-slate-200 hover:text-indigo-300 font-bold transition flex justify-between items-center cursor-pointer"
+                  className="w-full text-left p-4 rounded-xl bg-slate-950/40 hover:bg-indigo-950/30 border border-slate-805 text-xs text-slate-200 hover:text-indigo-300 font-bold transition flex justify-between items-center cursor-pointer"
                 >
                   <span>{app.name}</span>
                   <span className="text-xs text-slate-500 font-mono">Launch</span>
@@ -960,10 +960,10 @@ Ip Routing Channel: ${device.ip} (${device.region})
       {/* 3.3 Gemini vision consultation report modal */}
       {showAiVisionModal && (
         <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl max-w-lg w-full p-6 shadow-2xl animate-in fade-in zoom-in-95 duration-200 max-h-[90vh] overflow-y-auto scrollbar-narrow text-left">
+          <div className="bg-slate-900 border border-slate-800 rounded-2xl max-w-lg w-full p-4 shadow-2xl animate-in fade-in zoom-in-95 duration-200 max-h-[90vh] overflow-y-auto scrollbar-narrow text-left">
 
-            <div className="flex justify-between items-center border-b border-slate-800 pb-3 mb-4">
-              <div className="flex items-center gap-2">
+            <div className="flex justify-between items-center border-b border-slate-800 pb-3 mb-2">
+              <div className="flex items-center gap-4">
                 <Cpu className="text-indigo-400 w-5 h-5 animate-pulse" />
                 <span className="text-xs font-bold text-white">Gemini 视觉大模型截图顾问诊断</span>
               </div>
@@ -977,10 +977,10 @@ Ip Routing Channel: ${device.ip} (${device.region})
 
             <div className="space-y-4">
               {/* Thumbnail snapshot */}
-              <div className="bg-slate-955/65 rounded-xl border border-slate-800 p-2 flex gap-3.5 items-center">
+              <div className="bg-slate-955/65 rounded-xl border border-slate-800 p-4 flex gap-4.5 items-center">
                 <div className="w-12 h-16 rounded bg-slate-950 border border-neutral-800 flex flex-col items-center justify-center shrink-0">
                   <Camera className="w-5 h-5 text-indigo-400 animate-pulse" />
-                  <span className="text-[7px] text-slate-500 uppercase tracking-widest font-mono mt-1">PNG Active</span>
+                  <span className="text-[7px] text-slate-500 uppercase tracking-widest font-mono mt-3">PNG Active</span>
                 </div>
                 <div className="leading-tight">
                   <span className="text-xs text-slate-400 block font-mono">PROMPT SENT IN NY TIMEZONE:</span>
@@ -991,8 +991,8 @@ Ip Routing Channel: ${device.ip} (${device.region})
               </div>
 
               {/* Status Scores */}
-              <div className="grid grid-cols-2 gap-3.5">
-                <div className="bg-slate-950/40 p-3 rounded-xl border border-slate-800 flex items-center gap-3">
+              <div className="grid grid-cols-2 gap-4.5">
+                <div className="bg-slate-950/40 p-4 rounded-xl border border-slate-800 flex items-center gap-4">
                   <Award className="w-5 h-5 text-indigo-400" />
                   <div>
                     <span className="text-xs text-slate-400 block font-mono">ALGORITHM MATCH</span>
@@ -1000,7 +1000,7 @@ Ip Routing Channel: ${device.ip} (${device.region})
                   </div>
                 </div>
 
-                <div className="bg-slate-950/40 p-3 rounded-xl border border-slate-805 flex items-center gap-3">
+                <div className="bg-slate-950/40 p-4 rounded-xl border border-slate-805 flex items-center gap-4">
                   <CheckCircle className="w-5 h-5 text-emerald-400 animate-bounce" />
                   <div>
                     <span className="text-xs text-slate-400 block font-mono">PROXY HEALTH</span>
@@ -1011,7 +1011,7 @@ Ip Routing Channel: ${device.ip} (${device.region})
 
               {/* Core Output Box */}
               {aiAnalysis.analyzing ? (
-                <div className="flex flex-col items-center justify-center text-center p-6 bg-slate-950/40 border border-dashed border-slate-850 rounded-xl">
+                <div className="flex flex-col items-center justify-center text-center p-4 bg-slate-950/40 border border-dashed border-slate-850 rounded-xl">
                   <div className="w-8 h-8 rounded-full border-3 border-t-indigo-550 border-r-slate-800 border-b-slate-800 border-l-slate-800 animate-spin mb-2" />
                   <span className="text-xs font-bold text-slate-300">Gemini-1.5-Flash generating advice report...</span>
                 </div>
@@ -1028,8 +1028,8 @@ Ip Routing Channel: ${device.ip} (${device.region})
               {!aiAnalysis.analyzing && (
                 <>
                   <div>
-                    <span className="text-xs text-slate-400 font-bold block mb-1.5">Extracted Tags:</span>
-                    <div className="flex flex-wrap gap-1.5">
+                    <span className="text-xs text-slate-400 font-bold block mb-2">Extracted Tags:</span>
+                    <div className="flex flex-wrap gap-4">
                       {aiAnalysis.tags.map((tg, idx) => (
                         <span key={idx} className="text-xs font-mono text-indigo-400 bg-indigo-950/45 border border-indigo-900/30 px-2 py-0.5 rounded-md">
                           {tg}
@@ -1038,8 +1038,8 @@ Ip Routing Channel: ${device.ip} (${device.region})
                     </div>
                   </div>
 
-                  <div className="bg-indigo-950/20 p-3 rounded-xl border border-indigo-900/30">
-                    <span className="text-xs text-indigo-400 font-bold block mb-1">Suggested Agent Automation Step:</span>
+                  <div className="bg-indigo-950/20 p-4 rounded-xl border border-indigo-900/30">
+                    <span className="text-xs text-indigo-400 font-bold block mb-2">Suggested Agent Automation Step:</span>
                     <p className="text-xs text-slate-300 leading-snug font-mono">
                       {aiAnalysis.actionSuggested}
                     </p>

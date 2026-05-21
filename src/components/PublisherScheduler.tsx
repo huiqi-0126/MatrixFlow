@@ -162,10 +162,10 @@ export default function PublisherScheduler({
   };
 
   return (
-    <div className="flex flex-col text-left space-y-6 text-slate-200">
+    <div className="flex flex-col text-left space-y-4 text-slate-200 h-full min-h-[500px]">
       
       {/* 2. Headline filter counters */}
-      <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
+      <div className="grid grid-cols-2 sm:grid-cols-5 gap-4">
         {[
           { key: 'all', label: '全部排期任务', count: aggregateCounts.total, color: 'border-slate-800 text-slate-300 hover:border-indigo-500/30' },
           { key: 'pending', label: '等待发布', count: aggregateCounts.pending, color: 'border-amber-900/40 text-amber-400 hover:border-indigo-500/30' },
@@ -176,7 +176,7 @@ export default function PublisherScheduler({
           <button 
             key={item.key}
             onClick={() => setActiveFilter(item.key as any)}
-            className={`bg-slate-800/40 border p-3 rounded-xl flex items-center justify-between text-xs cursor-pointer hover:bg-slate-800/60 transition truncate ${item.color} ${
+            className={`bg-slate-800/40 border p-4 rounded-xl flex items-center justify-between text-xs cursor-pointer hover:bg-slate-800/60 transition truncate ${item.color} ${
               activeFilter === item.key ? 'ring-2 ring-indigo-500 bg-indigo-950/20 text-white' : ''
             }`}
           >
@@ -187,13 +187,13 @@ export default function PublisherScheduler({
       </div>
 
       {/* Grid: Form and listing */}
-      <div className="grid grid-cols-1 xl:grid-cols-12 gap-6">
+      <div className="flex-1 grid grid-cols-1 xl:grid-cols-12 gap-4 min-h-0">
 
         {/* 3. Scheduler Lists block (8 columns) */}
-        <div className="xl:col-span-12 bg-slate-800/40 border border-slate-800 rounded-2xl p-5 flex flex-col bento-glow-indigo">
+        <div className="xl:col-span-12 bg-slate-800/40 border border-slate-800 rounded-2xl p-4 flex flex-col bento-glow-indigo h-full">
           
-          <div className="flex items-center justify-between border-b border-slate-800 pb-4 mb-4">
-            <div className="flex items-center gap-2">
+          <div className="flex items-center justify-between border-b border-slate-800 pb-4 mb-2">
+            <div className="flex items-center gap-4">
               <Clock className="text-indigo-400 w-5 h-5" />
               <h3 className="text-xs font-bold text-slate-150">自动定时发帖任务队列</h3>
             </div>
@@ -249,7 +249,7 @@ export default function PublisherScheduler({
                         
                         {/* 1. Video file preview */}
                         <td className="py-3 px-3">
-                          <div className="flex items-center gap-2">
+                          <div className="flex items-center gap-4">
                             <div className={`w-8 h-8 rounded shrink-0 flex items-center justify-center text-xs ${asset?.thumbnailColor || 'bg-slate-800'}`}>
                               📹
                             </div>
@@ -332,9 +332,9 @@ export default function PublisherScheduler({
       {/* Modal: Create new post task overlay */}
       {showCreateModal && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 w-full max-w-lg text-left shadow-2xl">
+          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4 w-full max-w-lg text-left shadow-2xl">
             
-            <div className="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
+            <div className="flex items-center justify-between border-b border-slate-800 pb-3 mb-2">
               <span className="text-xs font-bold text-slate-150">创建定时自动化发帖任务 (New scheduled Task)</span>
               <button 
                 onClick={() => setShowCreateModal(false)}
@@ -347,7 +347,7 @@ export default function PublisherScheduler({
             <form onSubmit={handleCreateTask} className="space-y-4">
               
               <div>
-                <label className="text-xs text-slate-400 block mb-1">选择当前设备库中的视频文件 (Pick Asset)</label>
+                <label className="text-xs text-slate-400 block mb-2">选择当前设备库中的视频文件 (Pick Asset)</label>
                 <select 
                   required
                   value={selectedAssetId}
@@ -362,14 +362,14 @@ export default function PublisherScheduler({
                   ))}
                 </select>
                 {videoAssets.filter(a => a.niche === device.niche || a.niche === 'all').length === 0 && (
-                  <span className="text-xs text-red-400 mt-1 block">
+                  <span className="text-xs text-red-400 mt-3 block">
                     ⚠️ 当前人设垂类下无导入视频大纲！请先前往【人设与资源管理】选项导入几份视频文件。
                   </span>
                 )}
               </div>
 
               <div>
-                <label className="text-xs text-slate-400 block mb-1">作品描述 (English Caption)</label>
+                <label className="text-xs text-slate-400 block mb-2">作品描述 (English Caption)</label>
                 <textarea 
                   required
                   placeholder="请输入用于海外发布展示的英文说明，例如: Morning routine for healthy mind..."
@@ -379,9 +379,9 @@ export default function PublisherScheduler({
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="text-xs text-slate-400 block mb-1">SEO 英语标签 (英文逗号隔开)</label>
+                  <label className="text-xs text-slate-400 block mb-2">SEO 英语标签 (英文逗号隔开)</label>
                   <input 
                     type="text" 
                     placeholder="matcha, workout, tutorial"
@@ -391,7 +391,7 @@ export default function PublisherScheduler({
                   />
                 </div>
                 <div>
-                  <label className="text-xs text-slate-400 block mb-1">设定定时发布时间 (schedule_time)</label>
+                  <label className="text-xs text-slate-400 block mb-2">设定定时发布时间 (schedule_time)</label>
                   <input 
                     type="text" 
                     placeholder="例如: 05/21 18:00"
@@ -402,12 +402,12 @@ export default function PublisherScheduler({
                 </div>
               </div>
 
-              <div className="bg-slate-950 p-3 rounded border border-slate-850 text-xs text-slate-400 leading-relaxed font-mono">
+              <div className="bg-slate-950 p-4 rounded border border-slate-850 text-xs text-slate-400 leading-relaxed font-mono">
                 <span className="font-bold text-slate-350 block mb-0.5">🚀 自动化推送原理:</span>
                 本定时任务一旦保存，系统将在指定的时间节点全自动使用 MCP 服务连接到 IP 为【{device.ip}】的 iPhone 设备。通过注入模拟原生手势点击把视频、标题及设定标签发布到账号【@{device.username}】，全程无需人工盯梢。
               </div>
 
-              <div className="flex gap-2">
+              <div className="flex gap-4">
                 <button 
                   type="submit"
                   disabled={!selectedAssetId}
@@ -433,9 +433,9 @@ export default function PublisherScheduler({
       {/* Modal Viewport: Automator Screen Share Interactive Live Terminal (Typewriter sequence mockup) */}
       {showAutoPostVisualizer && activeVisualizerTask && (
         <div className="fixed inset-0 bg-black/85 flex items-center justify-center z-50 p-4 font-mono">
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 w-full max-w-xl text-left shadow-2xl">
+          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4 w-full max-w-xl text-left shadow-2xl">
             
-            <div className="flex items-center gap-2 border-b border-slate-800 pb-3 mb-4">
+            <div className="flex items-center gap-4 border-b border-slate-800 pb-3 mb-2">
               <Smartphone className="w-5 h-5 text-emerald-400" />
               <span className="text-xs font-bold text-white leading-none">MCP 远程自动化：正在对齐 iPhone 执行发帖任务...</span>
             </div>
@@ -443,8 +443,8 @@ export default function PublisherScheduler({
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               
               {/* Left: Terminal Output */}
-              <div className="bg-black p-3.5 rounded-lg border border-slate-850 flex flex-col justify-between h-[280px]">
-                <div className="overflow-y-auto space-y-1 pr-1 text-left scrollbar-narrow">
+              <div className="bg-black p-3 rounded-lg border border-slate-850 flex flex-col justify-between flex-1 h-[280px]">
+                <div className="overflow-y-auto space-y-4 pr-1 text-left scrollbar-narrow">
                   {visualizerLogs.map((lg, i) => {
                     let col = 'text-slate-400';
                     if (lg.includes('TYPEWRITER')) col = 'text-amber-400 font-bold animate-pulse';
@@ -458,28 +458,28 @@ export default function PublisherScheduler({
                   })}
                 </div>
 
-                <div className="mt-3 text-xs flex items-center gap-1 text-slate-550 border-t border-slate-900 pt-2">
+                <div className="mt-5 text-xs flex items-center gap-1 text-slate-550 border-t border-slate-900 pt-2">
                   <RefreshCw className="w-3 h-3 animate-spin text-emerald-450" />
                   <span>Interactive Agent Connection (ADB shell)</span>
                 </div>
               </div>
 
               {/* Right: Phone Simulation Typewriter Frame */}
-              <div className="bg-slate-950 rounded-xl border border-slate-800 p-4 h-[280px] flex flex-col justify-between text-left">
+              <div className="bg-slate-950 rounded-xl border border-slate-800 p-4 h-[280px] flex flex-col justify-between flex-1 text-left">
                 <div>
                   <span className="text-xs text-slate-500 uppercase font-bold font-mono tracking-wider block">Screen Output Monitor</span>
                   <div className="h-0.5 bg-slate-850 my-1"></div>
                   
                   {/* Mock content loader on video form */}
-                  <div className="space-y-2 mt-3 text-xs">
-                    <div className="flex justify-between font-bold text-slate-350 bg-slate-900 p-1.5 rounded border border-slate-850">
+                  <div className="space-y-4 mt-5 text-xs">
+                    <div className="flex justify-between font-bold text-slate-350 bg-slate-900 p-4 rounded border border-slate-850">
                       <span>Video Asset Attached:</span>
                       <span className="text-emerald-400 truncate max-w-[80px]">Recreated.mp4</span>
                     </div>
 
                     <div>
                       <span className="text-slate-500">Caption typing simulation:</span>
-                      <div className="bg-black/60 p-2 rounded border border-slate-900 min-h-[50px] text-sky-300 break-all leading-normal text-xs">
+                      <div className="bg-black/60 p-4 rounded border border-slate-900 min-h-[50px] text-sky-300 break-all leading-normal text-xs">
                         {typewriterText}
                         <span className="w-1.5 h-3.5 bg-sky-400 animate-ping inline-block align-middle ml-0.5"></span>
                       </div>
@@ -494,7 +494,7 @@ export default function PublisherScheduler({
                   </div>
                 </div>
 
-                <div className="bg-slate-900 p-2 rounded border border-slate-850 text-center flex items-center justify-center gap-1.5 text-xs font-mono">
+                <div className="bg-slate-900 p-4 rounded border border-slate-850 text-center flex items-center justify-center gap-4 text-xs font-mono">
                   {visualizerStep === 10 ? (
                     <span className="text-emerald-400 font-bold flex items-center gap-1">
                       <Check className="w-3 h-3 text-emerald-400" /> PUBLISHED SUCCESS
