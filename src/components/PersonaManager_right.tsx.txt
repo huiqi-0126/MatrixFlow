@@ -1,0 +1,111 @@
+{/* 2. Right Panel: Trending Competitor Content (7 columns) */}
+      <div className="xl:col-span-7 bg-slate-800/40 border border-slate-800 rounded-2xl p-4 flex flex-col text-left bento-glow-indigo">
+        
+        {/* Hub Header */}
+        <div className="flex items-center justify-between border-b border-slate-800 pb-4 mb-2">
+          <div className="flex items-center gap-4">
+            <Flame className="text-rose-500 w-5 h-5" />
+            <h3 className="text-xs font-bold text-slate-150">近期对标账号爆款视频抓取 (Trending Competitor Content)</h3>
+          </div>
+          
+          <span className="text-xs text-slate-500 font-mono tracking-wider">
+            AUTO-SYNCED: JUST NOW
+          </span>
+        </div>
+
+        {/* Assets List Grid */}
+        <div className="flex-1 overflow-y-auto h-full min-h-[460px] pr-1 space-y-3 scrollbar-narrow">
+          {[
+            {
+              title: "15s Matcha Latte ASMR for sleepy mornings 🍵",
+              creator: "@matcha_muse",
+              views: "1.2M",
+              likes: "345K",
+              date: "2 hours ago",
+              tags: ["#matcha", "#asmrcooking", "#aesthetic"],
+              imgColor: "bg-emerald-900/50"
+            },
+            {
+              title: "POV: Sunday reset routine in my minimal kitchen",
+              creator: "@cozy_corner_ny",
+              views: "890K",
+              likes: "120K",
+              date: "5 hours ago",
+              tags: ["#sundayreset", "#minimalist", "#kitchen"],
+              imgColor: "bg-amber-900/50"
+            },
+            {
+              title: "Making espresso without a machine! ☕️🤯",
+              creator: "@coffee_hacks_daily",
+              views: "2.4M",
+              likes: "580K",
+              date: "1 day ago",
+              tags: ["#espresso", "#coffeehacks", "#morningroutine"],
+              imgColor: "bg-amber-800/50"
+            },
+            {
+              title: "Testing the viral glass cup aesthetic",
+              creator: "@glassware_finds",
+              views: "450K",
+              likes: "80K",
+              date: "2 days ago",
+              tags: ["#amazonfinds", "#aesthetic", "#unboxing"],
+              imgColor: "bg-sky-900/50"
+            },
+            {
+              title: "Late night study session with lofi beats 📚",
+              creator: "@study_aesthetic",
+              views: "720K",
+              likes: "95K",
+              date: "3 days ago",
+              tags: ["#studywithme", "#lofi", "#aesthetic"],
+              imgColor: "bg-indigo-900/50"
+            }
+          ].map((vid, i) => (
+              <div 
+                key={i}
+                className="bg-slate-800/30 p-4 rounded-xl border border-slate-800 flex flex-col md:flex-row gap-4 hover:border-rose-500/30 transition-all"
+              >
+                {/* Visual Placeholder thumbnail */}
+                <div className={`w-full md:w-32 h-20 rounded-lg ${vid.imgColor} border border-white/10 shrink-0 relative flex flex-col items-center justify-center overflow-hidden`}>
+                  <Play className="w-5 h-5 text-white/50 mb-1" />
+                  <span className="text-[10px] text-white/70 font-mono font-bold">{vid.views} Views</span>
+                </div>
+
+                {/* Details info */}
+                <div className="flex-1 min-w-0 flex flex-col justify-between">
+                  <div className="flex items-start justify-between">
+                    <div className="overflow-hidden">
+                      <h4 className="text-xs font-bold text-slate-200 truncate pr-4">{vid.title}</h4>
+                      <div className="flex items-center gap-2 mt-1.5 text-[10px] font-mono">
+                        <span className="text-rose-400 font-bold">{vid.creator}</span>
+                        <span className="text-slate-500">•</span>
+                        <span className="text-slate-400">{vid.date}</span>
+                        <span className="text-slate-500">•</span>
+                        <span className="text-slate-400">{vid.likes} Likes</span>
+                      </div>
+                    </div>
+
+                    <button 
+                      onClick={() => alert('已将该视频推送至 [克隆选题] 队列，即将调用多模态模型提取关键帧与文案！')}
+                      className="px-3 py-1.5 bg-rose-500 hover:bg-rose-600 text-black rounded font-bold text-xs flex items-center gap-1.5 transition shrink-0 shadow-[0_0_10px_rgba(244,63,94,0.3)] hover:scale-105 active:scale-95 cursor-pointer"
+                    >
+                      <Layers className="w-3.5 h-3.5" />
+                      一键复刻
+                    </button>
+                  </div>
+
+                  {/* Metadata labels */}
+                  <div className="flex items-center mt-3 flex-wrap gap-2">
+                    {vid.tags.map((tag, idx) => (
+                      <span key={idx} className="text-[10px] font-mono text-slate-400 bg-slate-900/80 border border-slate-800 px-1.5 py-0.5 rounded">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+              </div>
+          ))}
+        </div>
+      </div>

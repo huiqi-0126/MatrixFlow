@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { 
   Calendar, Eye, BookOpen, Film, Video, Clipboard, 
-  Sparkles, CheckCircle, RefreshCw, Layers, Zap, Info, Play, MessageSquare, ArrowRight 
+  Sparkles, CheckCircle, RefreshCw, Layers, Zap, Info, Play, MessageSquare, ArrowRight, Clock, Tag, Loader2, AlertCircle, List, MousePointer2 
 } from 'lucide-react';
 import { DailyPlan, Device, VideoAsset } from '../types';
 import { MOCK_MONTHLY_PLANS } from '../constants';
@@ -29,6 +29,22 @@ export default function ContentPlanner({ device, onAddRecreatedVideo }: ContentP
   } | null>(null);
 
   const plans = MOCK_MONTHLY_PLANS[device.niche] || MOCK_MONTHLY_PLANS['aesthetic-cooking'];
+
+
+  React.useEffect(() => {
+    const handleReplicateVideo = (e: any) => {
+      if (e.detail && e.detail.url) {
+        setCompetitorUrl(e.detail.url);
+        // Automatically start extraction
+        setTimeout(() => {
+          const btn = document.getElementById('btn-analyze-video');
+          if (btn) btn.click();
+        }, 150);
+      }
+    };
+    window.addEventListener('trigger-analyze-video', handleReplicateVideo);
+    return () => window.removeEventListener('trigger-analyze-video', handleReplicateVideo);
+  }, []);
 
   const handleAnalyzeVideo = () => {
     if (!competitorUrl.trim()) return;
@@ -205,7 +221,7 @@ export default function ContentPlanner({ device, onAddRecreatedVideo }: ContentP
                   </div>
                 </div>
 
-                <div className="pt-2 border-t border-slate-800/50">
+                <div className="pt-2 border-t border-slate-800/50 mt-4">
                   <span className="text-xs text-slate-500 font-bold block mb-2">
                     📊 流量转化预测参数 (Conversion Parameters)
                   </span>
@@ -223,6 +239,14 @@ export default function ContentPlanner({ device, onAddRecreatedVideo }: ContentP
                       <span className="text-xs text-indigo-400 font-mono font-bold">18:00 EST</span>
                     </div>
                   </div>
+
+                  <button 
+                    onClick={() => window.dispatchEvent(new CustomEvent('open-schedule-modal'))}
+                    className="w-full mt-4 py-2.5 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-400 hover:to-purple-500 text-white font-bold text-xs rounded-xl transition flex items-center justify-center gap-2 cursor-pointer shadow-lg bento-glow-indigo active:scale-95"
+                  >
+                    <Clock className="w-4 h-4" />
+                    定时发布
+                  </button>
                 </div>
 
               </div>
@@ -273,6 +297,7 @@ export default function ContentPlanner({ device, onAddRecreatedVideo }: ContentP
             className="flex-1 bg-black text-slate-300 border border-slate-800 rounded px-2.5 py-2 text-xs font-mono focus:outline-none focus:border-indigo-500"
           />
           <button 
+            id="btn-analyze-video"
             onClick={handleAnalyzeVideo}
             disabled={isAnalyzing}
             className="px-4 py-2 bg-emerald-500 hover:bg-emerald-600 disabled:opacity-50 text-black font-bold text-xs rounded transition flex items-center justify-center gap-1 cursor-pointer shrink-0"
@@ -358,10 +383,38 @@ export default function ContentPlanner({ device, onAddRecreatedVideo }: ContentP
               </div>
 
               {/* Interactive buttons */}
-              <div className="flex gap-4 pt-2">
+              <div className="flex flex-col xl:flex-row items-center gap-4 pt-2">
+                
+                {/* 视频模型选择 & 生成视频按钮 */}
+                <div className="flex items-center gap-2 w-full xl:w-1/2">
+                  <div className="relative flex-1">
+                    <select className="w-full appearance-none bg-slate-900 border border-slate-700 hover:border-indigo-500 text-slate-200 text-xs py-2 pl-3 pr-8 rounded transition-colors focus:outline-none focus:border-indigo-500 shadow-inner">
+                      <option value="pixverse-v6">PixVerse V6</option>
+                      <option value="pixverse-v5.6">PixVerse V5.6</option>
+                      <option value="veo-3.1-standard">veo-3.1-standard</option>
+                      <option value="grok-imagine">grok-imagine</option>
+                      <option value="sora-2-pro">sora-2-pro</option>
+                      <option value="seedance-2.0-standard">Seedance 2.0 standard</option>
+                      <option value="seedance-2.0-fast">Seedance 2.0 fast</option>
+                      <option value="pixverse-c1">PixVerse C1</option>
+                    </select>
+                    <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none text-slate-400">
+                      <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20">
+                        <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/>
+                      </svg>
+                    </div>
+                  </div>
+                  <button 
+                    onClick={() => alert('已将当前分镜序列和画风提示词发送给选定的视频大模型，开始并行生成视频任务！')}
+                    className="px-4 py-2 bg-indigo-500 hover:bg-indigo-600 font-bold text-white text-xs rounded transition flex items-center gap-1.5 cursor-pointer shadow-lg shadow-indigo-500/20 shrink-0 whitespace-nowrap"
+                  >
+                    <Film className="w-3.5 h-3.5" /> 生成视频
+                  </button>
+                </div>
+
                 <button 
                   onClick={handleAutoReplicate}
-                  className="flex-1 py-1.5 bg-emerald-500 hover:bg-emerald-600 font-bold text-black text-xs rounded transition flex items-center justify-center gap-4 cursor-pointer"
+                  className="flex-1 w-full xl:w-auto py-2 bg-emerald-500 hover:bg-emerald-600 font-bold text-black text-xs rounded transition flex items-center justify-center gap-2 cursor-pointer shadow-[0_0_15px_rgba(16,185,129,0.3)]"
                 >
                   <Layers className="w-3.5 h-3.5" /> 立即复制该复刻方案到我的资源库 (Save to Assets)
                 </button>

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { 
   User, Check, Plus, Edit, Trash2, Video, Tag, MessageSquare, 
-  Sparkles, FileText, Info, HelpCircle, HardDrive, UploadCloud 
+  Sparkles, FileText, Info, HelpCircle, HardDrive, UploadCloud,
+  Flame, Play, Layers
 } from 'lucide-react';
 import { Persona, VideoAsset, Device } from '../types';
 import { NICHES } from '../constants';
@@ -96,15 +97,23 @@ export default function PersonaManager({
           </div>
           
           {!isEditingPersona && (
-            <button 
-              onClick={() => {
-                setEditedPersona({ ...persona });
-                setIsEditingPersona(true);
-              }}
-              className="px-3 py-1 bg-slate-800 hover:bg-slate-700 text-indigo-400 text-xs font-bold rounded-lg flex items-center gap-1 cursor-pointer transition"
-            >
-              <Edit className="w-3.5 h-3.5" /> 修改人设
-            </button>
+            <div className="flex gap-2">
+              <button 
+                onClick={() => alert('大模型正在重新生成人设框架...')}
+                className="px-3 py-1 bg-indigo-950/40 hover:bg-indigo-900 border border-indigo-500/30 text-indigo-400 text-xs font-bold rounded-lg flex items-center gap-1 cursor-pointer transition"
+              >
+                <Sparkles className="w-3.5 h-3.5" /> 重新生成
+              </button>
+              <button 
+                onClick={() => {
+                  setEditedPersona({ ...persona });
+                  setIsEditingPersona(true);
+                }}
+                className="px-3 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold rounded-lg flex items-center gap-1 cursor-pointer transition"
+              >
+                <Edit className="w-3.5 h-3.5" /> 修改人设
+              </button>
+            </div>
           )}
         </div>
 
@@ -302,233 +311,123 @@ export default function PersonaManager({
 
       </div>
 
-      {/* 2. Right Panel: Video Asset Manager (7 columns) */}
+      {/* 2. Right Panel: Trending Competitor Content (7 columns) */}
       <div className="xl:col-span-7 bg-slate-800/40 border border-slate-800 rounded-2xl p-4 flex flex-col text-left bento-glow-indigo">
         
         {/* Hub Header */}
         <div className="flex items-center justify-between border-b border-slate-800 pb-4 mb-2">
           <div className="flex items-center gap-4">
-            <Video className="text-emerald-400 w-5 h-5" />
-            <h3 className="text-xs font-bold text-slate-150">创作资源库及视频文件管理 (Media Asset Hub)</h3>
+            <Flame className="text-rose-500 w-5 h-5" />
+            <h3 className="text-xs font-bold text-slate-150">近期对标账号爆款视频抓取 (Trending Competitor Content)</h3>
           </div>
           
-          <button 
-            onClick={() => setShowUploadModal(true)}
-            className="px-3 py-1.5 bg-emerald-500 hover:bg-emerald-600 text-black text-xs font-bold rounded-lg flex items-center gap-1 cursor-pointer transition shadow-md"
-          >
-            <Plus className="w-4 h-4" /> 导入/新增视频资源
-          </button>
+          <span className="text-xs text-slate-500 font-mono tracking-wider">
+            AUTO-SYNCED: JUST NOW
+          </span>
         </div>
 
         {/* Assets List Grid */}
         <div className="flex-1 overflow-y-auto h-full min-h-[460px] pr-1 space-y-3 scrollbar-narrow">
-          {videoAssets.filter(asset => asset.niche === device.niche || asset.niche === 'all').length === 0 ? (
-            <div className="flex flex-col items-center justify-center p-8 text-center bg-slate-800/20 rounded-xl border border-dashed border-slate-800">
-              <HardDrive className="w-8 h-8 text-slate-650 mb-2" />
-              <span className="text-xs text-slate-400 font-bold">该垂类暂无储备视频文件</span>
-              <p className="text-xs text-slate-500 mt-3 max-w-sm">
-                点击右上角按钮手工导入。
-              </p>
-            </div>
-          ) : (
-            videoAssets.map(asset => (
+          {[
+            {
+              title: "15s Matcha Latte ASMR for sleepy mornings 🍵",
+              creator: "@matcha_muse",
+              views: "1.2M",
+              likes: "345K",
+              date: "2 hours ago",
+              tags: ["#matcha", "#asmrcooking", "#aesthetic"],
+              imgSrc: "https://images.unsplash.com/photo-1563822249548-9a72b6353cd1?auto=format&fit=crop&q=80&w=200&h=200",
+              imgColor: "bg-emerald-900/50"
+            },
+            {
+              title: "POV: Sunday reset routine in my minimal kitchen",
+              creator: "@cozy_corner_ny",
+              views: "890K",
+              likes: "120K",
+              date: "5 hours ago",
+              tags: ["#sundayreset", "#minimalist", "#kitchen"],
+              imgSrc: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&q=80&w=200&h=200",
+              imgColor: "bg-amber-900/50"
+            },
+            {
+              title: "Making espresso without a machine! ☕️🤯",
+              creator: "@coffee_hacks_daily",
+              views: "2.4M",
+              likes: "580K",
+              date: "1 day ago",
+              tags: ["#espresso", "#coffeehacks", "#morningroutine"],
+              imgSrc: "https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&q=80&w=200&h=200",
+              imgColor: "bg-amber-800/50"
+            },
+            {
+              title: "Testing the viral glass cup aesthetic",
+              creator: "@glassware_finds",
+              views: "450K",
+              likes: "80K",
+              date: "2 days ago",
+              tags: ["#amazonfinds", "#aesthetic", "#unboxing"],
+              imgSrc: "https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?auto=format&fit=crop&q=80&w=200&h=200",
+              imgColor: "bg-sky-900/50"
+            },
+            {
+              title: "Late night study session with lofi beats 📚",
+              creator: "@study_aesthetic",
+              views: "720K",
+              likes: "95K",
+              date: "3 days ago",
+              tags: ["#studywithme", "#lofi", "#aesthetic"],
+              imgSrc: "https://images.unsplash.com/photo-1503694978374-8a2fa686963a?auto=format&fit=crop&q=80&w=200&h=200",
+              imgColor: "bg-indigo-900/50"
+            }
+          ].map((vid, i) => (
               <div 
-                key={asset.id}
-                className="bg-slate-800/30 p-4 rounded-xl border border-slate-800/85 flex flex-col md:flex-row gap-4 hover:border-indigo-500/40 transition-all"
+                key={i}
+                className="bg-slate-800/30 p-4 rounded-xl border border-slate-800 flex flex-col md:flex-row gap-4 hover:border-rose-500/30 transition-all"
               >
                 {/* Visual Placeholder thumbnail */}
-                <div className={`w-full md:w-32 h-20 rounded-lg ${asset.thumbnailColor} border border-white/10 shrink-0 relative flex flex-col items-center justify-center`}>
-                  <HardDrive className="w-5 h-5 text-white/40 mb-2" />
-                  <span className="text-xs text-white/70 font-mono font-bold">MP4 DRAFT HD</span>
-                  <div className="absolute bottom-1 right-1.5 bg-black/70 px-1 py-0.5 rounded text-xs font-mono text-emerald-400">
-                    00:{asset.duration < 10 ? `0${asset.duration}` : asset.duration}
-                  </div>
+                <div className={`w-full md:w-32 h-20 rounded-lg ${vid.imgColor} border border-white/10 shrink-0 relative flex flex-col items-center justify-center overflow-hidden`}>
+                  <img src={vid.imgSrc} alt="Thumbnail" className="absolute inset-0 w-full h-full object-cover opacity-80" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                  <Play className="w-5 h-5 text-white z-10 mb-1 drop-shadow-md" />
+                  <span className="text-[10px] text-white font-mono font-bold z-10 drop-shadow-md">{vid.views} Views</span>
                 </div>
 
                 {/* Details info */}
-                <div className="flex-1 min-w-0">
+                <div className="flex-1 min-w-0 flex flex-col justify-between">
                   <div className="flex items-start justify-between">
                     <div className="overflow-hidden">
-                      <span className="text-xs uppercase tracking-wider text-slate-500 block font-mono">FILE: {asset.id}</span>
-                      <h4 className="text-xs font-bold text-slate-200 truncate">{asset.title}</h4>
-                      <p className="text-xs text-slate-400 leading-snug line-clamp-1 italic mt-0.5">
-                        "{asset.tagline}"
-                      </p>
+                      <h4 className="text-xs font-bold text-slate-200 truncate pr-4">{vid.title}</h4>
+                      <div className="flex items-center gap-2 mt-1.5 text-[10px] font-mono">
+                        <span className="text-rose-400 font-bold">{vid.creator}</span>
+                        <span className="text-slate-500">•</span>
+                        <span className="text-slate-400">{vid.date}</span>
+                        <span className="text-slate-500">•</span>
+                        <span className="text-slate-400">{vid.likes} Likes</span>
+                      </div>
                     </div>
 
                     <button 
-                      onClick={() => onDeleteVideoAsset(asset.id)}
-                      className="p-2 text-slate-550 hover:text-red-400 rounded hover:bg-red-950/25 cursor-pointer transition shrink-0"
-                      title="删除资产"
+                      onClick={() => window.dispatchEvent(new CustomEvent('replicate-video', { detail: { url: `https://tiktok.com/${vid.creator.replace('@','')}/video/${Math.floor(Math.random() * 100000000)}` } }))}
+                      className="px-3 py-1.5 bg-rose-500 hover:bg-rose-600 text-black rounded font-bold text-xs flex items-center gap-1.5 transition shrink-0 shadow-[0_0_10px_rgba(244,63,94,0.3)] hover:scale-105 active:scale-95 cursor-pointer"
                     >
-                      <Trash2 className="w-3.5 h-3.5" />
+                      <Layers className="w-3.5 h-3.5" />
+                      一键复刻
                     </button>
                   </div>
 
-                  {/* Script overlay preview */}
-                  <div className="bg-black/40 p-4 border border-slate-900/60 rounded mt-3">
-                    <span className="text-xs text-slate-500 font-bold font-mono tracking-wider block uppercase mb-2">AUTOMATED SUBTILE SCRIPTEXT (ENG):</span>
-                    <p className="text-xs text-slate-300 font-mono leading-relaxed whitespace-pre-wrap line-clamp-2 text-left">
-                      {asset.script}
-                    </p>
-                  </div>
-
                   {/* Metadata labels */}
-                  <div className="flex items-center justify-between mt-5 flex-wrap gap-4">
-                    <div className="flex flex-wrap gap-4">
-                      {asset.tags.map((tag, i) => (
-                        <span key={i} className="text-xs font-mono text-emerald-400 bg-emerald-950/30 border border-emerald-900/20 px-1.5 py-0.5 rounded">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                    
-                    <span className="text-xs text-slate-500 uppercase font-mono font-bold">
-                      Format: H.264 MP4
-                    </span>
+                  <div className="flex items-center mt-3 flex-wrap gap-2">
+                    {vid.tags.map((tag, idx) => (
+                      <span key={idx} className="text-[10px] font-mono text-slate-400 bg-slate-900/80 border border-slate-800 px-1.5 py-0.5 rounded">
+                        {tag}
+                      </span>
+                    ))}
                   </div>
-
                 </div>
 
               </div>
-            ))
-          )}
+          ))}
         </div>
-
-        {/* Custom video asset upload mockup form modal overlay */}
-        {showUploadModal && (
-          <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
-            <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4 w-full max-w-lg text-left shadow-2xl">
-              
-              <div className="flex items-center justify-between border-b border-slate-800 pb-3 mb-2">
-                <span className="text-xs font-bold text-slate-150">导入新视频资源 (Import Media Segment)</span>
-                <button 
-                  onClick={() => setShowUploadModal(false)}
-                  className="text-xs text-slate-400 hover:text-white"
-                >
-                  ✕
-                </button>
-              </div>
-
-              <form onSubmit={handleTriggerUpload} className="space-y-5">
-                
-                {/* Drag and drop mock view */}
-                <div 
-                  className={`border-2 border-dashed rounded-xl p-4 text-center transition cursor-pointer ${
-                    dragOver 
-                      ? 'border-emerald-400 bg-emerald-950/20 text-emerald-300' 
-                      : 'border-slate-800 bg-black/40 text-slate-400 hover:border-slate-700'
-                  }`}
-                  onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
-                  onDragLeave={() => setDragOver(false)}
-                  onDrop={(e) => {
-                    e.preventDefault();
-                    setDragOver(false);
-                    setNewVideo(prev => ({ ...prev, title: 'Prada_Vintage_Lookbook_HighRes_Recreated.mp4', tagline: 'Dropped from local disk storage' }));
-                  }}
-                  onClick={() => {
-                    setNewVideo(prev => ({ 
-                      ...prev, 
-                      title: 'OOTD_TokyoStyle_Vintage_Summer.mp4', 
-                      tagline: 'Simulated file selected from explorer' 
-                    }));
-                  }}
-                >
-                  <UploadCloud className="w-8 h-8 text-emerald-450 mx-auto mb-2" />
-                  <span className="text-xs font-bold block text-slate-300">拖拽 MP4 格式视频至此，或者点击选择</span>
-                  <span className="text-xs text-slate-500 block mt-3">支持 H.264 AAC编码，比例推荐 9:16 贴片竖屏剪辑</span>
-                </div >
-
-                <div>
-                  <label className="text-xs text-slate-400 block mb-2">文件标题 filename</label>
-                  <input 
-                    type="text" 
-                    required
-                    placeholder="例如: Matcha_Latte_ASMR_Clean_Cut.mp4"
-                    value={newVideo.title} 
-                    onChange={(e) => setNewVideo({ ...newVideo, title: e.target.value })}
-                    className="w-full bg-black text-slate-200 border border-slate-800 rounded px-2.5 py-1.5 text-xs font-mono focus:border-emerald-500 focus:outline-none"
-                  />
-                </div>
-
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="text-xs text-slate-400 block mb-2">视频长短 (秒 - duration)</label>
-                    <input 
-                      type="number" 
-                      value={newVideo.duration} 
-                      onChange={(e) => setNewVideo({ ...newVideo, duration: Number(e.target.value) || 15 })}
-                      className="w-full bg-black text-slate-200 border border-slate-800 rounded px-2.5 py-1.5 text-xs font-mono focus:border-emerald-500 focus:outline-none"
-                    />
-                  </div>
-                  <div>
-                    <label className="text-xs text-slate-400 block mb-2">目标内容垂类</label>
-                    <select 
-                      value={newVideo.niche} 
-                      onChange={(e) => setNewVideo({ ...newVideo, niche: e.target.value })}
-                      className="w-full bg-black text-slate-200 border border-slate-800 rounded px-2.5 py-1.5 text-xs focus:border-emerald-500 focus:outline-none"
-                    >
-                      {NICHES.map(n => (
-                        <option key={n.id} value={n.id}>{n.label}</option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-
-                <div>
-                  <label className="text-xs text-slate-400 block mb-2">宣传导引句 (English Tagline)</label>
-                  <input 
-                    type="text" 
-                    placeholder="POV: satisfy your matcha foam cravings tonight."
-                    value={newVideo.tagline} 
-                    onChange={(e) => setNewVideo({ ...newVideo, tagline: e.target.value })}
-                    className="w-full bg-black text-slate-200 border border-slate-800 rounded px-2.5 py-1.5 text-xs font-mono focus:border-emerald-500 focus:outline-none"
-                  />
-                </div>
-
-                <div>
-                  <label className="text-xs text-slate-400 block mb-2">推荐SEO 英文标签 tags (英文逗号隔开)</label>
-                  <input 
-                    type="text" 
-                    placeholder="matcha, aesthetic, satisfying, asmr"
-                    value={newVideo.tagsString} 
-                    onChange={(e) => setNewVideo({ ...newVideo, tagsString: e.target.value })}
-                    className="w-full bg-black text-slate-200 border border-slate-800 rounded px-2.5 py-1.5 text-xs font-mono focus:border-emerald-500 focus:outline-none"
-                  />
-                </div>
-
-                <div>
-                  <label className="text-xs text-slate-400 block mb-2">自动化配音及字母台本 (English Script)</label>
-                  <textarea 
-                    value={newVideo.script} 
-                    onChange={(e) => setNewVideo({ ...newVideo, script: e.target.value })}
-                    placeholder="POV: boiling organic green tea powder. Whisking slowly. Hot oat foam cascading."
-                    className="w-full bg-black text-slate-200 border border-slate-800 rounded px-2.5 py-1.5 text-xs font-mono focus:border-emerald-500 focus:outline-none h-16 resize-none"
-                  />
-                </div>
-
-                <div className="flex gap-4 pt-2">
-                  <button 
-                    type="submit"
-                    className="flex-1 py-1.5 bg-emerald-500 hover:bg-emerald-600 font-bold text-black text-xs rounded transition cursor-pointer text-center"
-                  >
-                    确认录入资源库
-                  </button>
-                  <button 
-                    type="button"
-                    onClick={() => setShowUploadModal(false)}
-                    className="px-4 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs rounded transition"
-                  >
-                    取消
-                  </button>
-                </div>
-
-              </form>
-
-            </div>
-          </div>
-        )}
-
       </div>
 
     </div>

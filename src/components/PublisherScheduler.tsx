@@ -27,6 +27,14 @@ export default function PublisherScheduler({
 
   const [activeFilter, setActiveFilter] = useState<'all' | 'pending' | 'posting' | 'success' | 'failed'>('all');
   const [showCreateModal, setShowCreateModal] = useState(false);
+
+  useEffect(() => {
+    const handleOpenScheduleModal = () => {
+      setShowCreateModal(true);
+    };
+    window.addEventListener('trigger-create-task', handleOpenScheduleModal);
+    return () => window.removeEventListener('trigger-create-task', handleOpenScheduleModal);
+  }, []);
   const [showAutoPostVisualizer, setShowAutoPostVisualizer] = useState(false);
   const [activeVisualizerTask, setActiveVisualizerTask] = useState<ScheduleTask | null>(null);
 
@@ -249,13 +257,22 @@ export default function PublisherScheduler({
                         
                         {/* 1. Video file preview */}
                         <td className="py-3 px-3">
-                          <div className="flex items-center gap-4">
-                            <div className={`w-8 h-8 rounded shrink-0 flex items-center justify-center text-xs ${asset?.thumbnailColor || 'bg-slate-800'}`}>
-                              📹
+                          <div className="flex items-center gap-3">
+                            <div className="relative w-14 h-14 rounded-lg shrink-0 overflow-hidden">
+                              <div className={`absolute inset-0 ${asset?.thumbnailColor || 'bg-slate-800'}`} />
+                              <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-black/30" />
+                              <div className="absolute inset-0 flex items-center justify-center">
+                                <div className="w-7 h-7 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center">
+                                  <Play className="w-3 h-3 text-white fill-white ml-0.5" />
+                                </div>
+                              </div>
+                              <div className="absolute bottom-0.5 right-0.5 bg-black/70 text-white text-[9px] font-mono px-1 py-px rounded">
+                                0:{(asset?.duration || 15).toString().padStart(2, '0')}
+                              </div>
                             </div>
                             <div className="overflow-hidden max-w-[140px]">
                               <span className="font-bold text-slate-200 block truncate">{asset?.title || 'Unknown.mp4'}</span>
-                              <span className="text-xs text-slate-500 block truncate">Duration: {asset?.duration || 15}s</span>
+                              <span className="text-[10px] text-slate-500 block truncate">Duration: {asset?.duration || 15}s</span>
                             </div>
                           </div>
                         </td>

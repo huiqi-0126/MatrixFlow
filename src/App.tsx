@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Smartphone, Shield, Activity, Users, Flame, Globe, Sliders, 
   Calendar, Video, Clock, BarChart, RefreshCw, Layers, Award, Info,
@@ -34,39 +34,201 @@ export default function App() {
   const [personas, setPersonas] = useState<Record<string, Persona>>(INITIAL_PERSONAS);
   const [videoAssets, setVideoAssets] = useState<VideoAsset[]>(VIDEO_RESOURCES);
   
-  // Preload a few mock publishing tasks to establish initial visual realism (failed / pending)
+  // Preload mock publishing tasks to establish initial visual realism
   const [tasks, setTasks] = useState<ScheduleTask[]>([
+    // Device-1: aesthetic-cooking (cook_with_kai)
     {
       id: 'task-preload-1',
       deviceId: 'device-1',
       videoAssetId: 'res-1',
       description: 'POV: craft high grade matcha with me. Whispering ASMR sounds on a cozy rainy morning.',
       tags: ['#matchalove', '#asmrcooking', '#lifestyle', '#aestheticcooking'],
-      scheduleTime: '05/20 11:00',
-      status: 'failed',
-      errorLog: 'Network timeout: residential proxy handshakes exceeded 15s limit.'
+      scheduleTime: '05/19 09:00',
+      status: 'success',
     },
     {
       id: 'task-preload-2',
       deviceId: 'device-1',
-      videoAssetId: 'res-1',
-      description: 'Satisfying matcha green powder whisking. Relieve your anxiety with foam bubbles.',
+      videoAssetId: 'res-5',
+      description: 'Rain tapping on the window, slow pour over brewing. Let the water do the work.',
+      tags: ['#pourover', '#coffeASMR', '#rainyday', '#slowliving'],
+      scheduleTime: '05/19 15:00',
+      status: 'success',
+    },
+    {
+      id: 'task-preload-3',
+      deviceId: 'device-1',
+      videoAssetId: 'res-6',
+      description: 'Golden toast meets perfectly runny egg. The simplest breakfast hits different at 7 AM.',
+      tags: ['#eggtoast', '#breakfastasmr', '#crunchysounds', '#morningvibes'],
+      scheduleTime: '05/20 07:30',
+      status: 'success',
+    },
+    {
+      id: 'task-preload-4',
+      deviceId: 'device-1',
+      videoAssetId: 'res-7',
+      description: 'From raw clay to your morning cereal bowl. Every bowl has a soul. This one is calm.',
+      tags: ['#pottery', '#ceramics', '#clayasmr', '#handmade'],
+      scheduleTime: '05/21 11:00',
+      status: 'failed',
+      errorLog: 'Network timeout: residential proxy handshakes exceeded 15s limit.'
+    },
+    {
+      id: 'task-preload-5',
+      deviceId: 'device-1',
+      videoAssetId: 'res-8',
+      description: 'Satisfying vanilla ice cream scooping. Relieve your anxiety with cream textures.',
       tags: ['#matchalatte', '#asmrrecipes', '#peacefulrecipes'],
       scheduleTime: '05/21 18:00',
       status: 'pending'
     },
     {
-      id: 'task-preload-3',
+      id: 'task-preload-6',
+      deviceId: 'device-1',
+      videoAssetId: 'res-1',
+      description: 'Making a hot matcha latte on a rainy afternoon. No thoughts, just matcha foam.',
+      tags: ['#matcha', '#asmrcooking', '#aestheticcoffee', '#satisfying'],
+      scheduleTime: '05/22 10:00',
+      status: 'pending'
+    },
+    // Device-2: fitness (fit_goddess_o)
+    {
+      id: 'task-preload-7',
       deviceId: 'device-2',
       videoAssetId: 'res-3',
       description: 'When everyone defaults, you stack bricks. Morning 5 AM consistency core workout.',
       tags: ['#coreworkout', '#gymmotivation', '#5amclub', '#fitness'],
-      scheduleTime: '05/21 11:00',
+      scheduleTime: '05/19 05:30',
+      status: 'success',
+    },
+    {
+      id: 'task-preload-8',
+      deviceId: 'device-2',
+      videoAssetId: 'res-9',
+      description: 'Three rounds, zero excuses. Resistance band glute burn that actually works!',
+      tags: ['#bootyband', '#gluteworkout', '#fitnesschallenge', '#gymbestie'],
+      scheduleTime: '05/19 16:00',
+      status: 'success',
+    },
+    {
+      id: 'task-preload-9',
+      deviceId: 'device-2',
+      videoAssetId: 'res-10',
+      description: 'Sweat session done, glow up begins. Post-gym skincare essentials for the glow.',
+      tags: ['#skincareroutine', '#postworkoutglow', '#selfcare', '#gymglow'],
+      scheduleTime: '05/20 07:00',
+      status: 'success',
+    },
+    {
+      id: 'task-preload-10',
+      deviceId: 'device-2',
+      videoAssetId: 'res-11',
+      description: 'Sunday prep, weekday gains. Prep once, eat like a queen all week.',
+      tags: ['#mealprep', '#highprotein', '#chickenrice', '#sundayprep'],
+      scheduleTime: '05/21 08:00',
+      status: 'posting',
+    },
+    {
+      id: 'task-preload-11',
+      deviceId: 'device-2',
+      videoAssetId: 'res-12',
+      description: '60 seconds to set your core on fire. Quick pilates burn challenge.',
+      tags: ['#pilates', '#coreburn', '#quickworkout', '#60secondchallenge'],
+      scheduleTime: '05/22 06:00',
       status: 'pending'
-    }
+    },
+    // Device-3: streetwear (streetwear_kai)
+    {
+      id: 'task-preload-12',
+      deviceId: 'device-3',
+      videoAssetId: 'res-4',
+      description: 'Spent 5 hours digging, found this museum-grade vintage Prada piece.',
+      tags: ['#pradathrift', '#streetwearinspo', '#vintageaesthetic', '#ootdinspo'],
+      scheduleTime: '05/20 14:00',
+      status: 'success',
+    },
+    {
+      id: 'task-preload-13',
+      deviceId: 'device-3',
+      videoAssetId: 'res-13',
+      description: 'Score of the decade. Found rare Nike Dunks at the thrift for $8. The universe knows.',
+      tags: ['#nikedunk', '#thriftfind', '#vintagesneakers', '#rarekicks'],
+      scheduleTime: '05/21 12:00',
+      status: 'pending'
+    },
+    {
+      id: 'task-preload-14',
+      deviceId: 'device-3',
+      videoAssetId: 'res-14',
+      description: 'One pant, three completely different energies. Versatility is the real flex.',
+      tags: ['#cargopants', '#streetwearfits', '#ootd', '#threeways'],
+      scheduleTime: '05/22 15:00',
+      status: 'pending'
+    },
+    // Device-4: tech-gadgets (tech_unboxed_vibe)
+    {
+      id: 'task-preload-15',
+      deviceId: 'device-4',
+      videoAssetId: 'res-2',
+      description: 'Unboxing my dream cyberpunk mechanical keyboard. Rate this typing level 1-10.',
+      tags: ['#mechanicalkeyboards', '#vaporwave', '#customtech', '#typingasmr'],
+      scheduleTime: '05/19 11:00',
+      status: 'success',
+    },
+    {
+      id: 'task-preload-16',
+      deviceId: 'device-4',
+      videoAssetId: 'res-16',
+      description: 'The art of the perfect switch lube. That sound is worth 4 hours of lubing.',
+      tags: ['#keyboardbuild', '#lubingasmr', '#mechanicalkeyboard', '#techasmr'],
+      scheduleTime: '05/20 10:00',
+      status: 'success',
+    },
+    {
+      id: 'task-preload-17',
+      deviceId: 'device-4',
+      videoAssetId: 'res-17',
+      description: 'Welcome to my command center. Full cyberpunk desk setup tour 2025.',
+      tags: ['#desksetup', '#rgbsetup', '#cyberpunkdesk', '#techtour'],
+      scheduleTime: '05/21 14:00',
+      status: 'pending'
+    },
+    {
+      id: 'task-preload-18',
+      deviceId: 'device-4',
+      videoAssetId: 'res-18',
+      description: '99% of iPhone users don\'t know these hidden features exist. The future is in your pocket.',
+      tags: ['#iphone16pro', '#iosfeatures', '#techhacks', '#appletips'],
+      scheduleTime: '05/22 09:00',
+      status: 'pending'
+    },
   ]);
 
-  const [activeTab, setActiveTab] = useState<'simulation' | 'persona' | 'warmup' | 'content' | 'scheduler' | 'analytics'>('simulation');
+  const [activeTab, setActiveTab] = useState<'simulation' | 'persona' | 'warmup' | 'content' | 'scheduler' | 'analytics'>('simulation'); 
+  useEffect(() => {
+    const handleOpenScheduleModal = () => {
+      setActiveTab('scheduler');
+      setTimeout(() => {
+        window.dispatchEvent(new CustomEvent('trigger-create-task'));
+      }, 150);
+    };
+    window.addEventListener('open-schedule-modal', handleOpenScheduleModal);
+    return () => window.removeEventListener('open-schedule-modal', handleOpenScheduleModal);
+  }, []);
+
+  useEffect(() => {
+    const handleReplicateVideo = (e: any) => {
+      setActiveTab('content');
+      const url = e.detail?.url;
+      setTimeout(() => {
+        window.dispatchEvent(new CustomEvent('trigger-analyze-video', { detail: { url } }));
+      }, 150);
+    };
+    window.addEventListener('replicate-video', handleReplicateVideo);
+    return () => window.removeEventListener('replicate-video', handleReplicateVideo);
+  }, []);
+'persona' | 'warmup' | 'content' | 'scheduler' | 'analytics'>('simulation');
 
   // Find active selected items helper
   const activeDevice = devices.find(d => d.id === selectedDeviceId) || devices[0];
