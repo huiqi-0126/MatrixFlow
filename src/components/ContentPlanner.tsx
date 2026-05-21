@@ -205,6 +205,26 @@ export default function ContentPlanner({ device, onAddRecreatedVideo }: ContentP
                   </div>
                 </div>
 
+                <div className="pt-2 border-t border-slate-800/50">
+                  <span className="text-xs text-slate-500 font-bold block mb-2">
+                    📊 流量转化预测参数 (Conversion Parameters)
+                  </span>
+                  <div className="grid grid-cols-3 gap-3">
+                    <div className="bg-slate-900/80 p-2.5 rounded border border-slate-800/80">
+                      <span className="text-[10px] text-slate-500 block mb-1 uppercase">BGM Mood</span>
+                      <span className="text-xs text-indigo-400 font-mono font-bold">Trending / Vital</span>
+                    </div>
+                    <div className="bg-slate-900/80 p-2.5 rounded border border-slate-800/80">
+                      <span className="text-[10px] text-slate-500 block mb-1 uppercase">Est. Duration</span>
+                      <span className="text-xs text-indigo-400 font-mono font-bold">15s - 25s</span>
+                    </div>
+                    <div className="bg-slate-900/80 p-2.5 rounded border border-slate-800/80">
+                      <span className="text-[10px] text-slate-500 block mb-1 uppercase">Best Post Time</span>
+                      <span className="text-xs text-indigo-400 font-mono font-bold">18:00 EST</span>
+                    </div>
+                  </div>
+                </div>
+
               </div>
             ) : (
               <div className="h-40 flex flex-col items-center justify-center text-center text-slate-500">
@@ -272,9 +292,9 @@ export default function ContentPlanner({ device, onAddRecreatedVideo }: ContentP
         </div>
 
         {/* Output area */}
-        <div className="flex-1 bg-slate-800/20 rounded-xl border border-slate-800 p-4 min-h-[350px] flex flex-col justify-between flex-1">
+        <div className="flex-1 bg-slate-800/20 rounded-xl border border-slate-800 p-4 flex flex-col min-h-0">
           {analysisReport ? (
-            <div className="space-y-4 pr-1 max-h-[360px] overflow-y-auto scrollbar-narrow text-left">
+            <div className="space-y-4 pr-1 flex-1 overflow-y-auto scrollbar-narrow text-left">
               
               <div className="flex justify-between items-center bg-slate-900 p-4 rounded border border-slate-800">
                 <span className="text-xs text-emerald-400 font-mono font-bold">1. 提取的原版英文文案 scripts</span>
@@ -358,7 +378,7 @@ export default function ContentPlanner({ device, onAddRecreatedVideo }: ContentP
             </div>
           )}
 
-          <div className="bg-slate-900/50 p-3 rounded border border-slate-850 text-xs text-slate-500 text-left mt-3 flex gap-4 items-start">
+          <div className="bg-slate-900/50 p-3 rounded border border-slate-850 text-xs text-slate-500 text-left mt-3 flex gap-4 items-start shrink-0">
             <Info className="w-3.5 h-3.5 shrink-0 text-sky-400 mt-0.5" />
             <p className="leading-normal">
               本模块模拟对海外多媒体片段中音轨(Audio Extraction)及画面快照转换。多模态在提取文案时已经全自动将可能含有拼写错误的口语化歌词或台词过滤，输出标准、无语法毛病的英文配音提纲。
