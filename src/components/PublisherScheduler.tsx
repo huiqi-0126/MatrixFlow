@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { 
   Calendar, CheckCircle, Clock, Plus, Trash2, Video, 
-  Send, AlertTriangle, Play, RefreshCw, HelpCircle, Laptop, Smartphone, Check
+  Send, AlertTriangle, Play, RefreshCw, HelpCircle, Laptop, Smartphone, Check, Zap, Shield
 } from 'lucide-react';
 import { ScheduleTask, VideoAsset, Device } from '../types';
 
@@ -37,6 +37,8 @@ export default function PublisherScheduler({
   }, []);
   const [showAutoPostVisualizer, setShowAutoPostVisualizer] = useState(false);
   const [activeVisualizerTask, setActiveVisualizerTask] = useState<ScheduleTask | null>(null);
+  const [agentActivated, setAgentActivated] = useState<boolean>(false);
+  const [agentMode, setAgentMode] = useState<'fullAuto' | 'userConfirm'>('fullAuto');
 
   // New task form state
   const [selectedAssetId, setSelectedAssetId] = useState<string>('');
@@ -173,7 +175,46 @@ export default function PublisherScheduler({
   };
 
   return (
-    <div className="flex flex-col text-left space-y-4 text-slate-200 h-full min-h-[500px]">
+    <>
+      {/* ─── Agent Control Header ─── */}
+      <div className="bg-slate-800/40 border border-slate-800 rounded-2xl p-4 flex flex-wrap items-center justify-between gap-4 mb-4">
+        <div className="flex items-center gap-3">
+          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg shadow-emerald-500/20">
+            <Zap className="w-4 h-4 text-white" />
+          </div>
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="text-sm font-bold text-white">素材发布智能体</span>
+              {agentActivated
+                ? <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-950/50 border border-emerald-500/30 text-emerald-400">● 已激活</span>
+                : <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-900 border border-slate-700 text-slate-500">○ 未激活</span>
+              }
+            </div>
+            <p className="text-xs text-slate-500 mt-0.5">激活后按排期自动定时发布视频素材</p>
+          </div>
+        </div>
+        <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1 bg-slate-900 border border-slate-800 rounded-lg p-1">
+            <button onClick={() => setAgentMode('fullAuto')} className={`px-3 py-1 rounded text-[11px] font-bold transition cursor-pointer ${agentMode === 'fullAuto' ? 'bg-emerald-600 text-white shadow' : 'text-slate-400 hover:text-white'}`}>
+              <Zap className="w-3 h-3 inline mr-1" />全权托管
+            </button>
+            <button onClick={() => setAgentMode('userConfirm')} className={`px-3 py-1 rounded text-[11px] font-bold transition cursor-pointer ${agentMode === 'userConfirm' ? 'bg-amber-600 text-white shadow' : 'text-slate-400 hover:text-white'}`}>
+              <Shield className="w-3 h-3 inline mr-1" />用户确认
+            </button>
+          </div>
+          {!agentActivated ? (
+            <button onClick={() => setAgentActivated(true)} className="px-4 py-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-bold rounded-lg transition shadow-lg cursor-pointer">
+              激活智能体
+            </button>
+          ) : (
+            <button onClick={() => setAgentActivated(false)} className="px-4 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 text-xs font-bold rounded-lg transition cursor-pointer">
+              停用
+            </button>
+          )}
+        </div>
+      </div>
+
+      <div className="flex flex-col text-left space-y-4 text-slate-200 h-full min-h-[500px]">
       
       {/* 2. Headline filter counters */}
       <div className="grid grid-cols-2 sm:grid-cols-5 gap-4">
@@ -531,5 +572,6 @@ export default function PublisherScheduler({
       )}
 
     </div>
+    </>
   );
 }

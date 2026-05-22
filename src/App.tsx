@@ -24,6 +24,7 @@ import ContentPlanner from './components/ContentPlanner';
 import PublisherScheduler from './components/PublisherScheduler';
 import AnalyticsAdvisor from './components/AnalyticsAdvisor';
 import AssetManager from './components/AssetManager';
+import DataCollector from './components/DataCollector';
 
 // Import Types and Constants
 import { Device, Persona, VideoAsset, ScheduleTask } from './types';
@@ -207,7 +208,9 @@ export default function App() {
     },
   ]);
 
-  const [activeTab, setActiveTab] = useState<'simulation' | 'persona' | 'warmup' | 'content' | 'scheduler' | 'analytics' | 'assets'>('persona');
+  const [activeTab, setActiveTab] = useState<'simulation' | 'persona' | 'warmup' | 'content' | 'scheduler' | 'analytics' | 'assets' | 'datacollect'>('persona');
+  // Agent activation states (each agent tab requires explicit activation)
+  const [agentActivated, setAgentActivated] = useState<Record<string, boolean>>({});
   useEffect(() => {
     const handleOpenScheduleModal = () => {
       setActiveTab('scheduler');
@@ -310,7 +313,7 @@ export default function App() {
             <Globe className="w-5.5 h-5.5 text-white" />
           </div>
           <div className="text-left">
-            <h1 className="text-xs font-bold font-sans tracking-tight text-white flex items-center gap-1.5 leading-none">
+            <h1 className="text-xs font-bold font-sans tracking-tight text-white flex items-center gap-1.5 leading-none whitespace-nowrap">
               海外自媒体账号培育与内容发布系统
               <span className="text-xs bg-indigo-950/60 border border-indigo-900/40 text-indigo-400 px-2 py-0.5 rounded font-mono font-bold">
                 MCN FARM PRO
@@ -537,30 +540,31 @@ export default function App() {
           </div>
 
           {/* 3. Horizontal tabs selection designed as high-quality Bento Grid cards */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3 pb-2 select-none">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5 gap-3 pb-2 select-none">
             {[
-              { id: 'persona', label: '👤 智能体人设定义', desc: '肖像兴趣与视频大纲' },
-              { id: 'warmup', label: '📅 社交互动', desc: '模拟真人浏览防反作弊' },
-              { id: 'content', label: '📝 内容生成', desc: '内容表与关键帧分析' },
-              { id: 'assets', label: '🗂️ 素材管理', desc: '视频资产与AI生成' },
-              { id: 'scheduler', label: '🕒 任务列表', desc: '自动定时发布排期' },
-              { id: 'analytics', label: '📊 数据分析', desc: 'SVG成长与诊断建议' },
-              
+              { id: 'persona',      label: '🧠 智能体人设定义', desc: '账号肖像 · 人设 · 养殖环境', isAgent: false },
+              { id: 'warmup',       label: '💬 社交互动智能体',  desc: '模拟真人浏览互动防封号',   isAgent: true  },
+              { id: 'content',      label: '✍️ 内容生成智能体',  desc: '脚本规划 · 关键帧复刻',    isAgent: true  },
+              { id: 'scheduler',    label: '📤 素材发布智能体',  desc: '定时自动发布排期任务',     isAgent: true  },
+              { id: 'datacollect',  label: '🔍 数据采集智能体',  desc: '爆款采集 · 账号数据同步',   isAgent: true  },
+              { id: 'analytics',   label: '📊 数据分析',         desc: '成长趋势 · AI诊断建议',   isAgent: false },
             ].map(tab => {
               const isActive = activeTab === tab.id;
               return (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id as any)}
-                  className={`p-3 rounded-xl border transition-all duration-200 cursor-pointer text-left flex flex-col justify-between ${isActive
-                    ? 'bg-indigo-600/20 border-indigo-500/50 text-indigo-400 bento-glow-indigo shadow-lg'
-                    : 'bg-slate-800/40 border-slate-800/60 text-slate-400 hover:text-slate-200 hover:bg-slate-800/60 hover:border-slate-700'
-                    }`}
+                  className={`p-3 rounded-xl border transition-all duration-200 cursor-pointer text-left flex flex-col justify-between relative ${
+                    isActive
+                      ? 'bg-indigo-600/20 border-indigo-500/50 text-indigo-400 bento-glow-indigo shadow-lg'
+                      : 'bg-slate-800/40 border-slate-800/60 text-slate-400 hover:text-slate-200 hover:bg-slate-800/60 hover:border-slate-700'
+                  }`}
                 >
                   <span className="font-bold text-xs tracking-tight">{tab.label}</span>
-                  <span className="text-xs text-slate-500 pt-2 leading-tight font-mono block">
-                    {tab.desc}
-                  </span>
+                  <span className="text-xs text-slate-500 pt-2 leading-tight font-mono block">{tab.desc}</span>
+                  {tab.isAgent && (
+                    <span className="absolute top-2 right-2 text-[9px] font-bold px-1.5 py-0.5 rounded bg-cyan-950/60 border border-cyan-900/40 text-cyan-500">AGENT</span>
+                  )}
                 </button>
               );
             })}
@@ -622,6 +626,9 @@ export default function App() {
                 device={activeDevice}
                 videoAssets={videoAssets}
               />
+            </div>
+            <div className={activeTab === 'datacollect' ? 'block h-full' : 'hidden'}>
+              <DataCollector device={activeDevice} />
             </div>
           </div>
 

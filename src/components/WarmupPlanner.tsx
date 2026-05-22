@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import {
   Calendar, CheckCircle, Play, Sliders, ChevronRight, Terminal,
-  Search, Shield, Heart, Eye, Bookmark, MessageSquare, AlertCircle, HelpCircle, X, Camera, Image as ImageIcon
+  Search, Shield, Heart, Eye, Bookmark, MessageSquare, AlertCircle, HelpCircle, X, Camera, Image as ImageIcon, Zap
 } from 'lucide-react';
 import { WarmupPlan, WarmupAction, Device } from '../types';
 import { DEFAULT_WARMUP_PLANS } from '../constants';
@@ -25,6 +25,10 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
   const [viewMode, setViewMode] = useState<'log' | 'screenshot'>('log');
   const [hasPlanned, setHasPlanned] = useState<boolean>(false);
   const [isPlanning, setIsPlanning] = useState<boolean>(false);
+
+  // Agent activation
+  const [agentActivated, setAgentActivated] = useState<boolean>(false);
+  const [agentMode, setAgentMode] = useState<'fullAuto' | 'userConfirm'>('fullAuto');
 
 
   // Automation Slider Parameters
@@ -239,6 +243,44 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
 
   return (
     <>
+      {/* ─── Agent Control Header ─── */}
+      <div className="bg-slate-800/40 border border-slate-800 rounded-2xl p-4 flex flex-wrap items-center justify-between gap-4 mb-4">
+        <div className="flex items-center gap-3">
+          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-purple-500/20">
+            <Zap className="w-4 h-4 text-white" />
+          </div>
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="text-sm font-bold text-white">社交互动智能体</span>
+              {agentActivated
+                ? <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-950/50 border border-emerald-500/30 text-emerald-400">● 已激活</span>
+                : <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-900 border border-slate-700 text-slate-500">○ 未激活</span>
+              }
+            </div>
+            <p className="text-xs text-slate-500 mt-0.5">激活后自动规划5天养号互动脚本，模拟真人浏览防封号</p>
+          </div>
+        </div>
+        <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1 bg-slate-900 border border-slate-800 rounded-lg p-1">
+            <button onClick={() => setAgentMode('fullAuto')} className={`px-3 py-1 rounded text-[11px] font-bold transition cursor-pointer ${agentMode === 'fullAuto' ? 'bg-purple-600 text-white shadow' : 'text-slate-400 hover:text-white'}`}>
+              <Zap className="w-3 h-3 inline mr-1" />全权托管
+            </button>
+            <button onClick={() => setAgentMode('userConfirm')} className={`px-3 py-1 rounded text-[11px] font-bold transition cursor-pointer ${agentMode === 'userConfirm' ? 'bg-amber-600 text-white shadow' : 'text-slate-400 hover:text-white'}`}>
+              <Shield className="w-3 h-3 inline mr-1" />用户确认
+            </button>
+          </div>
+          {!agentActivated ? (
+            <button onClick={() => { setAgentActivated(true); if (!hasPlanned && !isPlanning) handleSmartPlan(); }} className="px-4 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-bold rounded-lg transition shadow-lg cursor-pointer">
+              激活智能体
+            </button>
+          ) : (
+            <button onClick={() => setAgentActivated(false)} className="px-4 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 text-xs font-bold rounded-lg transition cursor-pointer">
+              停用
+            </button>
+          )}
+        </div>
+      </div>
+
       <div className="grid grid-cols-1 xl:grid-cols-12 gap-4 text-slate-200 h-full min-h-[500px]">
 
         {/* 2. Middle & Right panel: Plan List Planner Timeline + Virtual Simulator Output logs (8 columns) */}
@@ -269,12 +311,7 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
                       <p className="text-slate-400 text-xs text-center mb-6 leading-relaxed">
                         当前暂无互动规划数据。<br />请点击下方按钮，由系统根据该账号的垂直领域自动生成5天阶梯式的养号剧本。
                       </p>
-                      <button
-                        onClick={handleSmartPlan}
-                        className="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold rounded-lg shadow-lg shadow-indigo-900/20 transition-all cursor-pointer"
-                      >
-                        ✨ 基于人设智能规划
-                      </button>
+                      <p className="text-xs text-slate-600 text-center">激活上方「社交互动智能体」后自动开始规划</p>
                     </>
                   )}
                 </div>
