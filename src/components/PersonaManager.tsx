@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { 
-  User, Check, Plus, Edit, Trash2, Video, Tag, MessageSquare, 
+import {
+  User, Check, Plus, Edit, Trash2, Video, Tag, MessageSquare,
   Sparkles, FileText, Info, HelpCircle, HardDrive, UploadCloud, Loader2,
-  Flame, Play, Layers
+  Flame, Play, Layers, Download
 } from 'lucide-react';
 import { Persona, VideoAsset, Device } from '../types';
 import { NICHES } from '../constants';
@@ -16,15 +16,15 @@ interface PersonaManagerProps {
   onDeleteVideoAsset: (assetId: string) => void;
 }
 
-export default function PersonaManager({ 
-  device, 
-  persona, 
-  videoAssets, 
-  onUpdatePersona, 
-  onAddVideoAsset, 
-  onDeleteVideoAsset 
+export default function PersonaManager({
+  device,
+  persona,
+  videoAssets,
+  onUpdatePersona,
+  onAddVideoAsset,
+  onDeleteVideoAsset
 }: PersonaManagerProps) {
-  
+
   const [isEditingPersona, setIsEditingPersona] = useState(false);
   const [isFetchingCompetitors, setIsFetchingCompetitors] = useState(false);
   const [showCompetitors, setShowCompetitors] = useState(false);
@@ -37,7 +37,7 @@ export default function PersonaManager({
     }, 3000);
   };
   const [editedPersona, setEditedPersona] = useState<Persona>({ ...persona });
-  
+
   // Video uploading modal/form state
   const [showUploadModal, setShowUploadModal] = useState(false);
   const [dragOver, setDragOver] = useState(false);
@@ -59,7 +59,7 @@ export default function PersonaManager({
   const handleTriggerUpload = (e: React.FormEvent) => {
     e.preventDefault();
     if (!newVideo.title) return;
-    
+
     const tags = newVideo.tagsString
       .split(',')
       .map(t => t.trim())
@@ -82,7 +82,7 @@ export default function PersonaManager({
 
     onAddVideoAsset(createdAsset);
     setShowUploadModal(false);
-    
+
     // Reset form
     setNewVideo({
       title: '',
@@ -96,25 +96,25 @@ export default function PersonaManager({
 
   return (
     <div className="grid grid-cols-1 xl:grid-cols-12 gap-4 text-slate-200">
-      
+
       {/* 1. Left Panel: Standard User Persona Editor (5 columns) */}
       <div className="xl:col-span-5 bg-slate-800/40 border border-slate-800 rounded-2xl p-4 flex flex-col text-left bento-glow-indigo">
-        
+
         <div className="flex items-center justify-between border-b border-slate-800 pb-4 mb-2">
           <div className="flex items-center gap-4">
             <User className="text-indigo-400 w-5 h-5" />
             <h3 className="text-xs font-bold text-slate-150">稳定海外账号人设 (Stable AI Persona)</h3>
           </div>
-          
+
           {!isEditingPersona && (
             <div className="flex gap-2">
-              <button 
+              <button
                 onClick={() => alert('大模型正在重新生成人设框架...')}
                 className="px-3 py-1 bg-indigo-950/40 hover:bg-indigo-900 border border-indigo-500/30 text-indigo-400 text-xs font-bold rounded-lg flex items-center gap-1 cursor-pointer transition"
               >
                 <Sparkles className="w-3.5 h-3.5" /> 重新生成
               </button>
-              <button 
+              <button
                 onClick={() => {
                   setEditedPersona({ ...persona });
                   setIsEditingPersona(true);
@@ -132,18 +132,18 @@ export default function PersonaManager({
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="text-xs text-slate-400 block mb-2">形象 Emoji 标识</label>
-                <input 
-                  type="text" 
-                  value={editedPersona.avatarUrl} 
+                <input
+                  type="text"
+                  value={editedPersona.avatarUrl}
                   onChange={(e) => setEditedPersona({ ...editedPersona, avatarUrl: e.target.value })}
                   className="w-full bg-black text-slate-200 border border-slate-800 rounded px-2.5 py-1.5 text-xs font-mono focus:border-sky-500 focus:outline-none"
                 />
               </div>
               <div>
                 <label className="text-xs text-slate-400 block mb-2">目标族裔/细分受众</label>
-                <input 
-                  type="text" 
-                  value={editedPersona.race} 
+                <input
+                  type="text"
+                  value={editedPersona.race}
                   onChange={(e) => setEditedPersona({ ...editedPersona, race: e.target.value })}
                   className="w-full bg-black text-slate-200 border border-slate-800 rounded px-2.5 py-1.5 text-xs font-mono focus:border-sky-500 focus:outline-none"
                 />
@@ -153,8 +153,8 @@ export default function PersonaManager({
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="text-xs text-slate-400 block mb-2">性别设定</label>
-                <select 
-                  value={editedPersona.gender} 
+                <select
+                  value={editedPersona.gender}
                   onChange={(e) => setEditedPersona({ ...editedPersona, gender: e.target.value })}
                   className="w-full bg-black text-slate-200 border border-slate-800 rounded px-2.5 py-1.5 text-xs focus:border-sky-500 focus:outline-none"
                 >
@@ -165,8 +165,8 @@ export default function PersonaManager({
               </div>
               <div>
                 <label className="text-xs text-slate-400 block mb-2">内容垂类</label>
-                <select 
-                  value={editedPersona.niche} 
+                <select
+                  value={editedPersona.niche}
                   onChange={(e) => setEditedPersona({ ...editedPersona, niche: e.target.value })}
                   className="w-full bg-black text-slate-200 border border-slate-800 rounded px-2.5 py-1.5 text-xs focus:border-sky-500 focus:outline-none"
                 >
@@ -179,9 +179,9 @@ export default function PersonaManager({
 
             <div>
               <label className="text-xs text-slate-400 block mb-2">核心价值观 (Values Model - English)</label>
-              <input 
-                type="text" 
-                value={editedPersona.values} 
+              <input
+                type="text"
+                value={editedPersona.values}
                 onChange={(e) => setEditedPersona({ ...editedPersona, values: e.target.value })}
                 className="w-full bg-black text-slate-200 border border-slate-800 rounded px-2.5 py-1.5 text-xs font-mono focus:border-sky-500 focus:outline-none"
               />
@@ -189,9 +189,9 @@ export default function PersonaManager({
 
             <div>
               <label className="text-xs text-slate-400 block mb-2">个性标签与兴趣域 (英文逗号隔开)</label>
-              <input 
-                type="text" 
-                value={editedPersona.interests.join(', ')} 
+              <input
+                type="text"
+                value={editedPersona.interests.join(', ')}
                 onChange={(e) => setEditedPersona({ ...editedPersona, interests: e.target.value.split(',').map(x => x.trim()) })}
                 className="w-full bg-black text-slate-200 border border-slate-800 rounded px-2.5 py-1.5 text-xs font-mono focus:border-sky-500 focus:outline-none"
               />
@@ -199,8 +199,8 @@ export default function PersonaManager({
 
             <div>
               <label className="text-xs text-slate-400 block mb-2">英文独家简介 (TikTok Bio - English)</label>
-              <textarea 
-                value={editedPersona.bio} 
+              <textarea
+                value={editedPersona.bio}
                 onChange={(e) => setEditedPersona({ ...editedPersona, bio: e.target.value })}
                 className="w-full bg-black text-slate-200 border border-slate-800 rounded px-2.5 py-1.5 text-xs font-mono focus:border-sky-500 focus:outline-none h-16 resize-none"
               />
@@ -208,22 +208,22 @@ export default function PersonaManager({
 
             <div>
               <label className="text-xs text-slate-400 block mb-2">评论互动风格 (Interaction Language Tone)</label>
-              <input 
-                type="text" 
-                value={editedPersona.tone} 
+              <input
+                type="text"
+                value={editedPersona.tone}
                 onChange={(e) => setEditedPersona({ ...editedPersona, tone: e.target.value })}
                 className="w-full bg-black text-slate-200 border border-slate-800 rounded px-2.5 py-1.5 text-xs font-mono focus:border-sky-500 focus:outline-none"
               />
             </div>
 
             <div className="flex gap-4">
-              <button 
+              <button
                 type="submit"
                 className="flex-1 py-1.5 bg-emerald-500 hover:bg-emerald-600 font-bold text-black text-xs rounded transition cursor-pointer text-center"
               >
                 保存人设参数
               </button>
-              <button 
+              <button
                 type="button"
                 onClick={() => setIsEditingPersona(false)}
                 className="px-4 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs rounded transition cursor-pointer"
@@ -234,14 +234,14 @@ export default function PersonaManager({
           </form>
         ) : (
           <div className="space-y-4">
-            
+
             {/* Visual Persona Header Summary */}
             <div className="bg-slate-800/20 p-4 rounded-xl border border-slate-800 flex items-center gap-4">
               <div className="w-20 h-20 rounded-full border-2 border-white/20 shadow-inner shrink-0 overflow-hidden bg-slate-200">
                 {(persona.avatarUrl.startsWith('http') || persona.avatarUrl.startsWith('/')) ? (
-                  <img 
-                    src={persona.avatarUrl} 
-                    alt="Persona Avatar" 
+                  <img
+                    src={persona.avatarUrl}
+                    alt="Persona Avatar"
                     className="w-full h-full object-cover"
                     onError={(e) => {
                       e.currentTarget.style.display = 'none';
@@ -323,28 +323,36 @@ export default function PersonaManager({
 
       {/* 2. Right Panel: Trending Competitor Content (7 columns) */}
       <div className="xl:col-span-7 bg-slate-800/40 border border-slate-800 rounded-2xl p-4 flex flex-col text-left bento-glow-indigo">
-        
+
         {/* Hub Header */}
         <div className="flex items-center justify-between border-b border-slate-800 pb-4 mb-2">
           <div className="flex items-center gap-4">
             <Flame className="text-rose-500 w-5 h-5" />
             <h3 className="text-xs font-bold text-slate-150">近期对标账号爆款视频抓取 (Trending Competitor Content)</h3>
           </div>
-          
+
           <div className="flex items-center gap-3">
             {showCompetitors && (
-              <span className="text-xs text-slate-500 font-mono tracking-wider">
-                AUTO-SYNCED: JUST NOW
-              </span>
+              <div className="flex items-center gap-3">
+                <span className="text-xs text-slate-500 font-mono tracking-wider">
+                  AUTO-SYNCED: JUST NOW
+                </span>
+                <button
+                  onClick={() => alert('正在抓取对标账号近期爆款视频...')}
+                  className="px-3 py-1.5 bg-gradient-to-r from-rose-500 to-orange-500 hover:from-rose-600 hover:to-orange-600 text-black rounded font-bold text-xs flex items-center gap-1.5 transition shadow-[0_0_12px_rgba(244,63,94,0.3)] hover:scale-105 active:scale-95 cursor-pointer"
+                >
+                  <Download className="w-3.5 h-3.5" />
+                  立刻抓取
+                </button>
+              </div>
             )}
             <button
               onClick={handleFetchCompetitors}
               disabled={isFetchingCompetitors || showCompetitors}
-              className={`flex items-center gap-2 px-3 py-1.5 rounded text-xs font-bold transition-all ${
-                showCompetitors
+              className={`flex items-center gap-2 px-3 py-1.5 rounded text-xs font-bold transition-all ${showCompetitors
                   ? 'bg-slate-800 text-slate-500 cursor-not-allowed'
                   : 'bg-indigo-600 hover:bg-indigo-500 text-white shadow-[0_0_10px_rgba(79,70,229,0.3)]'
-              }`}
+                }`}
             >
               {isFetchingCompetitors ? (
                 <>
@@ -368,7 +376,7 @@ export default function PersonaManager({
 
         {/* Assets List Grid */}
         <div className="flex-1 overflow-y-auto h-full min-h-[460px] pr-1 space-y-3 scrollbar-narrow relative">
-          
+
           {!showCompetitors && !isFetchingCompetitors && (
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6 bg-slate-800/20 rounded-xl border border-slate-700/50 border-dashed">
               <div className="w-16 h-16 bg-slate-800 rounded-full flex items-center justify-center mb-4 shadow-inner">
@@ -393,58 +401,58 @@ export default function PersonaManager({
 
           {showCompetitors && (
             [
-            {
-              title: "15s Matcha Latte ASMR for sleepy mornings 🍵",
-              creator: "@matcha_muse",
-              views: "1.2M",
-              likes: "345K",
-              date: "2 hours ago",
-              tags: ["#matcha", "#asmrcooking", "#aesthetic"],
-              imgSrc: "https://images.unsplash.com/photo-1563822249548-9a72b6353cd1?auto=format&fit=crop&q=80&w=200&h=200",
-              imgColor: "bg-emerald-900/50"
-            },
-            {
-              title: "POV: Sunday reset routine in my minimal kitchen",
-              creator: "@cozy_corner_ny",
-              views: "890K",
-              likes: "120K",
-              date: "5 hours ago",
-              tags: ["#sundayreset", "#minimalist", "#kitchen"],
-              imgSrc: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&q=80&w=200&h=200",
-              imgColor: "bg-amber-900/50"
-            },
-            {
-              title: "Making espresso without a machine! ☕️🤯",
-              creator: "@coffee_hacks_daily",
-              views: "2.4M",
-              likes: "580K",
-              date: "1 day ago",
-              tags: ["#espresso", "#coffeehacks", "#morningroutine"],
-              imgSrc: "https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&q=80&w=200&h=200",
-              imgColor: "bg-amber-800/50"
-            },
-            {
-              title: "Testing the viral glass cup aesthetic",
-              creator: "@glassware_finds",
-              views: "450K",
-              likes: "80K",
-              date: "2 days ago",
-              tags: ["#amazonfinds", "#aesthetic", "#unboxing"],
-              imgSrc: "https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?auto=format&fit=crop&q=80&w=200&h=200",
-              imgColor: "bg-sky-900/50"
-            },
-            {
-              title: "Late night study session with lofi beats 📚",
-              creator: "@study_aesthetic",
-              views: "720K",
-              likes: "95K",
-              date: "3 days ago",
-              tags: ["#studywithme", "#lofi", "#aesthetic"],
-              imgSrc: "https://images.unsplash.com/photo-1503694978374-8a2fa686963a?auto=format&fit=crop&q=80&w=200&h=200",
-              imgColor: "bg-indigo-900/50"
-            }
-          ].map((vid, i) => (
-              <div 
+              {
+                title: "15s Matcha Latte ASMR for sleepy mornings 🍵",
+                creator: "@matcha_muse",
+                views: "1.2M",
+                likes: "345K",
+                date: "2 hours ago",
+                tags: ["#matcha", "#asmrcooking", "#aesthetic"],
+                imgSrc: "https://images.unsplash.com/photo-1563822249548-9a72b6353cd1?auto=format&fit=crop&q=80&w=200&h=200",
+                imgColor: "bg-emerald-900/50"
+              },
+              {
+                title: "POV: Sunday reset routine in my minimal kitchen",
+                creator: "@cozy_corner_ny",
+                views: "890K",
+                likes: "120K",
+                date: "5 hours ago",
+                tags: ["#sundayreset", "#minimalist", "#kitchen"],
+                imgSrc: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&q=80&w=200&h=200",
+                imgColor: "bg-amber-900/50"
+              },
+              {
+                title: "Making espresso without a machine! ☕️🤯",
+                creator: "@coffee_hacks_daily",
+                views: "2.4M",
+                likes: "580K",
+                date: "1 day ago",
+                tags: ["#espresso", "#coffeehacks", "#morningroutine"],
+                imgSrc: "https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&q=80&w=200&h=200",
+                imgColor: "bg-amber-800/50"
+              },
+              {
+                title: "Testing the viral glass cup aesthetic",
+                creator: "@glassware_finds",
+                views: "450K",
+                likes: "80K",
+                date: "2 days ago",
+                tags: ["#amazonfinds", "#aesthetic", "#unboxing"],
+                imgSrc: "https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?auto=format&fit=crop&q=80&w=200&h=200",
+                imgColor: "bg-sky-900/50"
+              },
+              {
+                title: "Late night study session with lofi beats 📚",
+                creator: "@study_aesthetic",
+                views: "720K",
+                likes: "95K",
+                date: "3 days ago",
+                tags: ["#studywithme", "#lofi", "#aesthetic"],
+                imgSrc: "https://images.unsplash.com/photo-1503694978374-8a2fa686963a?auto=format&fit=crop&q=80&w=200&h=200",
+                imgColor: "bg-indigo-900/50"
+              }
+            ].map((vid, i) => (
+              <div
                 key={i}
                 className="bg-slate-800/30 p-4 rounded-xl border border-slate-800 flex flex-col md:flex-row gap-4 hover:border-rose-500/30 transition-all"
               >
@@ -470,8 +478,8 @@ export default function PersonaManager({
                       </div>
                     </div>
 
-                    <button 
-                      onClick={() => window.dispatchEvent(new CustomEvent('replicate-video', { detail: { url: `https://tiktok.com/${vid.creator.replace('@','')}/video/${Math.floor(Math.random() * 100000000)}` } }))}
+                    <button
+                      onClick={() => window.dispatchEvent(new CustomEvent('replicate-video', { detail: { url: `https://tiktok.com/${vid.creator.replace('@', '')}/video/${Math.floor(Math.random() * 100000000)}` } }))}
                       className="px-3 py-1.5 bg-rose-500 hover:bg-rose-600 text-black rounded font-bold text-xs flex items-center gap-1.5 transition shrink-0 shadow-[0_0_10px_rgba(244,63,94,0.3)] hover:scale-105 active:scale-95 cursor-pointer"
                     >
                       <Layers className="w-3.5 h-3.5" />
@@ -490,7 +498,7 @@ export default function PersonaManager({
                 </div>
 
               </div>
-          ))
+            ))
           )}
         </div>
       </div>

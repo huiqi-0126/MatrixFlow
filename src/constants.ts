@@ -366,7 +366,7 @@ export const INITIAL_DEVICES: Device[] = [
 export const INITIAL_PERSONAS: Record<string, Persona> = {
   'device-1': {
     id: 'device-1',
-    avatarUrl: '/a001.png',
+    avatarUrl: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face',
     interests: ['Aesthetic Cooking', 'Family Recipes', 'Coffee ASMR', 'Home Baking', 'Kitchen Restock'],
     race: 'Caucasian (Western Housewives)',
     gender: 'Female',
