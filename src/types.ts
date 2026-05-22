@@ -41,12 +41,16 @@ export interface WarmupPlan {
 export interface VideoAsset {
   id: string;
   title: string;
-  niche: string;
+  niche?: string;
   duration: number; // in seconds
   thumbnailColor: string;
-  tagline: string;
+  tagline?: string;
   tags: string[];
   script: string;
+  size?: string;
+  format?: string;
+  status?: string;
+  [key: string]: any;
 }
 
 export interface DailyPlan {
