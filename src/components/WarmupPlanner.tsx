@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import {
-  Calendar, CheckCircle, Play, Sliders, ChevronRight, Terminal,
+  Calendar, CheckCircle, Play, Sliders, ChevronRight, ChevronLeft, Terminal,
   Search, Shield, Heart, Eye, Bookmark, MessageSquare, AlertCircle, HelpCircle, X, Camera, Image as ImageIcon, Zap
 } from 'lucide-react';
 import { WarmupPlan, WarmupAction, Device } from '../types';
@@ -29,8 +29,9 @@ interface WarmupPlannerProps {
 
 export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPlannerProps) {
   const todayDate = new Date();
+  const [calendarShift, setCalendarShift] = useState<number>(0);
   const CALENDAR_DAYS = Array.from({ length: 7 }).map((_, i) => {
-    const offset = i - 3;
+    const offset = i - 3 + calendarShift;
     const d = new Date(todayDate);
     d.setDate(todayDate.getDate() + offset);
     const dateStr = `${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
@@ -340,35 +341,51 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
               ) : (
                 <>
                   {/* 2.1 Calendar Header (7-Day Agent Execution Planner) */}
-                  <div className="flex items-center justify-between mb-4 bg-slate-900 border border-slate-800 rounded-xl p-1 shadow-inner relative">
-                    <div className="absolute inset-y-0 left-0 bg-indigo-500/20 rounded-xl" style={{ width: `${simProgress}%`, transition: 'width 1s linear' }}></div>
-                    {CALENDAR_DAYS.map((p) => {
-                      const isSelected = selectedDayOffset === p.offset;
-                      const isPast = p.offset <= 0;
-                      const isToday = p.offset === 0;
-                      return (
-                        <button
-                          key={p.offset}
-                          onClick={() => {
-                            if (!isSimulating) setSelectedDayOffset(p.offset);
-                          }}
-                          disabled={isSimulating}
-                          className={`py-2 px-1 flex-1 text-center rounded text-xs font-bold font-mono transition cursor-pointer flex flex-col items-center gap-0.5 relative ${isSelected
-                            ? 'bg-purple-600 text-white shadow-lg shadow-purple-900/40'
-                            : 'bg-transparent hover:bg-slate-800 text-slate-400 disabled:opacity-40'
-                            }`}
-                        >
-                          <span className={isSelected ? 'text-white' : isToday ? 'text-purple-400' : 'text-slate-500'}>{p.dateStr}</span>
-                          <span className="flex items-center">
-                            {p.label}
-                            {isPast && <CheckCircle className={`w-2.5 h-2.5 inline ml-1 ${isSelected ? 'text-white' : 'text-emerald-500'}`} />}
-                          </span>
-                          {p.offset > 0 && (
-                            <span className="absolute top-1 right-2 w-1.5 h-1.5 rounded-full bg-slate-600"></span>
-                          )}
-                        </button>
-                      );
-                    })}
+                  <div className="flex items-center mb-4 bg-slate-900 border border-slate-800 rounded-xl p-1 shadow-inner relative">
+                    <button 
+                      onClick={() => setCalendarShift(s => s - 7)}
+                      className="px-1 py-4 text-slate-500 hover:text-slate-300 hover:bg-slate-800 rounded transition cursor-pointer"
+                      title="上周"
+                    >
+                      <ChevronLeft className="w-4 h-4" />
+                    </button>
+                    <div className="absolute inset-y-0 left-6 right-6 bg-indigo-500/20 rounded-xl pointer-events-none" style={{ width: `${simProgress}%`, transition: 'width 1s linear' }}></div>
+                    <div className="flex-1 flex justify-between items-center px-1">
+                      {CALENDAR_DAYS.map((p) => {
+                        const isSelected = selectedDayOffset === p.offset;
+                        const isPast = p.offset <= 0;
+                        const isToday = p.offset === 0;
+                        return (
+                          <button
+                            key={p.offset}
+                            onClick={() => {
+                              if (!isSimulating) setSelectedDayOffset(p.offset);
+                            }}
+                            disabled={isSimulating}
+                            className={`py-2 px-1 flex-1 text-center rounded text-xs font-bold font-mono transition cursor-pointer flex flex-col items-center gap-0.5 relative ${isSelected
+                              ? 'bg-purple-600 text-white shadow-lg shadow-purple-900/40'
+                              : 'bg-transparent hover:bg-slate-800 text-slate-400 disabled:opacity-40'
+                              }`}
+                          >
+                            <span className={isSelected ? 'text-white' : isToday ? 'text-purple-400' : 'text-slate-500'}>{p.dateStr}</span>
+                            <span className="flex items-center">
+                              {p.label}
+                              {isPast && <CheckCircle className={`w-2.5 h-2.5 inline ml-1 ${isSelected ? 'text-white' : 'text-emerald-500'}`} />}
+                            </span>
+                            {p.offset > 0 && (
+                              <span className="absolute top-1 right-2 w-1.5 h-1.5 rounded-full bg-slate-600"></span>
+                            )}
+                          </button>
+                        );
+                      })}
+                    </div>
+                    <button 
+                      onClick={() => setCalendarShift(s => s + 7)}
+                      className="px-1 py-4 text-slate-500 hover:text-slate-300 hover:bg-slate-800 rounded transition cursor-pointer"
+                      title="下周"
+                    >
+                      <ChevronRight className="w-4 h-4" />
+                    </button>
                   </div>
 
                   {/* Panel Content based on Selection */}
@@ -469,15 +486,7 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
                     </div>
                   )}
 
-                  {/* Click run button */}
-                  <button
-                    onClick={handleRunSimulation}
-                    disabled={isSimulating}
-                    className={`w-full py-2 bg-gradient-to-r from-purple-600 to-indigo-600 disabled:from-slate-800 disabled:to-slate-800 disabled:opacity-50 hover:opacity-90 font-bold text-white text-xs rounded transition shadow-lg flex items-center justify-center gap-4 cursor-pointer mt-3`}
-                  >
-                    <Play className="w-3.5 h-3.5 fill-currentScale" />
-                    {isSimulating ? `正在远程代运营养号中...` : `一键运行养号脚本`}
-                  </button>
+
                 </>
               )}
 
@@ -533,7 +542,7 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
                           ref={logScrollRef}
                           className="absolute inset-0 overflow-y-auto space-y-1.5 bg-black/80 p-4 rounded border border-slate-900 font-mono text-[10px] text-left text-slate-400 select-all scrollbar-narrow leading-tight"
                         >
-                          {(simLogs.length === 0 && !isSimulating && agentActivated) ? (
+                          {(simLogs.length === 0 && !isSimulating && hasPlanned) ? (
                             [
                               "2026-05-21 14:30:00,123 - INFO - [iPhone 8 Plus #01] ========== 开始历史任务恢复 ==========",
                               "2026-05-21 14:30:01,456 - INFO - [iPhone 8 Plus #01] MCP 连接已建立",
@@ -563,7 +572,7 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
                           ) : simLogs.length === 0 ? (
                             <div className="h-full flex flex-col items-center justify-center text-center text-slate-600">
                               <Terminal className="w-8 h-8 mb-2" />
-                              <span>{agentActivated ? '等待指令... 正在启动脚本。' : '等待指令... 请先激活社交互动智能体。'}</span>
+                              <span>{hasPlanned ? '等待指令... 正在启动脚本。' : agentActivated ? '智能体正在规划任务中，请稍候...' : '等待指令... 请先激活社交互动智能体。'}</span>
                             </div>
                           ) : (
                             simLogs.map((log, i) => {
