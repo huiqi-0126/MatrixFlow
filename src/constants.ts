@@ -22,8 +22,8 @@ export const INITIAL_DEVICES: Device[] = [
     status: 'idle',
     niche: 'aesthetic-cooking',
     followerCount: 24,
-    videoCount: 87,
-    totalViews: 45800,
+    videoCount: 7,
+    totalViews: 1450,
   },
   {
     id: 'device-2',
@@ -36,8 +36,8 @@ export const INITIAL_DEVICES: Device[] = [
     status: 'warmup',
     niche: 'fitness',
     followerCount: 158,
-    videoCount: 103,
-    totalViews: 324100,
+    videoCount: 13,
+    totalViews: 32100,
   },
   {
     id: 'device-3',
@@ -50,8 +50,8 @@ export const INITIAL_DEVICES: Device[] = [
     status: 'idle',
     niche: 'streetwear',
     followerCount: 5,
-    videoCount: 78,
-    totalViews: 1250,
+    videoCount: 7,
+    totalViews: 120,
   },
   {
     id: 'device-4',
@@ -64,7 +64,7 @@ export const INITIAL_DEVICES: Device[] = [
     status: 'posting',
     niche: 'tech-gadgets',
     followerCount: 89,
-    videoCount: 94,
+    videoCount: 9,
     totalViews: 90420,
   }, ,
   {
@@ -78,7 +78,7 @@ export const INITIAL_DEVICES: Device[] = [
     status: 'idle',
     niche: 'luxury',
     followerCount: 5420,
-    videoCount: 217,
+    videoCount: 87,
     totalViews: 1042000,
   },
   {
@@ -92,7 +92,7 @@ export const INITIAL_DEVICES: Device[] = [
     status: 'warmup',
     niche: 'aesthetic-cooking',
     followerCount: 5,
-    videoCount: 77,
+    videoCount: 2,
     totalViews: 850,
   },
   {
@@ -106,7 +106,7 @@ export const INITIAL_DEVICES: Device[] = [
     status: 'posting',
     niche: 'tech-gadgets',
     followerCount: 145,
-    videoCount: 120,
+    videoCount: 12,
     totalViews: 890000,
   },
   {
@@ -120,7 +120,7 @@ export const INITIAL_DEVICES: Device[] = [
     status: 'idle',
     niche: 'fitness',
     followerCount: 8,
-    videoCount: 90,
+    videoCount: 9,
     totalViews: 12400,
   },
   {
@@ -134,7 +134,7 @@ export const INITIAL_DEVICES: Device[] = [
     status: 'offline',
     niche: 'aesthetic-cooking',
     followerCount: 32,
-    videoCount: 105,
+    videoCount: 45,
     totalViews: 45000,
   },
   {

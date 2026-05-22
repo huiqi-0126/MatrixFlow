@@ -364,7 +364,7 @@ export default function App() {
 
           <div className="flex items-center justify-between mb-4 border-b border-slate-800 pb-2.5">
             <span className="text-xs font-bold font-mono text-slate-400">
-              账号列表 (Accounts)
+              账号矩阵 (Accounts Matrix)
             </span>
             <span className="text-xs px-1.5 py-0.5 rounded bg-indigo-950/60 text-indigo-400 border border-indigo-900/30 font-mono tracking-tight font-bold">
               ROUTER OK
@@ -375,9 +375,9 @@ export default function App() {
           <div className="bg-slate-800/30 p-3 rounded-xl border border-slate-800/80 mb-4 text-xs text-slate-450 leading-relaxed">
             <div className="flex gap-1.5 text-xs font-bold text-slate-300 items-center mb-1 leading-none">
               <Shield className="w-3.5 h-3.5 text-indigo-400" />
-              <span>设备状态机机制 (State Mapping)</span>
+              <span>账号状态机机制 (State Mapping)</span>
             </div>
-            点击任意设备切换受控核心，管理其特定的【人设画像、视频库、发布日程、账号中心数据】
+            点击任意账号，管理其特定的【人设画像、视频库、发布日程、账号中心数据】
           </div>
 
           <div className="space-y-2">
@@ -522,10 +522,10 @@ export default function App() {
           <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3 pb-2 select-none">
             {[
               { id: 'persona', label: '👤 智能体人设定义', desc: '肖像兴趣与视频大纲' },
-              { id: 'warmup', label: '📅 社交互动', desc: '模拟浏览防反作弊' },
+              { id: 'warmup', label: '📅 社交互动', desc: '模拟真人浏览防反作弊' },
               { id: 'content', label: '📝 内容生成', desc: '内容表与关键帧分析' },
               { id: 'assets', label: '🗂️ 素材管理', desc: '视频资产与AI生成' },
-              { id: 'scheduler', label: '🕒 任务列表', desc: '自动定时挂钩排期' },
+              { id: 'scheduler', label: '🕒 任务列表', desc: '自动定时发布排期' },
               { id: 'analytics', label: '📊 数据分析', desc: 'SVG成长与诊断建议' },
               { id: 'simulation', label: '🖥️ 远程控制', desc: '截图及视觉AI诊断' },
             ].map(tab => {
