@@ -206,7 +206,7 @@ export default function App() {
     },
   ]);
 
-  const [activeTab, setActiveTab] = useState<'simulation' | 'persona' | 'warmup' | 'content' | 'scheduler' | 'analytics'>('simulation');
+  const [activeTab, setActiveTab] = useState<'simulation' | 'persona' | 'warmup' | 'content' | 'scheduler' | 'analytics' | 'assets'>('persona');
   useEffect(() => {
     const handleOpenScheduleModal = () => {
       setActiveTab('scheduler');
@@ -434,13 +434,15 @@ export default function App() {
                       <span className="text-[10px] bg-slate-800 text-slate-300 px-1.5 py-0.5 rounded font-bold">
                         {dev.platform}
                       </span>
-                      <span className={`text-[10px] px-1.5 py-0.5 rounded font-bold ${dev.followerCount > 10000 ? 'bg-orange-950 text-orange-400' : dev.followerCount > 1000 ? 'bg-purple-950 text-purple-400' : 'bg-slate-800 text-slate-300'}`}>
-                        {dev.followerCount > 10000 ? '大V号' : dev.followerCount > 1000 ? '高级号' : '新号'}
+                      <span className={`text-[10px] px-1.5 py-0.5 rounded font-bold ${dev.followerCount >= 1000 ? 'bg-orange-950 text-orange-400' : dev.followerCount >= 100 ? 'bg-purple-950 text-purple-400' : 'bg-slate-800 text-slate-300'}`}>
+                        {dev.followerCount >= 1000 ? '大V号' : dev.followerCount >= 100 ? '高级号' : '新号'}
                       </span>
                     </div>
-                    <span className="text-[10px] text-slate-500">
-                      粉丝: <span className="text-slate-300 font-bold">{dev.followerCount >= 100000 ? (dev.followerCount / 1000).toFixed(1) + 'k' : dev.followerCount}</span>
-                    </span>
+                    <div className="text-[10px] text-slate-500 flex gap-2.5">
+                      <span>粉丝 <span className="text-slate-300 font-bold">{dev.followerCount >= 100000 ? (dev.followerCount / 1000).toFixed(1) + 'k' : dev.followerCount}</span></span>
+                      <span>播放 <span className="text-slate-300 font-bold">{dev.totalViews >= 1000000 ? (dev.totalViews / 1000000).toFixed(1) + 'M' : (dev.totalViews / 1000).toFixed(1) + 'k'}</span></span>
+                      <span>作品 <span className="text-slate-300 font-bold">{dev.videoCount}</span></span>
+                    </div>
                   </div>
 
                 </div>
