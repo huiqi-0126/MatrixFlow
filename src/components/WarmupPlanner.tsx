@@ -523,7 +523,7 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
                     className={`flex items-center gap-2 px-3 py-1.5 rounded transition ${viewMode === 'results' ? 'bg-slate-800 text-purple-400 font-bold' : 'text-slate-400 hover:text-slate-200'}`}
                   >
                     <CheckCircle className="w-4 h-4" />
-                    <span className="text-xs">任务结果</span>
+                    <span className="text-xs">历史结果</span>
                   </button>
                 </div>
 
@@ -684,19 +684,6 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
                 </div>
 
                 <div className="space-y-4 text-xs font-mono">
-
-                  <div>
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-slate-400">并发运行设备数 (Concurrency)</span>
-                      <span className="text-purple-400 font-bold">{concurrentDevices} 台</span>
-                    </div>
-                    <input
-                      type="range" min="1" max="10"
-                      value={concurrentDevices}
-                      onChange={(e) => setConcurrentDevices(Number(e.target.value))}
-                      className="w-full accent-purple-500 bg-slate-850 h-1 rounded"
-                    />
-                  </div>
 
                   <div>
                     <div className="flex justify-between items-center mb-2">

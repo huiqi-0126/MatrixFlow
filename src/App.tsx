@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {
   Smartphone, Shield, Activity, Users, Flame, Globe, Sliders,
   Calendar, Video, Clock, BarChart, RefreshCw, Layers, Award, Info,
-  Instagram, Youtube
+  Instagram, Youtube, Send
 } from 'lucide-react';
 
 const TikTokIcon = ({ className }: { className?: string }) => (
@@ -298,9 +298,11 @@ export default function App() {
     }));
   };
 
-  // Aggregate metrics
-  const totalFollowersCount = 149; // Fixed per user request
-  const totalViewsCalculated = 9573; // Fixed per user request
+  // Account-specific metrics
+  const activeFollowersCount = activeDevice.followerCount;
+  const activeViewsCount = activeDevice.totalViews;
+  const activeVideoCount = activeDevice.videoCount;
+  const activeAccountHealth = activeFollowersCount > 500 ? '🟢 极佳 (High)' : '🟢 正常 (Good)';
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans select-none antialiased">
@@ -325,24 +327,24 @@ export default function App() {
           </div>
         </div>
 
-        {/* Global Summary Statistics bar */}
+        {/* Account-Specific Summary Statistics bar */}
         <div className="flex items-center gap-4 text-xs font-mono">
           <div className="bg-slate-800/40 border border-slate-800 px-3 py-1.5 rounded-lg text-left flex items-center gap-2 transition hover:bg-slate-800/60">
-            <Smartphone className="w-4 h-4 text-indigo-400" />
+            <Users className="w-4 h-4 text-indigo-400" />
             <div>
-              <span className="text-slate-500 block text-xs leading-none">ONLINE DEVICES</span>
+              <span className="text-slate-500 block text-[9px] leading-none uppercase">Account Followers</span>
               <span className="text-xs font-bold font-mono text-white leading-tight">
-                {devices.length} 台
+                {activeFollowersCount >= 1000 ? (activeFollowersCount / 1000).toFixed(1) + 'k' : activeFollowersCount}
               </span>
             </div>
           </div>
 
           <div className="bg-slate-800/40 border border-slate-800 px-3 py-1.5 rounded-lg text-left flex items-center gap-2 transition hover:bg-slate-800/60">
-            <Users className="w-4 h-4 text-emerald-400" />
+            <Video className="w-4 h-4 text-sky-400" />
             <div>
-              <span className="text-slate-500 block text-xs leading-none">ACCUMULATED FOLLOWERS</span>
-              <span className="text-xs font-bold font-mono text-emerald-400 leading-tight">
-                {totalFollowersCount.toLocaleString()}
+              <span className="text-slate-500 block text-[9px] leading-none uppercase">Posted Videos</span>
+              <span className="text-xs font-bold font-mono text-sky-400 leading-tight">
+                {activeVideoCount} 个
               </span>
             </div>
           </div>
@@ -350,9 +352,19 @@ export default function App() {
           <div className="bg-slate-800/40 border border-slate-800 px-3 py-1.5 rounded-lg text-left flex items-center gap-2 transition hover:bg-slate-800/60">
             <Flame className="w-4 h-4 text-orange-400" />
             <div>
-              <span className="text-slate-500 block text-xs leading-none">TOTAL VIDEO VIEWS</span>
+              <span className="text-slate-500 block text-[9px] leading-none uppercase">Total Views</span>
               <span className="text-xs font-bold font-mono text-orange-400 leading-tight">
-                {totalViewsCalculated.toLocaleString()}
+                {activeViewsCount >= 1000000 ? (activeViewsCount / 1000000).toFixed(1) + 'M' : activeViewsCount >= 1000 ? (activeViewsCount / 1000).toFixed(1) + 'k' : activeViewsCount}
+              </span>
+            </div>
+          </div>
+
+          <div className="bg-slate-800/40 border border-slate-800 px-3 py-1.5 rounded-lg text-left flex items-center gap-2 transition hover:bg-slate-800/60">
+            <Activity className="w-4 h-4 text-emerald-400" />
+            <div>
+              <span className="text-slate-500 block text-[9px] leading-none uppercase">Account Health</span>
+              <span className="text-xs font-bold font-mono text-emerald-400 leading-tight">
+                {activeAccountHealth}
               </span>
             </div>
           </div>
@@ -487,7 +499,7 @@ export default function App() {
           {/* 3. Horizontal tabs selection designed as high-quality Bento Grid cards */}
           <div className="grid grid-cols-5 gap-2 pb-2 select-none">
             {[
-              { id: 'persona', label: '🧠 人设定义', desc: '账号 · 人设 · 养殖环境', isAgent: false },
+              { id: 'persona', label: '🧠 基本信息', desc: '账号 · 人设 · 培育环境', isAgent: false },
               { id: 'warmup', label: '💬 社交互动智能体', desc: '仿真人浏览 · 防封号', isAgent: true },
               { id: 'datacollect', label: '🔍 数据采集智能体', desc: '爆款 · 账号数据同步', isAgent: true },
               { id: 'assets', label: '📊 素材生成及管理', desc: '素材管理 · 视频复刻', isAgent: false },

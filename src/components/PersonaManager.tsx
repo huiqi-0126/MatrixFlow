@@ -47,7 +47,7 @@ export default function PersonaManager({
               <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></div>
               <span className="text-xs font-bold text-indigo-200 tracking-wider">SECURE REMOTE CONNECTION: {device.ip}</span>
             </div>
-            <button 
+            <button
               onClick={() => setShowRemoteControl(false)}
               className="p-1 hover:bg-slate-800 rounded transition text-slate-400 hover:text-white"
             >
@@ -58,7 +58,7 @@ export default function PersonaManager({
             <DeviceSimulator
               device={device}
               persona={persona}
-              onUpdateDeviceStats={onUpdateDeviceStats || (() => {})}
+              onUpdateDeviceStats={onUpdateDeviceStats || (() => { })}
               compactMode={true}
             />
           </div>
@@ -66,14 +66,14 @@ export default function PersonaManager({
       )}
 
       <div className={`grid grid-cols-1 lg:grid-cols-3 gap-6 h-full text-slate-200 overflow-y-auto pr-2 scrollbar-narrow ${showRemoteControl ? 'opacity-0 pointer-events-none' : 'opacity-100'} transition-opacity duration-300`}>
-        
+
         {/* Module 1: 账号信息 (Account Info) */}
         <div className="bg-slate-800/40 border border-slate-800 rounded-2xl p-5 flex flex-col text-left bento-glow-indigo">
           <div className="flex items-center gap-3 border-b border-slate-800 pb-4 mb-5">
             <User className="text-indigo-400 w-5 h-5" />
             <h3 className="text-sm font-bold text-slate-150">账号信息</h3>
           </div>
-          
+
           <div className="flex flex-col items-center mb-6">
             <div className="w-24 h-24 rounded-full border-2 border-indigo-500/50 shadow-[0_0_15px_rgba(99,102,241,0.2)] overflow-hidden bg-slate-800 mb-3 relative group">
               {(persona.avatarUrl.startsWith('http') || persona.avatarUrl.startsWith('/')) ? (
@@ -100,7 +100,7 @@ export default function PersonaManager({
               {device.niche}
             </span>
           </div>
-          
+
           <div className="space-y-4 text-xs font-mono">
             <div>
               <span className="text-slate-500 block mb-1">主页链接 (Profile URL)</span>
@@ -287,7 +287,7 @@ export default function PersonaManager({
                   {persona.tone}
                 </div>
               </div>
-              
+
               <div className="grid grid-cols-2 gap-3 text-xs font-mono">
                 <div className="bg-slate-950/60 p-3 rounded border border-slate-850">
                   <span className="text-slate-500 block mb-1 text-[10px]">CONTENT STYLE</span>
@@ -312,7 +312,7 @@ export default function PersonaManager({
           <div className="flex items-center justify-between border-b border-slate-800 pb-4 mb-5">
             <div className="flex items-center gap-3">
               <HardDrive className="text-emerald-400 w-5 h-5" />
-              <h3 className="text-sm font-bold text-slate-150">养殖环境</h3>
+              <h3 className="text-sm font-bold text-slate-150">培育环境</h3>
             </div>
             <div className="flex items-center gap-2 text-[10px] bg-emerald-950/40 border border-emerald-900/50 text-emerald-400 px-2 py-1 rounded">
               <Wifi className="w-3 h-3" /> ONLINE
