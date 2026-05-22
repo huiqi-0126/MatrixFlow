@@ -6,6 +6,7 @@ export interface Device {
   platform: 'TikTok' | 'Instagram' | 'YouTube';
   username: string;
   avatarColor: string;
+  accountStatus: 'active' | 'dormant' | 'banned';
   status: 'idle' | 'warmup' | 'posting' | 'analyzing' | 'offline';
   niche: string;
   followerCount: number;

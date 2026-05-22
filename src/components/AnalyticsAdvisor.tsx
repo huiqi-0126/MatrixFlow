@@ -124,7 +124,7 @@ export default function AnalyticsAdvisor({ device, videoAssets }: AnalyticsAdvis
         <div className="flex-[4] grid grid-cols-2 gap-4 min-h-0 overflow-y-auto scrollbar-narrow pr-1 pb-2">
 
           {/* Chart 1: Views */}
-          <div className="bg-slate-900/40 p-4 rounded-xl border border-slate-800/80 flex flex-col min-h-[140px]">
+          <div className="bg-slate-900/40 p-4 pb-7 rounded-xl border border-slate-800/80 flex flex-col min-h-[140px]">
             <span className="text-[10px] text-slate-400 block mb-2 shrink-0">播放量趋势 (Views)</span>
             <div className="flex-1 relative ml-6 mt-2">
               <svg className="w-full h-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 100 20">
@@ -133,11 +133,17 @@ export default function AnalyticsAdvisor({ device, videoAssets }: AnalyticsAdvis
               <div className="absolute -left-7 top-0 bottom-0 flex flex-col justify-between text-[9px] text-slate-500 py-1">
                 <span>10k</span><span>5k</span><span>0</span>
               </div>
+              <div className="absolute left-0 right-0 -bottom-5 flex justify-between text-[9px] text-slate-500/80 font-mono">
+                <span>05/{15 + selectedVideoIndex * 2}</span>
+                <span>05/{16 + selectedVideoIndex * 2}</span>
+                <span>05/{17 + selectedVideoIndex * 2}</span>
+                <span>05/{18 + selectedVideoIndex * 2}</span>
+              </div>
             </div>
           </div>
 
           {/* Chart 2: Likes */}
-          <div className="bg-slate-900/40 p-4 rounded-xl border border-slate-800/80 flex flex-col min-h-[140px]">
+          <div className="bg-slate-900/40 p-4 pb-7 rounded-xl border border-slate-800/80 flex flex-col min-h-[140px]">
             <span className="text-[10px] text-slate-400 block mb-2 shrink-0">点赞数趋势 (Likes)</span>
             <div className="flex-1 relative ml-6 mt-2">
               <svg className="w-full h-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 100 20">
@@ -146,11 +152,17 @@ export default function AnalyticsAdvisor({ device, videoAssets }: AnalyticsAdvis
               <div className="absolute -left-7 top-0 bottom-0 flex flex-col justify-between text-[9px] text-slate-500 py-1">
                 <span>800</span><span>400</span><span>0</span>
               </div>
+              <div className="absolute left-0 right-0 -bottom-5 flex justify-between text-[9px] text-slate-500/80 font-mono">
+                <span>05/{15 + selectedVideoIndex * 2}</span>
+                <span>05/{16 + selectedVideoIndex * 2}</span>
+                <span>05/{17 + selectedVideoIndex * 2}</span>
+                <span>05/{18 + selectedVideoIndex * 2}</span>
+              </div>
             </div>
           </div>
 
           {/* Chart 3: Followers */}
-          <div className="bg-slate-900/40 p-4 rounded-xl border border-slate-800/80 flex flex-col min-h-[140px]">
+          <div className="bg-slate-900/40 p-4 pb-7 rounded-xl border border-slate-800/80 flex flex-col min-h-[140px]">
             <span className="text-[10px] text-slate-400 block mb-2 shrink-0">粉丝增长 (Followers)</span>
             <div className="flex-1 relative ml-6 mt-2">
               <svg className="w-full h-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 100 20">
@@ -159,11 +171,17 @@ export default function AnalyticsAdvisor({ device, videoAssets }: AnalyticsAdvis
               <div className="absolute -left-7 top-0 bottom-0 flex flex-col justify-between text-[9px] text-slate-500 py-1">
                 <span>50</span><span>25</span><span>0</span>
               </div>
+              <div className="absolute left-0 right-0 -bottom-5 flex justify-between text-[9px] text-slate-500/80 font-mono">
+                <span>05/{15 + selectedVideoIndex * 2}</span>
+                <span>05/{16 + selectedVideoIndex * 2}</span>
+                <span>05/{17 + selectedVideoIndex * 2}</span>
+                <span>05/{18 + selectedVideoIndex * 2}</span>
+              </div>
             </div>
           </div>
 
           {/* Chart 4: Comments/Engagement */}
-          <div className="bg-slate-900/40 p-4 rounded-xl border border-slate-800/80 flex flex-col min-h-[140px]">
+          <div className="bg-slate-900/40 p-4 pb-7 rounded-xl border border-slate-800/80 flex flex-col min-h-[140px]">
             <span className="text-[10px] text-slate-400 block mb-2 shrink-0">评论互动趋势 (Comments)</span>
             <div className="flex-1 relative ml-6 mt-2">
               <svg className="w-full h-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 100 20">
@@ -171,6 +189,12 @@ export default function AnalyticsAdvisor({ device, videoAssets }: AnalyticsAdvis
               </svg>
               <div className="absolute -left-7 top-0 bottom-0 flex flex-col justify-between text-[9px] text-slate-500 py-1">
                 <span>120</span><span>60</span><span>0</span>
+              </div>
+              <div className="absolute left-0 right-0 -bottom-5 flex justify-between text-[9px] text-slate-500/80 font-mono">
+                <span>05/{15 + selectedVideoIndex * 2}</span>
+                <span>05/{16 + selectedVideoIndex * 2}</span>
+                <span>05/{17 + selectedVideoIndex * 2}</span>
+                <span>05/{18 + selectedVideoIndex * 2}</span>
               </div>
             </div>
           </div>

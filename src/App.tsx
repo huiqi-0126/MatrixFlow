@@ -31,6 +31,7 @@ import { INITIAL_DEVICES, INITIAL_PERSONAS, VIDEO_RESOURCES } from './constants'
 
 export default function App() {
   const [devices, setDevices] = useState<Device[]>(INITIAL_DEVICES);
+  const [accountFilter, setAccountFilter] = useState<'all' | 'active' | 'dormant' | 'banned'>('all');
   const [selectedDeviceId, setSelectedDeviceId] = useState<string>('device-1');
   const [personas, setPersonas] = useState<Record<string, Persona>>(INITIAL_PERSONAS);
   const [videoAssets, setVideoAssets] = useState<VideoAsset[]>(VIDEO_RESOURCES);
@@ -375,13 +376,30 @@ export default function App() {
           <div className="bg-slate-800/30 p-3 rounded-xl border border-slate-800/80 mb-4 text-xs text-slate-450 leading-relaxed">
             <div className="flex gap-1.5 text-xs font-bold text-slate-300 items-center mb-1 leading-none">
               <Shield className="w-3.5 h-3.5 text-indigo-400" />
-              <span>账号状态机机制 (State Mapping)</span>
+              <span>账号状态机机制 (State Mapping)---点击任意账号，进行管理</span>
             </div>
-            点击任意账号，管理其特定的【人设画像、视频库、发布日程、账号中心数据】
+            <div className="flex gap-2 mt-3 pt-3 border-t border-slate-800/50">
+              <button
+                onClick={() => setAccountFilter('all')}
+                className={`px-2 py-1 rounded text-[10px] font-bold cursor-pointer transition ${accountFilter === 'all' ? 'bg-indigo-600 text-white' : 'bg-slate-800 text-slate-400 hover:text-slate-200 hover:bg-slate-700'}`}
+              >全部</button>
+              <button
+                onClick={() => setAccountFilter('active')}
+                className={`px-2 py-1 rounded text-[10px] font-bold cursor-pointer transition ${accountFilter === 'active' ? 'bg-emerald-600 text-white' : 'bg-slate-800 text-slate-400 hover:text-slate-200 hover:bg-slate-700'}`}
+              >活跃</button>
+              <button
+                onClick={() => setAccountFilter('dormant')}
+                className={`px-2 py-1 rounded text-[10px] font-bold cursor-pointer transition ${accountFilter === 'dormant' ? 'bg-amber-600 text-white' : 'bg-slate-800 text-slate-400 hover:text-slate-200 hover:bg-slate-700'}`}
+              >休眠</button>
+              <button
+                onClick={() => setAccountFilter('banned')}
+                className={`px-2 py-1 rounded text-[10px] font-bold cursor-pointer transition ${accountFilter === 'banned' ? 'bg-red-600 text-white' : 'bg-slate-800 text-slate-400 hover:text-slate-200 hover:bg-slate-700'}`}
+              >异常</button>
+            </div>
           </div>
 
           <div className="space-y-2">
-            {devices.map(dev => {
+            {devices.filter(d => accountFilter === 'all' || d.accountStatus === accountFilter).map(dev => {
               const isActive = dev.id === selectedDeviceId;
 
               // Status Badge elements
@@ -527,7 +545,7 @@ export default function App() {
               { id: 'assets', label: '🗂️ 素材管理', desc: '视频资产与AI生成' },
               { id: 'scheduler', label: '🕒 任务列表', desc: '自动定时发布排期' },
               { id: 'analytics', label: '📊 数据分析', desc: 'SVG成长与诊断建议' },
-              { id: 'simulation', label: '🖥️ 远程控制', desc: '截图及视觉AI诊断' },
+              
             ].map(tab => {
               const isActive = activeTab === tab.id;
               return (
@@ -550,14 +568,14 @@ export default function App() {
 
           {/* 4. Tab views dispatcher block */}
           <div className="flex-1 min-h-[500px]">
-            {activeTab === 'simulation' && (
+            <div className={activeTab === 'simulation' ? 'block h-full' : 'hidden'}>
               <DeviceSimulator
                 device={activeDevice}
                 persona={activePersona}
                 onUpdateDeviceStats={handleUpdateDeviceStats}
               />
-            )}
-            {activeTab === 'persona' && (
+            </div>
+            <div className={activeTab === 'persona' ? 'block h-full' : 'hidden'}>
               <PersonaManager
                 device={activeDevice}
                 persona={activePersona}
@@ -565,29 +583,30 @@ export default function App() {
                 onUpdatePersona={handleUpdatePersona}
                 onAddVideoAsset={handleAddVideoAsset}
                 onDeleteVideoAsset={handleDeleteVideoAsset}
+                onUpdateDeviceStats={handleUpdateDeviceStats}
               />
-            )}
-            {activeTab === 'warmup' && (
+            </div>
+            <div className={activeTab === 'warmup' ? 'block h-full' : 'hidden'}>
               <WarmupPlanner
                 device={activeDevice}
                 onUpdateDeviceStats={handleUpdateDeviceStats}
               />
-            )}
-            {activeTab === 'content' && (
+            </div>
+            <div className={activeTab === 'content' ? 'block h-full' : 'hidden'}>
               <ContentPlanner
                 device={activeDevice}
                 onAddRecreatedVideo={handleAddVideoAsset}
               />
-            )}
-            {activeTab === 'assets' && (
+            </div>
+            <div className={activeTab === 'assets' ? 'block h-full' : 'hidden'}>
               <AssetManager
                 device={activeDevice}
                 videoAssets={videoAssets}
                 onAddVideoAsset={handleAddVideoAsset}
                 onDeleteVideoAsset={handleDeleteVideoAsset}
               />
-            )}
-            {activeTab === 'scheduler' && (
+            </div>
+            <div className={activeTab === 'scheduler' ? 'block h-full' : 'hidden'}>
               <PublisherScheduler
                 device={activeDevice}
                 videoAssets={videoAssets}
@@ -597,13 +616,13 @@ export default function App() {
                 onUpdateTaskStatus={handleUpdateTaskStatus}
                 onUpdateDeviceStats={handleUpdateDeviceStats}
               />
-            )}
-            {activeTab === 'analytics' && (
+            </div>
+            <div className={activeTab === 'analytics' ? 'block h-full' : 'hidden'}>
               <AnalyticsAdvisor
                 device={activeDevice}
                 videoAssets={videoAssets}
               />
-            )}
+            </div>
           </div>
 
         </main>

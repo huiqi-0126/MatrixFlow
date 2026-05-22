@@ -65,7 +65,7 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
     setTimeout(() => {
       setIsPlanning(false);
       setHasPlanned(true);
-    }, 12000);
+    }, 10000);
   };
 
   const handleRunSimulation = () => {
