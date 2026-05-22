@@ -288,7 +288,7 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
                 : <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-900 border border-slate-700 text-slate-500">○ 未激活</span>
               }
             </div>
-            <p className="text-xs text-slate-500 mt-0.5">激活后自动规划养号互动脚本，模拟真人浏览防封号</p>
+            <p className="text-xs text-slate-500 mt-0.5">激活后自动规划养号互动技能，模拟真人浏览防封号</p>
           </div>
         </div>
         <div className="flex items-center gap-3">
@@ -314,7 +314,7 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
             <div className="bg-slate-800/30 border border-slate-700/50 rounded-2xl p-4 flex flex-col text-left shadow-lg shadow-slate-900/50 flex-1">
               <div className="flex items-center gap-4 border-b border-slate-700/50 pb-4 mb-2">
                 <Calendar className="text-indigo-400 w-5 h-5" />
-                <h3 className="text-xs font-bold text-slate-150">5天拟真梯度算法养号计划</h3>
+                <h3 className="text-xs font-bold text-slate-150">拟真梯度算法养号日历</h3>
               </div>
 
               {/* Days buttons row */}
@@ -402,7 +402,7 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
                         <table className="w-full text-left text-xs text-slate-300 font-mono whitespace-nowrap min-w-[600px]">
                           <thead className="sticky top-0 bg-slate-900/95 backdrop-blur-sm z-10 shadow-sm border-b border-slate-700/50">
                             <tr className="text-slate-500 uppercase">
-                              <th className="py-2.5 px-3 font-bold">脚本名称</th>
+                              <th className="py-2.5 px-3 font-bold">技能名称</th>
                               <th className="py-2.5 px-2 font-bold">时间</th>
                               <th className="py-2.5 px-2 font-bold text-center">操作</th>
                               <th className="py-2.5 px-2 font-bold">状态</th>
@@ -481,7 +481,7 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
                       ))}
 
                       <button className="w-full mt-2 border border-dashed border-slate-700 bg-slate-900/30 hover:bg-slate-800 hover:border-slate-600 transition text-slate-400 py-3 rounded-lg text-xs font-bold flex items-center justify-center gap-2">
-                        + 添加自动执行脚本
+                        + 添加自动执行技能
                       </button>
                     </div>
                   )}
@@ -524,7 +524,7 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
                           if (progressIntervalRef.current) clearInterval(progressIntervalRef.current);
                           setCurrentCountdown(0);
                           const dt = new Date().toISOString().replace('T', ' ').substring(0, 19) + ',000';
-                          pushSimLog(`${dt} - INFO - 🛑 脚本已手动终止`);
+                          pushSimLog(`${dt} - INFO - 🛑 技能已手动终止`);
                         }}
                         className="text-xs bg-red-950/80 hover:bg-red-900 text-red-400 border border-red-900/50 px-2 py-1 rounded transition font-bold font-mono tracking-tight flex items-center cursor-pointer shadow-[0_0_10px_rgba(220,38,38,0.2)]"
                       >
@@ -555,7 +555,7 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
                               "2026-05-21 14:31:18,789 - INFO - [iPhone 8 Plus #01] 👀 AI视频(AI工具)，看 13.4s",
                               "2026-05-21 14:31:32,123 - INFO - [iPhone 8 Plus #01] ❤️ 点赞: (0.91, 0.47)",
                               "2026-05-21 14:35:00,456 - INFO - [iPhone 8 Plus #01] --- loop#56 10.5min / 15min | v_likes=8 comm=3 ---",
-                              "2026-05-21 14:45:00,789 - INFO - ✅ [SUCCESS] 历史养号脚本执行完成！"
+                              "2026-05-21 14:45:00,789 - INFO - ✅ [SUCCESS] 历史养号技能执行完成！"
                             ].map((log, i) => {
                               let col = 'text-slate-300';
                               if (log.includes('INFO - HTTP')) col = 'text-slate-500';
@@ -572,7 +572,7 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
                           ) : simLogs.length === 0 ? (
                             <div className="h-full flex flex-col items-center justify-center text-center text-slate-600">
                               <Terminal className="w-8 h-8 mb-2" />
-                              <span>{hasPlanned ? '等待指令... 正在启动脚本。' : agentActivated ? '智能体正在规划任务中，请稍候...' : '等待指令... 请先激活社交互动智能体。'}</span>
+                              <span>{hasPlanned ? '等待指令... 正在启动技能。' : agentActivated ? '智能体正在规划任务中，请稍候...' : '等待指令... 请先激活社交互动智能体。'}</span>
                             </div>
                           ) : (
                             simLogs.map((log, i) => {
@@ -617,7 +617,7 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
                   <h3 className="text-xl font-bold text-white mb-3 tracking-tight z-10">智能体守护中</h3>
                   <p className="text-sm text-slate-400 max-w-sm mx-auto leading-relaxed z-10">
                     自动化执行引擎已就绪。<br />
-                    系统将自动探测设备的空闲状态，并在指定的计划时间点，免干预下发并自动执行排队中的脚本。
+                    系统将自动探测设备的空闲状态，并在指定的计划时间点，免干预下发并自动执行排队中的技能。
                   </p>
 
                   <div className="mt-8 flex gap-3 text-xs font-mono bg-slate-900/60 p-3 rounded-lg border border-slate-700/50 z-10">
@@ -645,7 +645,7 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
             <div className="flex items-center justify-between p-4 border-b border-slate-700/50 bg-slate-800/50">
               <div className="flex items-center gap-3">
                 <Sliders className="text-indigo-400 w-5 h-5" />
-                <h3 className="text-sm font-bold text-slate-150">脚本运行参数配置</h3>
+                <h3 className="text-sm font-bold text-slate-150">技能运行参数配置</h3>
               </div>
               <button onClick={() => setShowParamsModal(false)} className="text-slate-400 hover:text-white transition">
                 <X className="w-5 h-5" />
@@ -850,7 +850,7 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
                 className="px-6 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 rounded text-xs font-bold text-white transition flex items-center gap-2 shadow-[0_0_15px_rgba(99,102,241,0.4)]"
               >
                 <Play className="w-4 h-4" />
-                确认并运行脚本
+                确认并运行技能
               </button>
             </div>
           </div>

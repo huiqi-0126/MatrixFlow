@@ -305,65 +305,65 @@ export default function App() {
   const activeAccountHealth = activeFollowersCount > 500 ? '🟢 极佳 (High)' : '🟢 正常 (Good)';
 
   return (
-    <div className="min-h-screen bg-slate-900 text-slate-100 flex flex-col font-sans select-none antialiased">
+    <div className="min-h-screen bg-[var(--color-canvas)] text-slate-100 flex flex-col font-sans select-none antialiased">
 
       {/* 1. Global Navigation Top Header */}
-      <header className="border-b border-slate-800 bg-slate-900/50 backdrop-blur-md px-4 xl:px-6 py-3 xl:py-4 flex flex-col md:flex-row md:items-center md:justify-between gap-2 xl:gap-4 z-40 sticky top-0">
+      <header className="header-glow bg-[var(--color-canvas)]/80 backdrop-blur-xl px-5 xl:px-8 py-4 xl:py-5 flex flex-col md:flex-row md:items-center md:justify-between gap-3 xl:gap-5 z-40 sticky top-0">
 
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/20">
+          <div className="w-11 h-11 rounded-xl bg-gradient-to-tr from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/30">
             <Globe className="w-5.5 h-5.5 text-white" />
           </div>
           <div className="text-left">
-            <h1 className="text-xs font-bold font-sans tracking-tight text-white flex items-center gap-1.5 leading-none whitespace-nowrap">
+            <h1 className="text-base font-bold font-sans tracking-tight text-white flex items-center gap-2 leading-none whitespace-nowrap">
               海外自媒体账号培育与内容发布系统
-              <span className="text-xs bg-indigo-950/60 border border-indigo-900/40 text-indigo-400 px-2 py-0.5 rounded font-mono font-bold">
+              <span className="text-[10px] bg-indigo-950/60 border border-indigo-900/40 text-indigo-400 px-2 py-0.5 rounded font-mono font-bold">
                 MCN FARM PRO
               </span>
             </h1>
-            <p className="text-xs text-slate-500 mt-1.5 leading-none">
+            <p className="text-xs text-slate-500 mt-1.5 leading-none font-sans">
               每台设备独立住宅IP与专属人设 • OCR多模态视觉审计发帖 • 大模型自动克隆复刻
             </p>
           </div>
         </div>
 
         {/* Account-Specific Summary Statistics bar */}
-        <div className="flex items-center gap-4 text-xs font-mono">
-          <div className="bg-slate-800/40 border border-slate-800 px-3 py-1.5 rounded-lg text-left flex items-center gap-2 transition hover:bg-slate-800/60">
+        <div className="flex items-center gap-3 text-xs">
+          <div className="stat-card bg-slate-800/30 border border-slate-700/40 px-3 py-2 rounded-xl text-left flex items-center gap-2.5">
             <Users className="w-4 h-4 text-indigo-400" />
             <div>
-              <span className="text-slate-500 block text-[9px] leading-none uppercase">Account Followers</span>
-              <span className="text-xs font-bold font-mono text-white leading-tight">
+              <span className="text-slate-500 block text-[9px] leading-none uppercase font-sans">Account Followers</span>
+              <span className="text-sm font-bold font-mono text-white leading-tight">
                 {activeFollowersCount >= 1000 ? (activeFollowersCount / 1000).toFixed(1) + 'k' : activeFollowersCount}
               </span>
             </div>
           </div>
 
-          <div className="bg-slate-800/40 border border-slate-800 px-3 py-1.5 rounded-lg text-left flex items-center gap-2 transition hover:bg-slate-800/60">
+          <div className="stat-card bg-slate-800/30 border border-slate-700/40 px-3 py-2 rounded-xl text-left flex items-center gap-2.5">
             <Video className="w-4 h-4 text-sky-400" />
             <div>
-              <span className="text-slate-500 block text-[9px] leading-none uppercase">Posted Videos</span>
-              <span className="text-xs font-bold font-mono text-sky-400 leading-tight">
+              <span className="text-slate-500 block text-[9px] leading-none uppercase font-sans">Posted Videos</span>
+              <span className="text-sm font-bold font-mono text-sky-400 leading-tight">
                 {activeVideoCount} 个
               </span>
             </div>
           </div>
 
-          <div className="bg-slate-800/40 border border-slate-800 px-3 py-1.5 rounded-lg text-left flex items-center gap-2 transition hover:bg-slate-800/60">
+          <div className="stat-card bg-slate-800/30 border border-slate-700/40 px-3 py-2 rounded-xl text-left flex items-center gap-2.5">
             <Flame className="w-4 h-4 text-orange-400" />
             <div>
-              <span className="text-slate-500 block text-[9px] leading-none uppercase">Total Views</span>
-              <span className="text-xs font-bold font-mono text-orange-400 leading-tight">
+              <span className="text-slate-500 block text-[9px] leading-none uppercase font-sans">Total Views</span>
+              <span className="text-sm font-bold font-mono text-orange-400 leading-tight">
                 {activeViewsCount >= 1000000 ? (activeViewsCount / 1000000).toFixed(1) + 'M' : activeViewsCount >= 1000 ? (activeViewsCount / 1000).toFixed(1) + 'k' : activeViewsCount}
               </span>
             </div>
           </div>
 
-          <div className="bg-slate-800/40 border border-slate-800 px-3 py-1.5 rounded-lg text-left flex items-center gap-2 transition hover:bg-slate-800/60">
+          <div className="stat-card bg-slate-800/30 border border-slate-700/40 px-3 py-2 rounded-xl text-left flex items-center gap-2.5">
             <Activity className="w-4 h-4 text-emerald-400" />
             <div>
-              <span className="text-slate-500 block text-[9px] leading-none uppercase">Account Health</span>
-              <span className="text-xs font-bold font-mono text-emerald-400 leading-tight">
+              <span className="text-slate-500 block text-[9px] leading-none uppercase font-sans">Account Health</span>
+              <span className="text-sm font-bold font-mono text-emerald-400 leading-tight">
                 {activeAccountHealth}
               </span>
             </div>
@@ -373,51 +373,51 @@ export default function App() {
       </header>
 
       {/* 2. Main content Layout with grid */}
-      <div className="flex-1 grid grid-cols-1 xl:grid-cols-12 gap-4 p-4 xl:p-4 overflow-hidden relative">
+      <div className="flex-1 grid grid-cols-1 xl:grid-cols-12 gap-5 p-4 xl:p-5 overflow-hidden relative">
 
         {/* 2.1 Sidebar Panel: Active iPhone devices listing (3 columns) */}
-        <aside className="xl:col-span-3 2xl:col-span-3 bg-slate-800/60 border border-slate-700 rounded-2xl p-4 xl:p-5 flex flex-col text-left overflow-y-auto h-[calc(100vh-80px)] scrollbar-narrow shadow-xl">
+        <aside className="xl:col-span-3 2xl:col-span-3 glass-panel noise-bg rounded-2xl p-4 xl:p-5 flex flex-col text-left overflow-y-auto h-[calc(100vh-100px)] scrollbar-narrow shadow-xl">
 
-          <div className="flex items-center justify-between mb-4 border-b border-slate-800 pb-2.5">
-            <span className="text-xs font-bold font-mono text-slate-400">
-              账号矩阵 (Accounts Matrix)
+          <div className="flex items-center justify-between mb-4 border-b border-slate-700/40 pb-3">
+            <span className="text-sm font-bold font-sans text-slate-300">
+              账号矩阵
             </span>
-            <span className="text-xs px-1.5 py-0.5 rounded bg-indigo-950/60 text-indigo-400 border border-indigo-900/30 font-mono tracking-tight font-bold">
+            <span className="text-[10px] px-1.5 py-0.5 rounded bg-emerald-950/50 text-emerald-400 border border-emerald-900/30 font-mono tracking-tight font-bold">
               ROUTER OK
             </span>
           </div>
 
           {/* Quick instructions widget top of list */}
-          <div className="bg-slate-800/30 p-3 rounded-xl border border-slate-800/80 mb-4 text-xs text-slate-450 leading-relaxed">
-            <div className="flex gap-1.5 text-xs font-bold text-slate-300 items-center mb-1 leading-none">
+          <div className="bg-slate-800/20 p-3 rounded-xl border border-slate-700/30 mb-4 text-xs text-slate-450 leading-relaxed">
+            <div className="flex gap-1.5 text-xs font-bold text-slate-300 items-center mb-1 leading-none font-sans">
               <Shield className="w-3.5 h-3.5 text-indigo-400" />
-              <span>账号状态机机制 (State Mapping)---点击任意账号，进行管理</span>
+              <span>点击任意账号，进行管理</span>
             </div>
-            <div className="flex gap-2 mt-3 pt-3 border-t border-slate-800/50">
+            <div className="flex gap-1.5 mt-3 pt-3 border-t border-slate-700/30">
               <button
                 onClick={() => setAccountFilter('all')}
-                className={`px-2 py-1 rounded text-[10px] font-bold cursor-pointer transition ${accountFilter === 'all' ? 'bg-indigo-600 text-white' : 'bg-slate-800 text-slate-400 hover:text-slate-200 hover:bg-slate-700'}`}
+                className={`px-2.5 py-1 rounded-lg text-[10px] font-bold cursor-pointer transition btn-press font-sans ${accountFilter === 'all' ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/20' : 'bg-slate-800/60 text-slate-400 hover:text-slate-200 hover:bg-slate-700'}`}
               >全部</button>
               <button
                 onClick={() => setAccountFilter('active')}
-                className={`px-2 py-1 rounded text-[10px] font-bold cursor-pointer transition ${accountFilter === 'active' ? 'bg-emerald-600 text-white' : 'bg-slate-800 text-slate-400 hover:text-slate-200 hover:bg-slate-700'}`}
+                className={`px-2.5 py-1 rounded-lg text-[10px] font-bold cursor-pointer transition btn-press font-sans ${accountFilter === 'active' ? 'bg-emerald-600 text-white shadow-md shadow-emerald-500/20' : 'bg-slate-800/60 text-slate-400 hover:text-slate-200 hover:bg-slate-700'}`}
               >活跃</button>
               <button
                 onClick={() => setAccountFilter('dormant')}
-                className={`px-2 py-1 rounded text-[10px] font-bold cursor-pointer transition ${accountFilter === 'dormant' ? 'bg-amber-600 text-white' : 'bg-slate-800 text-slate-400 hover:text-slate-200 hover:bg-slate-700'}`}
+                className={`px-2.5 py-1 rounded-lg text-[10px] font-bold cursor-pointer transition btn-press font-sans ${accountFilter === 'dormant' ? 'bg-amber-600 text-white shadow-md shadow-amber-500/20' : 'bg-slate-800/60 text-slate-400 hover:text-slate-200 hover:bg-slate-700'}`}
               >休眠</button>
               <button
                 onClick={() => setAccountFilter('banned')}
-                className={`px-2 py-1 rounded text-[10px] font-bold cursor-pointer transition ${accountFilter === 'banned' ? 'bg-red-600 text-white' : 'bg-slate-800 text-slate-400 hover:text-slate-200 hover:bg-slate-700'}`}
+                className={`px-2.5 py-1 rounded-lg text-[10px] font-bold cursor-pointer transition btn-press font-sans ${accountFilter === 'banned' ? 'bg-red-600 text-white shadow-md shadow-red-500/20' : 'bg-slate-800/60 text-slate-400 hover:text-slate-200 hover:bg-slate-700'}`}
               >异常</button>
             </div>
           </div>
 
-          <div className="space-y-2">
+          <div className="space-y-2.5">
             {devices.filter(d => accountFilter === 'all' || d.accountStatus === accountFilter).map(dev => {
               const isActive = dev.id === selectedDeviceId;
 
-              // Status Badge elements
+              // Device operational status (running state)
               let statusText = '在线 / 空闲';
               let statusDot = 'bg-slate-550 border-slate-400';
               if (dev.status === 'warmup') {
@@ -428,48 +428,67 @@ export default function App() {
                 statusDot = 'bg-indigo-400 shadow-[0_0_8px_rgba(99,102,241,0.5)]';
               } else if (dev.status === 'idle') {
                 statusText = '安全驻留 [Idle]';
-                statusDot = 'bg-emerald-405 shadow-[0_0_8px_rgba(52,211,153,0.5)]';
+                statusDot = 'bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.5)]';
               } else if (dev.status === 'offline') {
                 statusText = '线路离线 [Offline]';
                 statusDot = 'bg-red-500';
+              }
+
+              // Account health status styling
+              let accountBadge = { text: '活跃', bg: 'bg-emerald-950/50', border: 'border-emerald-500/30', color: 'text-emerald-400', dot: 'bg-emerald-400', dotGlow: 'shadow-[0_0_6px_rgba(52,211,153,0.6)]', icon: '●' };
+              let cardTint = '';
+              if (dev.accountStatus === 'dormant') {
+                accountBadge = { text: '休眠', bg: 'bg-amber-950/50', border: 'border-amber-500/30', color: 'text-amber-400', dot: 'bg-amber-400', dotGlow: '', icon: '◑' };
+                cardTint = 'opacity-75';
+              } else if (dev.accountStatus === 'banned') {
+                accountBadge = { text: '异常', bg: 'bg-red-950/50', border: 'border-red-500/30', color: 'text-red-400', dot: 'bg-red-500', dotGlow: 'shadow-[0_0_6px_rgba(239,68,68,0.5)]', icon: '✕' };
+                cardTint = 'ring-1 ring-red-500/15';
               }
 
               return (
                 <div
                   key={dev.id}
                   onClick={() => setSelectedDeviceId(dev.id)}
-                  className={`p-3.5 rounded-xl border transition-all duration-200 cursor-pointer select-none text-left flex flex-col justify-between relative overflow-hidden ${isActive
-                    ? 'bg-indigo-600/30 border-indigo-500 shadow-lg shadow-indigo-500/20'
-                    : 'bg-slate-900/40 border-slate-700/60 hover:bg-slate-800 hover:border-slate-600'
+                  className={`p-3.5 rounded-xl border transition-all duration-300 cursor-pointer select-none text-left flex flex-col justify-between relative overflow-hidden card-lift accent-bar-left ${cardTint} ${isActive
+                    ? 'active bg-indigo-600/15 border-indigo-500/50 shadow-lg shadow-indigo-500/15'
+                    : 'bg-slate-900/30 border-slate-700/30 hover:bg-slate-800/60 hover:border-slate-600/50'
                     }`}
                 >
                   {/* Account Header line (Avatar + Info) */}
                   <div className="flex items-start gap-3">
-                    <img src={personas[dev.id]?.avatarUrl} alt="avatar" className="w-10 h-10 rounded-full object-cover border-2 border-slate-700 bg-slate-800" />
+                    <div className="relative shrink-0">
+                      <img src={personas[dev.id]?.avatarUrl} alt="avatar" className={`w-10 h-10 rounded-full object-cover border-2 bg-slate-800 transition-all duration-300 ${isActive ? 'border-indigo-500/50 shadow-md shadow-indigo-500/20' : dev.accountStatus === 'banned' ? 'border-red-500/40' : 'border-slate-700'}`} />
+                      {/* Account status indicator dot on avatar */}
+                      <span className={`absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full border-2 border-slate-900 ${accountBadge.dot} ${accountBadge.dotGlow} flex items-center justify-center`}>
+                        {dev.accountStatus === 'active' && <span className="w-1.5 h-1.5 rounded-full bg-emerald-200 animate-pulse"></span>}
+                      </span>
+                    </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex justify-between items-start mb-1">
-                        <h4 className="text-sm font-bold text-slate-100 font-mono tracking-tight leading-none truncate pr-2">
+                        <h4 className="text-[13px] font-bold text-slate-100 font-sans tracking-tight leading-none truncate pr-2">
                           {dev.username}
                         </h4>
-                        {/* State dot */}
-                        <div className="flex items-center gap-1.5 shrink-0 mt-0.5">
-                          <span className={`w-2 h-2 rounded-full ${statusDot}`}></span>
-                        </div>
+                        {/* Account status badge */}
+                        <span className={`shrink-0 text-[9px] font-bold px-1.5 py-0.5 rounded-full border ${accountBadge.bg} ${accountBadge.border} ${accountBadge.color} flex items-center gap-1`}>
+                          <span className="text-[8px] leading-none">{accountBadge.icon}</span>
+                          {accountBadge.text}
+                        </span>
                       </div>
-                      <p className="text-xs text-slate-400 line-clamp-1 leading-tight">{personas[dev.id]?.bio || '暂无描述'}</p>
+                      <p className="text-xs text-slate-500 line-clamp-1 leading-tight font-sans">{personas[dev.id]?.bio || '暂无描述'}</p>
                     </div>
                   </div>
 
                   {/* Account metadata & badges */}
-                  {/* Account metadata & badges */}
-                  <div className="flex items-center justify-between mt-3 pt-3 border-t border-slate-800/80">
-                    <div className="flex items-center gap-2">
+                  <div className="flex items-center justify-between mt-3 pt-3 border-t border-slate-700/30">
+                    <div className="flex items-center gap-1.5">
                       <span className="text-[10px] bg-slate-800 text-slate-300 px-1.5 py-0.5 rounded font-bold">
                         {dev.platform}
                       </span>
                       <span className={`text-[10px] px-1.5 py-0.5 rounded font-bold ${dev.followerCount >= 1000 ? 'bg-orange-950 text-orange-400' : dev.followerCount >= 100 ? 'bg-purple-950 text-purple-400' : 'bg-slate-800 text-slate-300'}`}>
                         {dev.followerCount >= 1000 ? '大V号' : dev.followerCount >= 100 ? '高级号' : '新号'}
                       </span>
+                      {/* Device running state dot */}
+                      <span className={`w-1.5 h-1.5 rounded-full ${statusDot}`}></span>
                     </div>
                     <div className="text-[10px] text-slate-500 flex gap-2.5">
                       <span>粉丝 <span className="text-slate-300 font-bold">{dev.followerCount >= 100000 ? (dev.followerCount / 1000).toFixed(1) + 'k' : dev.followerCount}</span></span>
@@ -483,42 +502,43 @@ export default function App() {
             })}
           </div>
 
-          <div className="mt-auto pt-6 border-t border-slate-800 text-xs text-slate-500 leading-normal">
-            <span className="font-bold text-slate-450 block mb-0.5">ℹ️ MCN 控制台重要指引:</span>
+          <div className="mt-auto pt-5 border-t border-slate-700/30 text-xs text-slate-500 leading-normal font-sans">
+            <span className="font-semibold text-slate-400 block mb-0.5">ℹ️ MCN 控制台重要指引:</span>
             设备IP为固定独享干净美区机房代理，请勿同一时间内频繁重置连接网线以保障流量质量。
           </div>
 
         </aside>
 
         {/* 2.2 Main View Panel (9 columns) */}
-        <main className="xl:col-span-9 flex flex-col space-y-4 xl:space-y-4 overflow-y-auto max-h-[calc(100vh-100px)] scrollbar-narrow">
+        <main className="xl:col-span-9 flex flex-col space-y-5 overflow-y-auto max-h-[calc(100vh-110px)] scrollbar-narrow">
 
           {/* Active Device Indicator details */}
 
 
           {/* 3. Horizontal tabs selection designed as high-quality Bento Grid cards */}
-          <div className="grid grid-cols-5 gap-2 pb-2 select-none">
+          <div className="grid grid-cols-5 gap-2.5 pb-3 select-none">
             {[
-              { id: 'persona', label: '🧠 基本信息', desc: '账号 · 人设 · 培育环境', isAgent: false },
-              { id: 'warmup', label: '💬 社交互动智能体', desc: '仿真人浏览 · 防封号', isAgent: true },
-              { id: 'datacollect', label: '🔍 数据采集智能体', desc: '爆款 · 账号数据同步', isAgent: true },
-              { id: 'assets', label: '📊 素材生成及管理', desc: '素材管理 · 视频复刻', isAgent: false },
-              { id: 'scheduler', label: '📤 内容发布管理', desc: '定时发布 · 视频分析', isAgent: true },
+              { id: 'persona', label: '🧠 基本信息', desc: '账号 · 人设 · 培育环境', isAgent: false, activeColor: 'text-violet-400', activeBg: 'bg-violet-600/15', activeBorder: 'border-violet-500/40', activeGlow: 'bento-glow-violet', barColor: 'bg-violet-500' },
+              { id: 'warmup', label: '💬 社交互动智能体', desc: '仿真人浏览 · 防封号', isAgent: true, activeColor: 'text-purple-400', activeBg: 'bg-purple-600/15', activeBorder: 'border-purple-500/40', activeGlow: 'bento-glow-purple', barColor: 'bg-purple-500' },
+              { id: 'datacollect', label: '🔍 数据采集智能体', desc: '爆款 · 账号数据同步', isAgent: true, activeColor: 'text-cyan-400', activeBg: 'bg-cyan-600/15', activeBorder: 'border-cyan-500/40', activeGlow: 'bento-glow-cyan', barColor: 'bg-cyan-500' },
+              { id: 'assets', label: '📊 素材生成及管理', desc: '素材管理 · 视频复刻', isAgent: false, activeColor: 'text-amber-400', activeBg: 'bg-amber-600/10', activeBorder: 'border-amber-500/40', activeGlow: 'bento-glow-amber', barColor: 'bg-amber-500' },
+              { id: 'scheduler', label: '📤 内容发布管理', desc: '定时发布 · 视频分析', isAgent: true, activeColor: 'text-emerald-400', activeBg: 'bg-emerald-600/12', activeBorder: 'border-emerald-500/40', activeGlow: 'bento-glow-emerald', barColor: 'bg-emerald-500' },
             ].map(tab => {
               const isActive = activeTab === tab.id;
               return (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id as any)}
-                  className={`p-2.5 rounded-xl border transition-all duration-200 cursor-pointer text-left flex flex-col justify-between relative ${isActive
-                    ? 'bg-indigo-600/20 border-indigo-500/50 text-indigo-400 bento-glow-indigo shadow-lg'
-                    : 'bg-slate-800/40 border-slate-800/60 text-slate-400 hover:text-slate-200 hover:bg-slate-800/60 hover:border-slate-700'
+                  className={`p-3 rounded-xl border transition-all duration-250 cursor-pointer text-left flex flex-col justify-between relative btn-press overflow-hidden ${isActive
+                    ? `${tab.activeBg} ${tab.activeBorder} ${tab.activeColor} ${tab.activeGlow} shadow-lg`
+                    : 'bg-slate-800/30 border-slate-700/30 text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 hover:border-slate-600/40'
                     }`}
                 >
-                  <span className="font-bold text-xs tracking-tight">{tab.label}</span>
-                  <span className="text-xs text-slate-500 pt-2 leading-tight font-mono block">{tab.desc}</span>
+                  {isActive && <span className={`absolute bottom-0 left-[15%] right-[15%] h-[2px] rounded-full ${tab.barColor}`}></span>}
+                  <span className="font-bold text-[13px] tracking-tight font-sans">{tab.label}</span>
+                  <span className="text-[11px] text-slate-500 pt-2 leading-tight font-sans block">{tab.desc}</span>
                   {tab.isAgent && (
-                    <span className="absolute top-2 right-2 text-[9px] font-bold px-1.5 py-0.5 rounded bg-cyan-950/60 border border-cyan-900/40 text-cyan-500">AGENT</span>
+                    <span className="absolute top-2 right-2 text-[9px] font-bold px-1.5 py-0.5 rounded bg-cyan-950/60 border border-cyan-900/40 text-cyan-400 flex items-center gap-1"><span className="w-1 h-1 rounded-full bg-cyan-400 animate-pulse"></span>AGENT</span>
                   )}
                 </button>
               );

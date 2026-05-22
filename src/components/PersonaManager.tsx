@@ -68,10 +68,10 @@ export default function PersonaManager({
       <div className={`grid grid-cols-1 lg:grid-cols-3 gap-6 h-full text-slate-200 overflow-y-auto pr-2 scrollbar-narrow ${showRemoteControl ? 'opacity-0 pointer-events-none' : 'opacity-100'} transition-opacity duration-300`}>
 
         {/* Module 1: 账号信息 (Account Info) */}
-        <div className="bg-slate-800/40 border border-slate-800 rounded-2xl p-5 flex flex-col text-left bento-glow-indigo">
-          <div className="flex items-center gap-3 border-b border-slate-800 pb-4 mb-5">
-            <User className="text-indigo-400 w-5 h-5" />
-            <h3 className="text-sm font-bold text-slate-150">账号信息</h3>
+        <div className="glass-panel rounded-2xl p-5 flex flex-col text-left bento-glow-violet">
+          <div className="flex items-center gap-3 border-b border-slate-700/40 pb-4 mb-5 module-bar-violet">
+            <User className="text-violet-400 w-5 h-5" />
+            <h3 className="text-sm font-bold text-slate-200 font-sans">账号信息</h3>
           </div>
 
           <div className="flex flex-col items-center mb-6">
@@ -96,20 +96,20 @@ export default function PersonaManager({
               </div>
             </div>
             <h2 className="text-lg font-bold font-mono tracking-tight">@{device.username}</h2>
-            <span className="text-xs text-indigo-400 font-mono mt-1 px-2 py-0.5 bg-indigo-950/50 rounded-full border border-indigo-900">
+            <span className="text-xs text-violet-400 font-mono mt-1 px-2 py-0.5 bg-violet-950/50 rounded-full border border-violet-900">
               {device.niche}
             </span>
           </div>
 
           <div className="space-y-4 text-xs font-mono">
             <div>
-              <span className="text-slate-500 block mb-1">主页链接 (Profile URL)</span>
+              <span className="text-slate-500 block mb-1 font-sans">主页链接 (Profile URL)</span>
               <div className="bg-black/40 p-2 rounded border border-slate-800 text-sky-400 truncate cursor-pointer hover:underline">
                 https://tiktok.com/@{device.username}
               </div>
             </div>
             <div>
-              <span className="text-slate-500 block mb-1">英文简介 (Bio)</span>
+              <span className="text-slate-500 block mb-1 font-sans">英文简介 (Bio)</span>
               <div className="bg-black/40 p-3 rounded border border-slate-800 text-slate-300 leading-relaxed min-h-[80px]">
                 {persona.bio}
               </div>
@@ -150,17 +150,17 @@ export default function PersonaManager({
         </div>
 
         {/* Module 2: 人设定义 (Persona Definition) */}
-        <div className="bg-slate-800/40 border border-slate-800 rounded-2xl p-5 flex flex-col text-left bento-glow-indigo">
-          <div className="flex items-center justify-between border-b border-slate-800 pb-4 mb-5">
-            <div className="flex items-center gap-3">
+        <div className="glass-panel rounded-2xl p-5 flex flex-col text-left bento-glow-purple">
+          <div className="flex items-center justify-between border-b border-slate-700/40 pb-4 mb-5">
+            <div className="flex items-center gap-3 module-bar-violet">
               <Sparkles className="text-purple-400 w-5 h-5" />
-              <h3 className="text-sm font-bold text-slate-150">人设定义</h3>
+              <h3 className="text-sm font-bold text-slate-200 font-sans">人设定义</h3>
             </div>
             {!isEditingPersona && (
               <div className="flex gap-2">
                 <button
                   onClick={() => alert('正在通过AI优化人设参数...')}
-                  className="px-3 py-1 bg-indigo-950/50 hover:bg-indigo-900/80 border border-indigo-500/30 text-indigo-400 text-xs font-bold rounded-lg flex items-center gap-1 cursor-pointer transition"
+                  className="px-3 py-1 bg-purple-950/50 hover:bg-purple-900/80 border border-purple-500/30 text-purple-400 text-xs font-bold rounded-lg flex items-center gap-1 cursor-pointer transition btn-press font-sans"
                 >
                   <Sparkles className="w-3.5 h-3.5" /> AI优化
                 </button>
@@ -169,7 +169,7 @@ export default function PersonaManager({
                     setEditedPersona({ ...persona });
                     setIsEditingPersona(true);
                   }}
-                  className="px-3 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold rounded-lg flex items-center gap-1 cursor-pointer transition"
+                  className="px-3 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold rounded-lg flex items-center gap-1 cursor-pointer transition btn-press font-sans"
                 >
                   <Edit className="w-3.5 h-3.5" /> 修改
                 </button>
@@ -236,14 +236,14 @@ export default function PersonaManager({
               <div className="flex gap-3 pt-2">
                 <button
                   type="submit"
-                  className="flex-1 py-2 bg-emerald-500 hover:bg-emerald-600 font-bold text-black text-xs rounded transition cursor-pointer text-center"
+                  className="flex-1 py-2 bg-emerald-500 hover:bg-emerald-600 font-bold text-black text-xs rounded transition cursor-pointer text-center btn-press font-sans"
                 >
                   保存
                 </button>
                 <button
                   type="button"
                   onClick={() => setIsEditingPersona(false)}
-                  className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs rounded transition cursor-pointer"
+                  className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs rounded transition cursor-pointer btn-press font-sans"
                 >
                   取消
                 </button>
@@ -252,11 +252,11 @@ export default function PersonaManager({
           ) : (
             <div className="space-y-5 flex-1">
               <div className="grid grid-cols-2 gap-3 text-xs font-mono">
-                <div className="bg-slate-950/60 p-3 rounded border border-slate-800">
+                <div className="bg-[var(--color-card)] p-3 rounded border border-slate-700/30">
                   <span className="text-slate-500 block mb-1 text-[10px]">TARGET RACE</span>
                   <span className="text-slate-200 font-bold">{persona.race}</span>
                 </div>
-                <div className="bg-slate-950/60 p-3 rounded border border-slate-800">
+                <div className="bg-[var(--color-card)] p-3 rounded border border-slate-700/30">
                   <span className="text-slate-500 block mb-1 text-[10px]">GENDER</span>
                   <span className="text-slate-200 font-bold">{persona.gender}</span>
                 </div>
@@ -264,7 +264,7 @@ export default function PersonaManager({
 
               <div>
                 <span className="text-[10px] text-slate-500 font-bold block mb-1.5 uppercase">CORE VALUES (价值观方向)</span>
-                <div className="bg-slate-950/60 p-3 rounded border border-slate-800 text-indigo-300 font-mono italic text-xs leading-relaxed">
+                <div className="bg-[var(--color-card)] p-3 rounded border border-slate-700/30 text-purple-300 font-mono italic text-xs leading-relaxed">
                   "{persona.values}"
                 </div>
               </div>
@@ -273,7 +273,7 @@ export default function PersonaManager({
                 <span className="text-[10px] text-slate-500 font-bold block mb-1.5 uppercase">INTEREST MATRIX (兴趣标签)</span>
                 <div className="flex flex-wrap gap-1.5">
                   {persona.interests.map((interest, idx) => (
-                    <span key={idx} className="text-[10px] bg-indigo-950/30 border border-indigo-900/50 text-indigo-300 px-2 py-0.5 rounded-full font-mono">
+                    <span key={idx} className="text-[10px] bg-purple-950/30 border border-purple-900/50 text-purple-300 px-2 py-0.5 rounded-full font-mono">
                       #{interest}
                     </span>
                   ))}
@@ -282,25 +282,25 @@ export default function PersonaManager({
 
               <div>
                 <span className="text-[10px] text-slate-500 font-bold block mb-1.5 uppercase">COMMENTARY TONE (互动文风)</span>
-                <div className="bg-slate-950/60 p-3 rounded border border-slate-800 text-slate-300 font-mono text-xs flex items-center gap-2">
+                <div className="bg-[var(--color-card)] p-3 rounded border border-slate-700/30 text-slate-300 font-mono text-xs flex items-center gap-2">
                   <MessageSquare className="w-3.5 h-3.5 text-purple-400 shrink-0" />
                   {persona.tone}
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-3 text-xs font-mono">
-                <div className="bg-slate-950/60 p-3 rounded border border-slate-800">
+                <div className="bg-[var(--color-card)] p-3 rounded border border-slate-700/30">
                   <span className="text-slate-500 block mb-1 text-[10px]">CONTENT STYLE</span>
                   <span className="text-slate-200 font-bold text-[11px] truncate block">{persona.niche === 'aesthetic-cooking' ? 'POV, ASMR, Vlog' : 'Trend, Info, Promo'}</span>
                 </div>
-                <div className="bg-slate-950/60 p-3 rounded border border-slate-800">
+                <div className="bg-[var(--color-card)] p-3 rounded border border-slate-700/30">
                   <span className="text-slate-500 block mb-1 text-[10px]">TIMEZONE / POSTING</span>
                   <span className="text-slate-200 font-bold text-[11px]">UTC-5 (EST) Prime</span>
                 </div>
               </div>
 
-              <div className="bg-slate-950/60 p-3 rounded border border-slate-800">
-                <span className="text-slate-500 block mb-1 text-[10px] uppercase">Avoidance / Anti-ban Strategy</span>
+              <div className="bg-[var(--color-card)] p-3 rounded border border-slate-700/30">
+                <span className="text-slate-500 block mb-1 text-[10px] uppercase font-sans">Avoidance / Anti-ban Strategy</span>
                 <span className="text-emerald-400 font-bold text-[11px] block">No excessive tagging, native browsing enabled.</span>
               </div>
             </div>
@@ -308,11 +308,11 @@ export default function PersonaManager({
         </div>
 
         {/* Module 3: 养殖环境 (Farming Environment) */}
-        <div className="bg-slate-800/40 border border-slate-800 rounded-2xl p-5 flex flex-col text-left bento-glow-indigo">
-          <div className="flex items-center justify-between border-b border-slate-800 pb-4 mb-5">
-            <div className="flex items-center gap-3">
+        <div className="glass-panel rounded-2xl p-5 flex flex-col text-left bento-glow-emerald">
+          <div className="flex items-center justify-between border-b border-slate-700/40 pb-4 mb-5">
+            <div className="flex items-center gap-3 module-bar-emerald">
               <HardDrive className="text-emerald-400 w-5 h-5" />
-              <h3 className="text-sm font-bold text-slate-150">培育环境</h3>
+              <h3 className="text-sm font-bold text-slate-200 font-sans">培育环境</h3>
             </div>
             <div className="flex items-center gap-2 text-[10px] bg-emerald-950/40 border border-emerald-900/50 text-emerald-400 px-2 py-1 rounded">
               <Wifi className="w-3 h-3" /> ONLINE
@@ -369,7 +369,7 @@ export default function PersonaManager({
           <div className="mt-6 pt-4 border-t border-slate-800">
             <button
               onClick={() => setShowRemoteControl(true)}
-              className="w-full py-3 bg-gradient-to-r from-rose-600 to-red-600 hover:from-rose-500 hover:to-red-500 text-white font-bold text-xs rounded-lg transition shadow-[0_0_15px_rgba(225,29,72,0.3)] flex items-center justify-center gap-2 cursor-pointer"
+              className="w-full py-3 bg-gradient-to-r from-rose-600 to-red-600 hover:from-rose-500 hover:to-red-500 text-white font-bold text-xs rounded-lg transition shadow-[0_0_15px_rgba(225,29,72,0.3)] flex items-center justify-center gap-2 cursor-pointer btn-press font-sans"
             >
               <Lock className="w-4 h-4" /> 锁定操控
             </button>

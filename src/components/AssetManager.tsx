@@ -255,7 +255,7 @@ export default function AssetManager({ device, videoAssets, onAddVideoAsset, onD
           </div>
 
           <p className="text-xs text-slate-400 leading-relaxed max-w-2xl mb-2">
-            看到同行的大爆款了？输入对标账号的海外视频链接，让本平台调用多模态模型提取原版<strong>字幕/文案</strong>、分析<strong>关键帧镜头切换点</strong>，并输出高画质一键克隆脚本。
+            看到同行的大爆款了？输入对标账号的海外视频链接，让本平台调用多模态模型提取原版<strong>字幕/文案</strong>、分析<strong>关键帧镜头切换点</strong>，并输出高画质一键克隆技能。
           </p>
 
           {/* Input link Row */}

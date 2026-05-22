@@ -176,7 +176,7 @@ export default function ContentPlanner({ device, onAddRecreatedVideo }: ContentP
     };
 
     onAddRecreatedVideo(replicatedAsset);
-    alert('🎉 已自动分析视频文案并对齐关键帧，生成了一份【高清复刻指导脚本】并存入下方设备专属资源库中！可在[人设与资源]模块中查看。');
+    alert('🎉 已自动分析视频文案并对齐关键帧，生成了一份【高清复刻指导技能】并存入下方设备专属资源库中！可在[人设与资源]模块中查看。');
   };
 
   const [agentActivated, setAgentActivated] = useState<boolean>(false);
@@ -301,7 +301,7 @@ export default function ContentPlanner({ device, onAddRecreatedVideo }: ContentP
 
                       <div>
                         <span className="text-xs text-slate-500 font-bold block mb-2">
-                          ✍️ 脚本大模型推荐提示 (English Writing Prompt)
+                          ✍️ 技能大模型推荐提示 (English Writing Prompt)
                         </span>
                         <div className="p-4 border border-slate-800 bg-slate-900/60 rounded text-xs font-mono text-slate-400 max-h-[80px] overflow-y-auto">
                           {currentPlanDay.scriptPrompt}
@@ -379,7 +379,7 @@ export default function ContentPlanner({ device, onAddRecreatedVideo }: ContentP
           </div>
 
           <p className="text-xs text-slate-400 leading-relaxed max-w-2xl mb-2">
-            看到同行的大爆款了？输入对标账号的海外视频链接，让本平台调用多模态模型提取原版<strong>字幕/文案</strong>、分析<strong>关键帧镜头切换点</strong>，并输出高画质一键克隆脚本。
+            看到同行的大爆款了？输入对标账号的海外视频链接，让本平台调用多模态模型提取原版<strong>字幕/文案</strong>、分析<strong>关键帧镜头切换点</strong>，并输出高画质一键克隆技能。
           </p>
 
           {/* Input link Row */}

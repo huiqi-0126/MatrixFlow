@@ -169,6 +169,10 @@ export default function DataCollector({ device }: DataCollectorProps) {
             ) : (
               <>
                 {/* Calendar Header */}
+                <div className="flex items-center gap-4 border-b border-slate-700/50 pb-4 mb-4 shrink-0">
+                  <Search className="text-cyan-400 w-5 h-5" />
+                  <h3 className="text-xs font-bold text-slate-150">数据采集日历</h3>
+                </div>
                 <div className="flex items-center mb-4 bg-slate-900 border border-slate-700/50 rounded-xl p-1 shadow-inner relative shrink-0">
                   <button
                     onClick={() => setCalendarShift(s => s - 7)}
@@ -231,7 +235,7 @@ export default function DataCollector({ device }: DataCollectorProps) {
                         <table className="w-full text-left text-xs text-slate-300 font-mono whitespace-nowrap min-w-[600px]">
                           <thead className="sticky top-0 bg-slate-900/95 backdrop-blur-sm z-10 shadow-sm border-b border-slate-700/50">
                             <tr className="text-slate-500 uppercase">
-                              <th className="py-2.5 px-3 font-bold">采集脚本</th>
+                              <th className="py-2.5 px-3 font-bold">采集技能</th>
                               <th className="py-2.5 px-2 font-bold">执行时间</th>
                               <th className="py-2.5 px-2 font-bold text-center">操作</th>
                               <th className="py-2.5 px-2 font-bold">状态</th>
@@ -298,7 +302,7 @@ export default function DataCollector({ device }: DataCollectorProps) {
                         </div>
                       ))}
                       <button className="w-full mt-2 border border-dashed border-slate-700 bg-slate-900/30 hover:bg-slate-800 hover:border-slate-600 transition text-slate-400 py-3 rounded-lg text-xs font-bold flex items-center justify-center gap-2">
-                        + 添加自定义采集脚本
+                        + 添加自定义采集技能
                       </button>
                     </div>
                   )}
@@ -352,7 +356,7 @@ export default function DataCollector({ device }: DataCollectorProps) {
                           "2026-05-21 14:30:10,789 - INFO - [DataCollector] 共发现 125 条高潜爆款视频",
                           "2026-05-21 14:31:15,123 - INFO - HTTP Request: POST https://tiktok.com/api/search \"HTTP/1.1 200 OK\"",
                           "2026-05-21 14:35:00,456 - INFO - [DataCollector] 数据清洗与标签抽取完成",
-                          "2026-05-21 14:45:00,789 - INFO - ✅ [SUCCESS] 采集脚本执行完成！"
+                          "2026-05-21 14:45:00,789 - INFO - ✅ [SUCCESS] 采集技能执行完成！"
                         ].map((log, i) => {
                           let col = 'text-slate-300';
                           if (log.includes('INFO - HTTP')) col = 'text-slate-500';
