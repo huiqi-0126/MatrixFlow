@@ -305,7 +305,7 @@ export default function App() {
   const activeAccountHealth = activeFollowersCount > 500 ? '🟢 极佳 (High)' : '🟢 正常 (Good)';
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans select-none antialiased">
+    <div className="min-h-screen bg-slate-900 text-slate-100 flex flex-col font-sans select-none antialiased">
 
       {/* 1. Global Navigation Top Header */}
       <header className="border-b border-slate-800 bg-slate-900/50 backdrop-blur-md px-4 xl:px-6 py-3 xl:py-4 flex flex-col md:flex-row md:items-center md:justify-between gap-2 xl:gap-4 z-40 sticky top-0">
@@ -376,7 +376,7 @@ export default function App() {
       <div className="flex-1 grid grid-cols-1 xl:grid-cols-12 gap-4 p-4 xl:p-4 overflow-hidden relative">
 
         {/* 2.1 Sidebar Panel: Active iPhone devices listing (3 columns) */}
-        <aside className="xl:col-span-3 2xl:col-span-3 bg-slate-900/40 border border-slate-800 rounded-2xl p-4 xl:p-5 flex flex-col text-left overflow-y-auto h-[calc(100vh-80px)] scrollbar-narrow bento-glow-indigo">
+        <aside className="xl:col-span-3 2xl:col-span-3 bg-slate-800/60 border border-slate-700 rounded-2xl p-4 xl:p-5 flex flex-col text-left overflow-y-auto h-[calc(100vh-80px)] scrollbar-narrow shadow-xl">
 
           <div className="flex items-center justify-between mb-4 border-b border-slate-800 pb-2.5">
             <span className="text-xs font-bold font-mono text-slate-400">
@@ -439,8 +439,8 @@ export default function App() {
                   key={dev.id}
                   onClick={() => setSelectedDeviceId(dev.id)}
                   className={`p-3.5 rounded-xl border transition-all duration-200 cursor-pointer select-none text-left flex flex-col justify-between relative overflow-hidden ${isActive
-                    ? 'bg-indigo-600/20 border-indigo-500/50 shadow-lg bento-glow-indigo'
-                    : 'bg-slate-800/40 border-slate-800/60 hover:bg-slate-800/60 hover:border-slate-700'
+                    ? 'bg-indigo-600/30 border-indigo-500 shadow-lg shadow-indigo-500/20'
+                    : 'bg-slate-900/40 border-slate-700/60 hover:bg-slate-800 hover:border-slate-600'
                     }`}
                 >
                   {/* Account Header line (Avatar + Info) */}
