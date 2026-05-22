@@ -54,7 +54,7 @@ export default function PublisherScheduler({
     if (selectedAssetId) {
       const selectedAsset = videoAssets.find(a => a.id === selectedAssetId);
       if (selectedAsset) {
-        setCaption(selectedAsset.tagline);
+        setCaption(selectedAsset.script || selectedAsset.title);
         setTagsInput(selectedAsset.tags.join(', '));
       }
     }
@@ -62,9 +62,8 @@ export default function PublisherScheduler({
 
   // Initial form values setup
   useEffect(() => {
-    const assetsForNiche = videoAssets.filter(a => a.niche === device.niche || a.niche === 'all');
-    if (assetsForNiche.length > 0 && !selectedAssetId) {
-      setSelectedAssetId(assetsForNiche[0].id);
+    if (videoAssets.length > 0 && !selectedAssetId) {
+      setSelectedAssetId(videoAssets[0].id);
     }
   }, [device, videoAssets, selectedAssetId]);
 

@@ -71,12 +71,35 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
     setActiveActionIndex(0);
     setViewMode('log');
 
-    const dt = new Date().toISOString().replace('T', ' ').substring(0, 19) + ',123';
-    pushSimLog(`${dt} - INFO - HTTP Request: POST https://rc.guokers.com/mcp "HTTP/1.1 200 OK"`);
-    pushSimLog(`${dt} - INFO - [${device.name}] 📸 截图: 0.1s`);
-    pushSimLog(`${dt} - INFO - [${device.name}] LLM: page='feed', action='scroll', 'x': 0, 'y': 0, 'is_fashion': False, 'content_type': '宠物/日常', 'has_liked': False`);
+    const dt = () => new Date().toISOString().replace('T', ' ').substring(0, 19) + ',' + Math.floor(Math.random() * 999).toString().padStart(3, '0');
 
-    executeStep(0);
+    const initLogs = [
+      `${dt()} - INFO - 并发度: ${concurrentDevices} 台设备同时操作`,
+      `${dt()} - INFO - [${device.name}] ========== 开始养号 ==========`,
+      `${dt()} - INFO - [${device.name}] MCP 连接已建立`,
+      `${dt()} - INFO - HTTP Request: POST https://rc.guokecs.com/mcp "HTTP/1.1 200 OK"`,
+      `${dt()} - INFO - Received session ID: 4de51ff9-4271-45dd-9131-c74d269bf436`,
+      `${dt()} - INFO - Negotiated protocol version: 2025-06-18`,
+      `${dt()} - INFO - [${device.name}] MCP Session 已初始化`,
+      `${dt()} - INFO - HTTP Request: POST https://rc.guokecs.com/mcp "HTTP/1.1 202 Accepted"`,
+      `${dt()} - INFO - HTTP Request: GET https://rc.guokecs.com/mcp "HTTP/1.1 200 OK"`,
+      `${dt()} - INFO - HTTP Request: POST https://rc.guokecs.com/mcp "HTTP/1.1 200 OK"`,
+      `${dt()} - INFO - HTTP Request: POST https://rc.guokecs.com/mcp "HTTP/1.1 200 OK"`,
+      `${dt()} - INFO - [${device.name}] 唤醒 TikTok 到前台...`,
+      `${dt()} - INFO - HTTP Request: POST https://rc.guokecs.com/mcp "HTTP/1.1 200 OK"`,
+      `${dt()} - INFO - [${device.name}] 开始养号循环，计划时长 ${totalMinutes} 分钟...`,
+      ` `
+    ];
+
+    let delay = 0;
+    initLogs.forEach(l => {
+      setTimeout(() => pushSimLog(l), delay);
+      delay += 120; // 快速顺序输出
+    });
+
+    setTimeout(() => {
+      executeStep(0);
+    }, delay + 400);
   };
 
   const executeStep = (actionIdx: number) => {
