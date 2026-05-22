@@ -310,7 +310,7 @@ export default function App() {
           </div>
           <div className="text-left">
             <h1 className="text-xs font-bold font-sans tracking-tight text-white flex items-center gap-1.5 leading-none">
-              海外自媒体模拟培育与代运营控制系统
+              海外自媒体账号培育与内容发布系统
               <span className="text-xs bg-indigo-950/60 border border-indigo-900/40 text-indigo-400 px-2 py-0.5 rounded font-mono font-bold">
                 MCN FARM PRO
               </span>
@@ -364,7 +364,7 @@ export default function App() {
 
           <div className="flex items-center justify-between mb-4 border-b border-slate-800 pb-2.5">
             <span className="text-xs font-bold font-mono text-slate-400">
-              设备农场 (Device Matrix)
+              账号列表 (Accounts)
             </span>
             <span className="text-xs px-1.5 py-0.5 rounded bg-indigo-950/60 text-indigo-400 border border-indigo-900/30 font-mono tracking-tight font-bold">
               ROUTER OK
@@ -410,50 +410,37 @@ export default function App() {
                       : 'bg-slate-800/40 border-slate-800/60 hover:bg-slate-800/60 hover:border-slate-700'
                     }`}
                 >
-                  {/* Subtle active border light indicator */}
-                  {isActive && (
-                    <div className="absolute top-0 right-0 bottom-0 w-1 bg-gradient-to-b from-indigo-500 to-purple-600"></div>
-                  )}
+                  {/* Account Header line (Avatar + Info) */}
+                  <div className="flex items-start gap-3">
+                    <img src={personas[dev.id]?.avatarUrl} alt="avatar" className="w-10 h-10 rounded-full object-cover border-2 border-slate-700 bg-slate-800" />
+                    <div className="flex-1 min-w-0">
+                      <div className="flex justify-between items-start mb-1">
+                        <h4 className="text-sm font-bold text-slate-100 font-mono tracking-tight leading-none truncate pr-2">
+                          {dev.username}
+                        </h4>
+                        {/* State dot */}
+                        <div className="flex items-center gap-1.5 shrink-0 mt-0.5">
+                          <span className={`w-2 h-2 rounded-full ${statusDot}`}></span>
+                        </div>
+                      </div>
+                      <p className="text-xs text-slate-400 line-clamp-1 leading-tight">{personas[dev.id]?.bio || '暂无描述'}</p>
+                    </div>
+                  </div>
 
-                  {/* Device Header line */}
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <span className="text-xs font-mono text-slate-500 block leading-none font-bold uppercase uppercase-wide mb-1">
-                        PROXY IP BOUND
+                  {/* Account metadata & badges */}
+                  {/* Account metadata & badges */}
+                  <div className="flex items-center justify-between mt-3 pt-3 border-t border-slate-800/80">
+                    <div className="flex items-center gap-2">
+                      <span className="text-[10px] bg-slate-800 text-slate-300 px-1.5 py-0.5 rounded font-bold">
+                        {dev.platform}
                       </span>
-                      <h4 className="text-xs font-bold text-slate-100 font-mono tracking-tight leading-none">
-                        {dev.name}
-                      </h4>
+                      <span className={`text-[10px] px-1.5 py-0.5 rounded font-bold ${dev.followerCount > 100000 ? 'bg-orange-950 text-orange-400' : dev.followerCount > 10000 ? 'bg-purple-950 text-purple-400' : 'bg-slate-800 text-slate-300'}`}>
+                        {dev.followerCount > 100000 ? '大V号' : dev.followerCount > 10000 ? '高级号' : '新号'}
+                      </span>
                     </div>
-
-                    {/* State dot */}
-                    <div className="flex items-center gap-1.5 shrink-0">
-                      <span className={`w-2 h-2 rounded-full ${statusDot}`}></span>
-                      <span className="text-xs font-mono text-slate-400">{dev.platform}</span>
-                    </div>
-                  </div>
-
-                  {/* Device mid metadata */}
-                  <div className="grid grid-cols-2 gap-2 mt-3.5 pt-3.5 border-t border-slate-800/80 text-xs font-mono text-slate-400 leading-tight">
-                    <div>
-                      <span className="text-slate-500 block text-xs leading-none mb-0.5">BOUND ID</span>
-                      <span className="text-slate-200 font-semibold truncate block">@{dev.username}</span>
-                    </div>
-                    <div>
-                      <span className="text-slate-500 block text-xs leading-none mb-0.5">PROXY ROUTE</span>
-                      <span className="text-slate-300 truncate block">{dev.ip}</span>
-                    </div>
-                  </div>
-
-                  {/* Bottom channel statistics snapshot */}
-                  <div className="flex justify-between items-center mt-3 pt-2 text-xs font-mono border-t border-dashed border-slate-800/80">
-                    <span className="text-xs text-indigo-400 uppercase font-bold tracking-tight bg-indigo-950/60 px-1 rounded-sm">
-                      {dev.niche}
+                    <span className="text-[10px] text-slate-500">
+                      粉丝: <span className="text-slate-300 font-bold">{dev.followerCount >= 100000 ? (dev.followerCount/1000).toFixed(1) + 'k' : dev.followerCount}</span>
                     </span>
-                    <div className="flex gap-2">
-                      <span><strong className="text-white font-bold">{dev.followerCount.toLocaleString()}</strong> fans</span>
-                      <span><strong className="text-white font-bold">{dev.videoCount}</strong> vids</span>
-                    </div>
                   </div>
 
                 </div>
@@ -532,13 +519,13 @@ export default function App() {
           {/* 3. Horizontal tabs selection designed as high-quality Bento Grid cards */}
           <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3 pb-2 select-none">
             {[
+              { id: 'persona', label: '👤 智能体人设定义', desc: '肖像兴趣与视频大纲' },
+              { id: 'warmup', label: '📅 社交互动', desc: '模拟浏览防反作弊' },
+              { id: 'content', label: '📝 内容生成', desc: '内容表与关键帧分析' },
+              { id: 'assets', label: '🗂️ 素材管理', desc: '视频资产与AI生成' },
+              { id: 'scheduler', label: '🕒 任务列表', desc: '自动定时挂钩排期' },
+              { id: 'analytics', label: '📊 数据分析', desc: 'SVG成长与诊断建议' },
               { id: 'simulation', label: '🖥️ 远程控制', desc: '截图及视觉AI诊断' },
-              { id: 'persona', label: '👤 人设仓库', desc: '肖像兴趣与视频大纲' },
-              { id: 'warmup', label: '📅 养号规划', desc: '模拟浏览防反作弊' },
-              { id: 'content', label: '📝 克隆选题', desc: '内容表与关键帧分析' },
-              { id: 'assets', label: '🗂️ 资源管理', desc: '视频资产与AI生成' },
-              { id: 'scheduler', label: '🕒 调度队列', desc: '自动定时挂钩排期' },
-              { id: 'analytics', label: '📊 账号效能', desc: 'SVG成长与诊断建议' },
             ].map(tab => {
               const isActive = activeTab === tab.id;
               return (
