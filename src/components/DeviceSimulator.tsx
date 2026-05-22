@@ -11,6 +11,7 @@ interface DeviceSimulatorProps {
   device: Device;
   persona: Persona;
   onUpdateDeviceStats: (deviceId: string, stats: { viewsAdd: number; followersAdd: number; videoAdd?: boolean }) => void;
+  compactMode?: boolean;
 }
 
 export default function DeviceSimulator({ device, persona, onUpdateDeviceStats, compactMode = false }: DeviceSimulatorProps) {

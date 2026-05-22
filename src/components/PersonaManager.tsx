@@ -59,6 +59,7 @@ export default function PersonaManager({
               device={device}
               persona={persona}
               onUpdateDeviceStats={onUpdateDeviceStats || (() => {})}
+              compactMode={true}
             />
           </div>
         </div>
