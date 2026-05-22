@@ -23,7 +23,7 @@ export const INITIAL_DEVICES: Device[] = [
     status: 'idle',
     niche: 'aesthetic-cooking',
     followerCount: 24,
-    videoCount: 7,
+    videoCount: 11,
     totalViews: 1450,
   },
   {

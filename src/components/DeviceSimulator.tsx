@@ -13,7 +13,7 @@ interface DeviceSimulatorProps {
   onUpdateDeviceStats: (deviceId: string, stats: { viewsAdd: number; followersAdd: number; videoAdd?: boolean }) => void;
 }
 
-export default function DeviceSimulator({ device, persona, onUpdateDeviceStats }: DeviceSimulatorProps) {
+export default function DeviceSimulator({ device, persona, onUpdateDeviceStats, compactMode = false }: DeviceSimulatorProps) {
   // Navigation: Springboard 'home' or internal screens
   const [phoneScreen, setPhoneScreen] = useState<'home' | 'feed' | 'creator' | 'posting' | 'warmup_running' | 'weather' | 'safari' | 'instagram' | 'troll' | 'troll2' | 'generic_app'>('home');
   const [genericAppName, setGenericAppName] = useState<string>('');
@@ -231,9 +231,10 @@ Ip Routing Channel: ${device.ip} (${device.region})
 
   return (
     <div className="flex flex-col text-left space-y-4 text-slate-200">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+      <div className={compactMode ? "flex justify-center h-full w-full max-h-[85vh] overflow-y-auto" : "grid grid-cols-1 lg:grid-cols-12 gap-4"}>
 
         {/* ==================== 1. LEFT PANEL: Full Device Metadata (5 Columns) ==================== */}
+        {!compactMode && (
         <div className="lg:col-span-5 flex flex-col gap-4 text-left">
 
           {/* Main User Card with Phone Status Badge */}
@@ -305,8 +306,10 @@ Ip Routing Channel: ${device.ip} (${device.region})
         </div>
 
 
+        )}
+
         {/* ==================== 2. RIGHT PANEL: Interactive Screen Casting & Core Controls (7 Columns) ==================== */}
-        <div className="lg:col-span-7 bg-slate-800/40 border border-slate-800 rounded-2xl p-4 flex flex-col items-center bento-glow-indigo">
+        <div className={`${compactMode ? "w-full max-w-[600px] mx-auto shadow-[0_0_50px_rgba(0,0,0,0.8)] border-slate-700/50" : "lg:col-span-7"} bg-slate-800/40 border border-slate-800 rounded-2xl p-4 flex flex-col items-center bento-glow-indigo`}>
 
           {/* Card Header matching screen simulation banner perfectly */}
           <div className="w-full flex items-center justify-between border-b border-slate-800 pb-3.5 mb-5">
