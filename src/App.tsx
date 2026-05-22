@@ -224,7 +224,7 @@ export default function App() {
 
   useEffect(() => {
     const handleReplicateVideo = (e: any) => {
-      setActiveTab('content');
+      setActiveTab('assets');
       const url = e.detail?.url;
       setTimeout(() => {
         window.dispatchEvent(new CustomEvent('trigger-analyze-video', { detail: { url } }));
@@ -488,10 +488,10 @@ export default function App() {
           <div className="grid grid-cols-5 gap-2 pb-2 select-none">
             {[
               { id: 'persona', label: '🧠 人设定义', desc: '账号 · 人设 · 养殖环境', isAgent: false },
-              { id: 'warmup', label: '💬 社交互动智能体', desc: '浏览互动 · 防封号', isAgent: true },
+              { id: 'warmup', label: '💬 社交互动智能体', desc: '仿真人浏览 · 防封号', isAgent: true },
               { id: 'datacollect', label: '🔍 数据采集智能体', desc: '爆款 · 账号数据同步', isAgent: true },
               { id: 'assets', label: '📊 素材生成及管理', desc: '素材管理 · 视频复刻', isAgent: false },
-              { id: 'scheduler', label: '📤 内容发布管理', desc: '定时发布 · 数据趋势', isAgent: true },
+              { id: 'scheduler', label: '📤 内容发布管理', desc: '定时发布 · 视频分析', isAgent: true },
             ].map(tab => {
               const isActive = activeTab === tab.id;
               return (

@@ -204,14 +204,6 @@ export default function ContentPlanner({ device, onAddRecreatedVideo }: ContentP
           </div>
         </div>
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-1 bg-slate-900 border border-slate-800 rounded-lg p-1">
-            <button onClick={() => setAgentMode('fullAuto')} className={`px-3 py-1 rounded text-[11px] font-bold transition cursor-pointer ${agentMode === 'fullAuto' ? 'bg-indigo-600 text-white shadow' : 'text-slate-400 hover:text-white'}`}>
-              <Zap className="w-3 h-3 inline mr-1" />全权托管
-            </button>
-            <button onClick={() => setAgentMode('userConfirm')} className={`px-3 py-1 rounded text-[11px] font-bold transition cursor-pointer ${agentMode === 'userConfirm' ? 'bg-amber-600 text-white shadow' : 'text-slate-400 hover:text-white'}`}>
-              <Shield className="w-3 h-3 inline mr-1" />用户确认
-            </button>
-          </div>
           {!agentActivated ? (
             <button onClick={() => { setAgentActivated(true); if (!hasPlanned && !isPlanning) handleSmartPlan(); }} className="px-4 py-2 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white text-xs font-bold rounded-lg transition shadow-lg cursor-pointer">
               激活智能体

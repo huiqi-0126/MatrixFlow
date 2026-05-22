@@ -137,20 +137,6 @@ export default function DataCollector({ device }: DataCollectorProps) {
 
         <div className="flex items-center gap-3">
           {/* Mode toggle */}
-          <div className="flex items-center gap-1 bg-slate-900 border border-slate-800 rounded-lg p-1">
-            <button
-              onClick={() => setMode('fullAuto')}
-              className={`px-3 py-1 rounded text-[11px] font-bold transition cursor-pointer ${mode === 'fullAuto' ? 'bg-indigo-600 text-white shadow' : 'text-slate-400 hover:text-white'}`}
-            >
-              <Zap className="w-3 h-3 inline mr-1" />全权托管
-            </button>
-            <button
-              onClick={() => setMode('userConfirm')}
-              className={`px-3 py-1 rounded text-[11px] font-bold transition cursor-pointer ${mode === 'userConfirm' ? 'bg-amber-600 text-white shadow' : 'text-slate-400 hover:text-white'}`}
-            >
-              <Shield className="w-3 h-3 inline mr-1" />用户确认
-            </button>
-          </div>
 
           {/* Activate button */}
           {!activated ? (

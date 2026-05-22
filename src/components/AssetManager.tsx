@@ -232,9 +232,7 @@ export default function AssetManager({ device, videoAssets, onAddVideoAsset, onD
                   </div>
 
                   <div className="flex items-center gap-2 mt-3">
-                    <button className="flex-1 text-[10px] font-bold bg-slate-900 hover:bg-slate-800 text-slate-300 py-1.5 rounded transition flex justify-center items-center gap-1 border border-slate-800 cursor-pointer">
-                      <Settings2 className="w-3 h-3" /> 二次剪辑
-                    </button>
+
                     <button className="flex-1 text-[10px] font-bold bg-slate-900 hover:bg-slate-800 text-slate-300 py-1.5 rounded transition flex justify-center items-center gap-1 border border-slate-800 cursor-pointer">
                       <Download className="w-3 h-3" /> 导出到本地
                     </button>

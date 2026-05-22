@@ -6,6 +6,22 @@ import {
 import { WarmupPlan, WarmupAction, Device } from '../types';
 import { DEFAULT_WARMUP_PLANS } from '../constants';
 
+const MOCK_RESULTS = Array.from({ length: 20 }).map((_, i) => {
+  const isFailed = i === 3 || i === 12;
+  return {
+    name: i % 3 === 0 ? '日常活跃养号' : i % 3 === 1 ? '深度互动计划' : '竞品主页截流',
+    time: `2026-05-${String(22 - Math.floor(i / 3)).padStart(2, '0')} ${String(8 + (i * 3) % 14).padStart(2, '0')}:${String((i * 17) % 60).padStart(2, '0')}:00`,
+    duration: isFailed ? `${(Math.random() * 5 + 1).toFixed(1)}m` : `${(Math.random() * 10 + 15).toFixed(1)}m`,
+    v_likes: isFailed ? 0 : Math.floor(Math.random() * 5),
+    open_comm: isFailed ? 0 : Math.floor(Math.random() * 8 + 2),
+    scroll_comm: isFailed ? 0 : Math.floor(Math.random() * 20 + 5),
+    c_likes: isFailed ? 0 : Math.floor(Math.random() * 4),
+    c_replies: isFailed ? 0 : Math.floor(Math.random() * 2),
+    c_news: isFailed ? 0 : (i % 5 === 0 ? 1 : 0),
+    status: isFailed ? 'failed' : 'success'
+  };
+});
+
 interface WarmupPlannerProps {
   device: Device;
   onUpdateDeviceStats: (deviceId: string, stats: { viewsAdd: number; followersAdd: number }) => void;
@@ -22,7 +38,7 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
 
   // New States
   const [showParamsModal, setShowParamsModal] = useState<boolean>(false);
-  const [viewMode, setViewMode] = useState<'log' | 'screenshot'>('log');
+  const [viewMode, setViewMode] = useState<'log' | 'screenshot' | 'results'>('log');
   const [hasPlanned, setHasPlanned] = useState<boolean>(false);
   const [isPlanning, setIsPlanning] = useState<boolean>(false);
 
@@ -261,14 +277,6 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
           </div>
         </div>
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-1 bg-slate-900 border border-slate-800 rounded-lg p-1">
-            <button onClick={() => setAgentMode('fullAuto')} className={`px-3 py-1 rounded text-[11px] font-bold transition cursor-pointer ${agentMode === 'fullAuto' ? 'bg-purple-600 text-white shadow' : 'text-slate-400 hover:text-white'}`}>
-              <Zap className="w-3 h-3 inline mr-1" />全权托管
-            </button>
-            <button onClick={() => setAgentMode('userConfirm')} className={`px-3 py-1 rounded text-[11px] font-bold transition cursor-pointer ${agentMode === 'userConfirm' ? 'bg-amber-600 text-white shadow' : 'text-slate-400 hover:text-white'}`}>
-              <Shield className="w-3 h-3 inline mr-1" />用户确认
-            </button>
-          </div>
           {!agentActivated ? (
             <button onClick={() => { setAgentActivated(true); if (!hasPlanned && !isPlanning) handleSmartPlan(); }} className="px-4 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-bold rounded-lg transition shadow-lg cursor-pointer">
               激活智能体
@@ -510,6 +518,13 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
                     <ImageIcon className="w-4 h-4" />
                     <span className="text-xs">设备截图</span>
                   </button>
+                  <button
+                    onClick={() => setViewMode('results')}
+                    className={`flex items-center gap-2 px-3 py-1.5 rounded transition ${viewMode === 'results' ? 'bg-slate-800 text-purple-400 font-bold' : 'text-slate-400 hover:text-slate-200'}`}
+                  >
+                    <CheckCircle className="w-4 h-4" />
+                    <span className="text-xs">任务结果</span>
+                  </button>
                 </div>
 
                 {isSimulating && (
@@ -560,7 +575,7 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
                         })
                       )}
                     </div>
-                  ) : (
+                  ) : viewMode === 'screenshot' ? (
                     <div className="absolute inset-0 overflow-y-auto bg-slate-900/50 p-4 rounded border border-slate-900 scrollbar-narrow grid grid-cols-2 lg:grid-cols-3 gap-4">
                       {['exabc-iphone-3-nurture_428s_153308.png', 'exabc-iphone-3-nurture_436s_153316.png', 'exabc-iphone-3-nurture_521s_153442.png', 'exabc-iphone-3-nurture_547s_153507.png', 'exabc-iphone-3-nurture_85s_154613.png', 'exabc-iphone-3-nurture_119s_154647.png', 'exabc-iphone-3-nurture_219s_152939.png', 'exabc-iphone-3-nurture_344s_153144.png', 'exabc-iphone-3-nurture_452s_153332.png'].map((img, idx) => (
                         <div key={idx} className="relative group rounded overflow-hidden border border-slate-700 bg-black aspect-[9/16]">
@@ -571,6 +586,67 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
                           </div>
                         </div>
                       ))}
+                    </div>
+                  ) : (
+                    <div className="absolute inset-0 overflow-y-auto bg-slate-900/50 p-4 rounded border border-slate-900 scrollbar-narrow">
+                      <table className="w-full text-left text-xs text-slate-300 font-mono">
+                        <thead className="sticky top-0 bg-slate-900/90 backdrop-blur-sm z-10 shadow-sm">
+                          <tr className="border-b border-slate-700 text-slate-500 uppercase">
+                            <th className="py-2.5 font-bold">脚本名称</th>
+                            <th className="py-2.5 font-bold">执行时间</th>
+                            <th className="py-2.5 font-bold">运行时长</th>
+                            <th className="py-2.5 font-bold">状态</th>
+                            <th className="py-2.5 font-bold">点赞视频</th>
+                            <th className="py-2.5 font-bold">点开评论</th>
+                            <th className="py-2.5 font-bold">滑动评论</th>
+                            <th className="py-2.5 font-bold">点赞评论</th>
+                            <th className="py-2.5 font-bold">回复评论</th>
+                            <th className="py-2.5 font-bold">新发评论</th>
+                            <th className="py-2.5 font-bold text-center pr-4">操作</th>
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y divide-slate-800">
+                          {MOCK_RESULTS.map((res, i) => (
+                            <tr
+                              key={i}
+                              className="hover:bg-slate-800/50 transition group"
+                            >
+                              <td className="py-3 font-bold text-slate-200">{res.name}</td>
+                              <td className="py-3 text-slate-400">{res.time}</td>
+                              <td className="py-3 text-sky-400">{res.duration}</td>
+                              <td className="py-3">
+                                {res.status === 'success' ? (
+                                  <span className="text-[10px] bg-emerald-950/40 text-emerald-400 px-1.5 py-0.5 rounded border border-emerald-900/50">已完成</span>
+                                ) : (
+                                  <span className="text-[10px] bg-rose-950/40 text-rose-400 px-1.5 py-0.5 rounded border border-rose-900/50">异常退出</span>
+                                )}
+                              </td>
+                              <td className="py-3">{res.v_likes}</td>
+                              <td className="py-3">{res.open_comm}</td>
+                              <td className="py-3">{res.scroll_comm}</td>
+                              <td className="py-3">{res.c_likes}</td>
+                              <td className="py-3">{res.c_replies}</td>
+                              <td className="py-3">{res.c_news}</td>
+                              <td className="py-3 text-right pr-4">
+                                <div className="flex items-center justify-end gap-2">
+                                  <button
+                                    onClick={(e) => { e.stopPropagation(); setViewMode('log'); }}
+                                    className="px-2 py-1 text-[10px] font-bold rounded bg-sky-950/40 text-sky-400 hover:bg-sky-900/60 transition"
+                                  >
+                                    日志
+                                  </button>
+                                  <button
+                                    onClick={(e) => { e.stopPropagation(); setViewMode('screenshot'); }}
+                                    className="px-2 py-1 text-[10px] font-bold rounded bg-emerald-950/40 text-emerald-400 hover:bg-emerald-900/60 transition"
+                                  >
+                                    截图
+                                  </button>
+                                </div>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
                     </div>
                   )}
                 </div>
