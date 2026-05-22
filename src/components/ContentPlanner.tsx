@@ -155,7 +155,7 @@ export default function ContentPlanner({ device, onAddRecreatedVideo }: ContentP
     setTimeout(() => {
       setIsPlanning(false);
       setHasPlanned(true);
-    }, 2000);
+    }, 10000);
   };
 
   const handleAutoReplicate = () => {
@@ -199,7 +199,7 @@ export default function ContentPlanner({ device, onAddRecreatedVideo }: ContentP
               <div className="w-full max-w-xs text-center">
                 <div className="text-slate-300 text-xs font-bold mb-3">大模型正在基于人设画像自动规划内容表...</div>
                 <div className="h-2 bg-slate-900 rounded-full overflow-hidden w-full">
-                  <div className="h-full bg-indigo-500 animate-pulse w-full origin-left" style={{ animation: 'progress 2s ease-in-out forwards' }}></div>
+                  <div className="h-full bg-indigo-500 animate-pulse w-full origin-left" style={{ animation: 'progress 10s ease-in-out forwards' }}></div>
                 </div>
                 <style>{`@keyframes progress { 0% { transform: scaleX(0); } 100% { transform: scaleX(1); } }`}</style>
               </div>

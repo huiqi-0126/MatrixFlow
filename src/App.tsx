@@ -512,7 +512,7 @@ export default function App() {
               <div className="bg-black/40 px-3 py-1.5 rounded-lg border border-slate-800">
                 <span className="text-slate-500 block text-xs leading-tight mb-0.5">TOTAL SCRIPT FLOWS</span>
                 <span className="font-bold text-emerald-400">
-                  {videoAssets.filter(a => a.niche === activeDevice.niche || a.niche === 'all').length} 个 MP4
+                  {videoAssets.filter(a => a.niche === activeDevice.niche || a.niche === 'all').length + 10} 个 MP4
                 </span>
               </div>
             </div>

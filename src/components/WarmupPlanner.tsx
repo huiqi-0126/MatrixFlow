@@ -65,7 +65,7 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
     setTimeout(() => {
       setIsPlanning(false);
       setHasPlanned(true);
-    }, 2000);
+    }, 12000);
   };
 
   const handleRunSimulation = () => {
@@ -259,7 +259,7 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
                     <div className="w-full max-w-xs text-center">
                       <div className="text-slate-300 text-xs font-bold mb-3">大模型正在基于人设画像自动规划互动剧本...</div>
                       <div className="h-2 bg-slate-900 rounded-full overflow-hidden w-full">
-                        <div className="h-full bg-purple-500 animate-pulse w-full origin-left" style={{ animation: 'progress 2s ease-in-out forwards' }}></div>
+                        <div className="h-full bg-purple-500 animate-pulse w-full origin-left" style={{ animation: 'progress 10s ease-in-out forwards' }}></div>
                       </div>
                       <style>{`@keyframes progress { 0% { transform: scaleX(0); } 100% { transform: scaleX(1); } }`}</style>
                     </div>
@@ -267,9 +267,9 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
                     <>
                       <div className="text-4xl mb-4 opacity-50">🤖</div>
                       <p className="text-slate-400 text-xs text-center mb-6 leading-relaxed">
-                        当前暂无互动规划数据。<br/>请点击下方按钮，由系统根据该账号的垂直领域自动生成5天阶梯式的养号剧本。
+                        当前暂无互动规划数据。<br />请点击下方按钮，由系统根据该账号的垂直领域自动生成5天阶梯式的养号剧本。
                       </p>
-                      <button 
+                      <button
                         onClick={handleSmartPlan}
                         className="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold rounded-lg shadow-lg shadow-indigo-900/20 transition-all cursor-pointer"
                       >
@@ -280,176 +280,176 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
                 </div>
               ) : (
                 <>
-              <div className="grid grid-cols-5 gap-4 mb-2">
-                {plans.map(p => (
-                  <button
-                    key={p.day}
-                    onClick={() => {
-                      if (!isSimulating) setSelectedDay(p.day);
-                    }}
-                    disabled={isSimulating}
-                    className={`py-2 text-center rounded text-xs font-bold font-mono transition cursor-pointer ${selectedDay === p.day
-                      ? 'bg-purple-600 text-white shadow-lg shadow-purple-900/40'
-                      : 'bg-slate-800 hover:bg-slate-705 text-slate-300 disabled:opacity-40'
-                      }`}
-                  >
-                    DAY {p.day}
-                  </button>
-                ))}
-              </div>
-
-              {/* Day detail preview */}
-              <div className="bg-slate-800/20 p-4 rounded-xl border border-slate-800 flex-1 min-h-[310px] flex flex-col justify-between flex-1">
-                <div>
-                  <div className="flex items-center gap-4 mb-2">
-                    <span className="text-xs bg-purple-950 border border-purple-800 text-purple-400 px-2 py-0.5 rounded font-mono">
-                      WARMUP SCRIPT
-                    </span>
-                    <span className="text-xs text-slate-300 font-bold truncate">养号脚本选择</span>
+                  <div className="grid grid-cols-5 gap-4 mb-2">
+                    {plans.map(p => (
+                      <button
+                        key={p.day}
+                        onClick={() => {
+                          if (!isSimulating) setSelectedDay(p.day);
+                        }}
+                        disabled={isSimulating}
+                        className={`py-2 text-center rounded text-xs font-bold font-mono transition cursor-pointer ${selectedDay === p.day
+                          ? 'bg-purple-600 text-white shadow-lg shadow-purple-900/40'
+                          : 'bg-slate-800 hover:bg-slate-705 text-slate-300 disabled:opacity-40'
+                          }`}
+                      >
+                        DAY {p.day}
+                      </button>
+                    ))}
                   </div>
 
-                  <p className="text-xs text-slate-400 mb-2 text-left leading-relaxed">
-                    选择养号脚本类型，系统将自动执行相应的模拟操作流程。
-                  </p>
+                  {/* Day detail preview */}
+                  <div className="bg-slate-800/20 p-4 rounded-xl border border-slate-800 flex-1 min-h-[310px] flex flex-col justify-between flex-1">
+                    <div>
+                      <div className="flex items-center gap-4 mb-2">
+                        <span className="text-xs bg-purple-950 border border-purple-800 text-purple-400 px-2 py-0.5 rounded font-mono">
+                          WARMUP SCRIPT
+                        </span>
+                        <span className="text-xs text-slate-300 font-bold truncate">养号脚本选择</span>
+                      </div>
 
-                  <span className="text-xs text-slate-500 font-bold block mb-2">养号脚本选择:</span>
+                      <p className="text-xs text-slate-400 mb-2 text-left leading-relaxed">
+                        选择养号脚本类型，系统将自动执行相应的模拟操作流程。
+                      </p>
 
-                  <div className="space-y-4">
-                    {/* Script Option 1 */}
-                    <div
-                      className={`flex items-center justify-between p-4 rounded-lg border text-xs font-mono transition cursor-pointer ${selectedDay === 1
-                        ? 'border-purple-500 bg-purple-950/20 text-white'
-                        : 'border-slate-850 bg-slate-900/50 text-slate-400 hover:border-purple-500/30'
-                        }`}
-                      onClick={() => setSelectedDay(1)}
-                    >
-                      <div className="flex items-center gap-4 overflow-hidden mr-2">
-                        <span className="text-xs">🎵</span>
-                        <div className="truncate text-left">
-                          <span className="font-bold text-slate-200 text-xs">TikTok浏览养号+评论</span>
-                          <span className="text-slate-500 block text-xs">自动浏览推荐页视频并随机评论互动</span>
+                      <span className="text-xs text-slate-500 font-bold block mb-2">养号脚本选择:</span>
+
+                      <div className="space-y-4">
+                        {/* Script Option 1 */}
+                        <div
+                          className={`flex items-center justify-between p-4 rounded-lg border text-xs font-mono transition cursor-pointer ${selectedDay === 1
+                            ? 'border-purple-500 bg-purple-950/20 text-white'
+                            : 'border-slate-850 bg-slate-900/50 text-slate-400 hover:border-purple-500/30'
+                            }`}
+                          onClick={() => setSelectedDay(1)}
+                        >
+                          <div className="flex items-center gap-4 overflow-hidden mr-2">
+                            <span className="text-xs">🎵</span>
+                            <div className="truncate text-left">
+                              <span className="font-bold text-slate-200 text-xs">TikTok浏览养号+评论</span>
+                              <span className="text-slate-500 block text-xs">自动浏览推荐页视频并随机评论互动</span>
+                            </div>
+                          </div>
+                          <div className="shrink-0">
+                            <span className={`text-xs px-2 py-0.5 rounded ${selectedDay === 1 ? 'bg-purple-500 text-white' : 'bg-slate-800 text-slate-400'
+                              }`}>
+                              {selectedDay === 1 ? '已选择' : '选择'}
+                            </span>
+                          </div>
+                        </div>
+
+                        {/* Script Option 2 */}
+                        <div
+                          className={`flex items-center justify-between p-4 rounded-lg border text-xs font-mono transition cursor-pointer ${selectedDay === 2
+                            ? 'border-purple-500 bg-purple-950/20 text-white'
+                            : 'border-slate-850 bg-slate-900/50 text-slate-400 hover:border-purple-500/30'
+                            }`}
+                          onClick={() => setSelectedDay(2)}
+                        >
+                          <div className="flex items-center gap-4 overflow-hidden mr-2">
+                            <span className="text-xs">🔍</span>
+                            <div className="truncate text-left">
+                              <span className="font-bold text-slate-200 text-xs">TikTok搜索养号</span>
+                              <span className="text-slate-500 block text-xs">根据人设兴趣关键词搜索并浏览视频</span>
+                            </div>
+                          </div>
+                          <div className="shrink-0">
+                            <span className={`text-xs px-2 py-0.5 rounded ${selectedDay === 2 ? 'bg-purple-500 text-white' : 'bg-slate-800 text-slate-400'
+                              }`}>
+                              {selectedDay === 2 ? '已选择' : '选择'}
+                            </span>
+                          </div>
+                        </div>
+
+                        {/* Script Option 3 */}
+                        <div
+                          className={`flex items-center justify-between p-4 rounded-lg border text-xs font-mono transition cursor-pointer ${selectedDay === 3
+                            ? 'border-purple-500 bg-purple-950/20 text-white'
+                            : 'border-slate-850 bg-slate-900/50 text-slate-400 hover:border-purple-500/30'
+                            }`}
+                          onClick={() => setSelectedDay(3)}
+                        >
+                          <div className="flex items-center gap-4 overflow-hidden mr-2">
+                            <span className="text-xs">❤️</span>
+                            <div className="truncate text-left">
+                              <span className="font-bold text-slate-200 text-xs">TikTok点赞+访问感兴趣主页</span>
+                              <span className="text-slate-500 block text-xs">对目标视频点赞并访问创作者主页</span>
+                            </div>
+                          </div>
+                          <div className="shrink-0">
+                            <span className={`text-xs px-2 py-0.5 rounded ${selectedDay === 3 ? 'bg-purple-500 text-white' : 'bg-slate-800 text-slate-400'
+                              }`}>
+                              {selectedDay === 3 ? '已选择' : '选择'}
+                            </span>
+                          </div>
+                        </div>
+                        {/* Script Option 4 */}
+                        <div
+                          className={`flex items-center justify-between p-4 rounded-lg border text-xs font-mono transition cursor-pointer ${selectedDay === 4
+                            ? 'border-purple-500 bg-purple-950/20 text-white'
+                            : 'border-slate-850 bg-slate-900/50 text-slate-400 hover:border-purple-500/30'
+                            }`}
+                          onClick={() => setSelectedDay(4)}
+                        >
+                          <div className="flex items-center gap-4 overflow-hidden mr-2">
+                            <span className="text-xs">📺</span>
+                            <div className="truncate text-left">
+                              <span className="font-bold text-slate-200 text-xs">直播间挂机+随机互动</span>
+                              <span className="text-slate-500 block text-xs">自动进入热门直播间停留并发送暖场弹幕</span>
+                            </div>
+                          </div>
+                          <div className="shrink-0">
+                            <span className={`text-xs px-2 py-0.5 rounded ${selectedDay === 4 ? 'bg-purple-500 text-white' : 'bg-slate-800 text-slate-400'
+                              }`}>
+                              {selectedDay === 4 ? '已选择' : '选择'}
+                            </span>
+                          </div>
+                        </div>
+
+                        {/* Script Option 5 */}
+                        <div
+                          className={`flex items-center justify-between p-4 rounded-lg border text-xs font-mono transition cursor-pointer ${selectedDay === 5
+                            ? 'border-purple-500 bg-purple-950/20 text-white'
+                            : 'border-slate-850 bg-slate-900/50 text-slate-400 hover:border-purple-500/30'
+                            }`}
+                          onClick={() => setSelectedDay(5)}
+                        >
+                          <div className="flex items-center gap-4 overflow-hidden mr-2">
+                            <span className="text-xs">🎯</span>
+                            <div className="truncate text-left">
+                              <span className="font-bold text-slate-200 text-xs">垂直领域创作者回关</span>
+                              <span className="text-slate-500 block text-xs">访问标签同赛道作者并执行"关注+留评"策略</span>
+                            </div>
+                          </div>
+                          <div className="shrink-0">
+                            <span className={`text-xs px-2 py-0.5 rounded ${selectedDay === 5 ? 'bg-purple-500 text-white' : 'bg-slate-800 text-slate-400'
+                              }`}>
+                              {selectedDay === 5 ? '已选择' : '选择'}
+                            </span>
+                          </div>
                         </div>
                       </div>
-                      <div className="shrink-0">
-                        <span className={`text-xs px-2 py-0.5 rounded ${selectedDay === 1 ? 'bg-purple-500 text-white' : 'bg-slate-800 text-slate-400'
-                          }`}>
-                          {selectedDay === 1 ? '已选择' : '选择'}
-                        </span>
+
+                      {/* Upload custom script button */}
+                      <div className="pt-2 border-t border-slate-800 mt-4">
+                        <button className="w-full border border-dashed border-slate-700 hover:border-purple-500 hover:text-purple-400 text-slate-400 py-3 rounded-lg text-xs font-bold transition flex items-center justify-center gap-2 cursor-pointer shadow-sm hover:bg-purple-900/10">
+                          <span className="text-lg leading-none">+</span> 上传自定义执行脚本 (.json / .js)
+                        </button>
                       </div>
                     </div>
 
-                    {/* Script Option 2 */}
-                    <div
-                      className={`flex items-center justify-between p-4 rounded-lg border text-xs font-mono transition cursor-pointer ${selectedDay === 2
-                        ? 'border-purple-500 bg-purple-950/20 text-white'
-                        : 'border-slate-850 bg-slate-900/50 text-slate-400 hover:border-purple-500/30'
-                        }`}
-                      onClick={() => setSelectedDay(2)}
+                    {/* Click run button */}
+                    <button
+                      onClick={handleRunSimulation}
+                      disabled={isSimulating}
+                      className={`w-full py-2 bg-gradient-to-r from-purple-600 to-indigo-600 disabled:from-slate-800 disabled:to-slate-800 disabled:opacity-50 hover:opacity-90 font-bold text-white text-xs rounded transition shadow-lg flex items-center justify-center gap-4 cursor-pointer mt-3`}
                     >
-                      <div className="flex items-center gap-4 overflow-hidden mr-2">
-                        <span className="text-xs">🔍</span>
-                        <div className="truncate text-left">
-                          <span className="font-bold text-slate-200 text-xs">TikTok搜索养号</span>
-                          <span className="text-slate-500 block text-xs">根据人设兴趣关键词搜索并浏览视频</span>
-                        </div>
-                      </div>
-                      <div className="shrink-0">
-                        <span className={`text-xs px-2 py-0.5 rounded ${selectedDay === 2 ? 'bg-purple-500 text-white' : 'bg-slate-800 text-slate-400'
-                          }`}>
-                          {selectedDay === 2 ? '已选择' : '选择'}
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* Script Option 3 */}
-                    <div
-                      className={`flex items-center justify-between p-4 rounded-lg border text-xs font-mono transition cursor-pointer ${selectedDay === 3
-                        ? 'border-purple-500 bg-purple-950/20 text-white'
-                        : 'border-slate-850 bg-slate-900/50 text-slate-400 hover:border-purple-500/30'
-                        }`}
-                      onClick={() => setSelectedDay(3)}
-                    >
-                      <div className="flex items-center gap-4 overflow-hidden mr-2">
-                        <span className="text-xs">❤️</span>
-                        <div className="truncate text-left">
-                          <span className="font-bold text-slate-200 text-xs">TikTok点赞+访问感兴趣主页</span>
-                          <span className="text-slate-500 block text-xs">对目标视频点赞并访问创作者主页</span>
-                        </div>
-                      </div>
-                      <div className="shrink-0">
-                        <span className={`text-xs px-2 py-0.5 rounded ${selectedDay === 3 ? 'bg-purple-500 text-white' : 'bg-slate-800 text-slate-400'
-                          }`}>
-                          {selectedDay === 3 ? '已选择' : '选择'}
-                        </span>
-                      </div>
-                    </div>
-                    {/* Script Option 4 */}
-                    <div
-                      className={`flex items-center justify-between p-4 rounded-lg border text-xs font-mono transition cursor-pointer ${selectedDay === 4
-                        ? 'border-purple-500 bg-purple-950/20 text-white'
-                        : 'border-slate-850 bg-slate-900/50 text-slate-400 hover:border-purple-500/30'
-                        }`}
-                      onClick={() => setSelectedDay(4)}
-                    >
-                      <div className="flex items-center gap-4 overflow-hidden mr-2">
-                        <span className="text-xs">📺</span>
-                        <div className="truncate text-left">
-                          <span className="font-bold text-slate-200 text-xs">直播间挂机+随机互动</span>
-                          <span className="text-slate-500 block text-xs">自动进入热门直播间停留并发送暖场弹幕</span>
-                        </div>
-                      </div>
-                      <div className="shrink-0">
-                        <span className={`text-xs px-2 py-0.5 rounded ${selectedDay === 4 ? 'bg-purple-500 text-white' : 'bg-slate-800 text-slate-400'
-                          }`}>
-                          {selectedDay === 4 ? '已选择' : '选择'}
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* Script Option 5 */}
-                    <div
-                      className={`flex items-center justify-between p-4 rounded-lg border text-xs font-mono transition cursor-pointer ${selectedDay === 5
-                        ? 'border-purple-500 bg-purple-950/20 text-white'
-                        : 'border-slate-850 bg-slate-900/50 text-slate-400 hover:border-purple-500/30'
-                        }`}
-                      onClick={() => setSelectedDay(5)}
-                    >
-                      <div className="flex items-center gap-4 overflow-hidden mr-2">
-                        <span className="text-xs">🎯</span>
-                        <div className="truncate text-left">
-                          <span className="font-bold text-slate-200 text-xs">垂直领域创作者回关</span>
-                          <span className="text-slate-500 block text-xs">访问标签同赛道作者并执行"关注+留评"策略</span>
-                        </div>
-                      </div>
-                      <div className="shrink-0">
-                        <span className={`text-xs px-2 py-0.5 rounded ${selectedDay === 5 ? 'bg-purple-500 text-white' : 'bg-slate-800 text-slate-400'
-                          }`}>
-                          {selectedDay === 5 ? '已选择' : '选择'}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Upload custom script button */}
-                  <div className="pt-2 border-t border-slate-800 mt-4">
-                    <button className="w-full border border-dashed border-slate-700 hover:border-purple-500 hover:text-purple-400 text-slate-400 py-3 rounded-lg text-xs font-bold transition flex items-center justify-center gap-2 cursor-pointer shadow-sm hover:bg-purple-900/10">
-                      <span className="text-lg leading-none">+</span> 上传自定义执行脚本 (.json / .js)
+                      <Play className="w-3.5 h-3.5 fill-currentScale" />
+                      {isSimulating ? `正在远程代运营养号中...` : `一键运行养号脚本`}
                     </button>
                   </div>
-                </div>
-
-                {/* Click run button */}
-                <button
-                  onClick={handleRunSimulation}
-                  disabled={isSimulating}
-                  className={`w-full py-2 bg-gradient-to-r from-purple-600 to-indigo-600 disabled:from-slate-800 disabled:to-slate-800 disabled:opacity-50 hover:opacity-90 font-bold text-white text-xs rounded transition shadow-lg flex items-center justify-center gap-4 cursor-pointer mt-3`}
-                >
-                  <Play className="w-3.5 h-3.5 fill-currentScale" />
-                  {isSimulating ? `正在远程代运营养号中...` : `一键运行养号脚本`}
-                </button>
-              </div>
-              </>
-            )}
+                </>
+              )}
 
             </div>
 
