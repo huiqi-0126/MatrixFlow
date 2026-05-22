@@ -571,7 +571,7 @@ Ip Routing Channel: ${device.ip} (${device.region})
 
                       <span className="text-xs text-slate-500 font-bold block mb-2">流量拆分</span>
                       <div className="space-y-4.5 bg-slate-900/60 p-3 border border-slate-800/60 rounded">
-                        <div className="h-1.5 bg-slate-850 rounded-full overflow-hidden flex">
+                        <div className="h-1.5 bg-slate-800/80 rounded-full overflow-hidden flex">
                           <div className="bg-emerald-400 h-full" style={{ width: '89%' }}></div>
                           <div className="bg-indigo-400 h-full" style={{ width: '11%' }}></div>
                         </div>
@@ -809,7 +809,7 @@ Ip Routing Channel: ${device.ip} (${device.region})
               <button
                 onClick={killActiveApp}
                 disabled={!isPowerOn}
-                className="flex flex-col items-center justify-center py-2 px-1 hover:bg-slate-850 bg-slate-900 border border-slate-805 font-bold rounded-xl text-xs text-slate-300 gap-1 cursor-pointer transition active:scale-95"
+                className="flex flex-col items-center justify-center py-2 px-1 hover:bg-slate-800/80 bg-slate-900 border border-slate-805 font-bold rounded-xl text-xs text-slate-300 gap-1 cursor-pointer transition active:scale-95"
                 title="杀掉应用"
               >
                 <Skull className="w-3.5 h-3.5 text-rose-400" />
@@ -838,7 +838,7 @@ Ip Routing Channel: ${device.ip} (${device.region})
                   addLog("[SYSTEM] Dispatching system localization config. Default locale: en_US.");
                 }}
                 disabled={!isPowerOn}
-                className="flex flex-col items-center justify-center py-2 px-1 hover:bg-slate-850 bg-slate-900 border border-slate-805 font-bold rounded-xl text-xs text-slate-300 gap-1 cursor-pointer transition active:scale-95"
+                className="flex flex-col items-center justify-center py-2 px-1 hover:bg-slate-800/80 bg-slate-900 border border-slate-805 font-bold rounded-xl text-xs text-slate-300 gap-1 cursor-pointer transition active:scale-95"
                 title="语言与区域"
               >
                 <Globe className="w-3.5 h-3.5 text-indigo-400" />
@@ -1017,7 +1017,7 @@ Ip Routing Channel: ${device.ip} (${device.region})
 
               {/* Core Output Box */}
               {aiAnalysis.analyzing ? (
-                <div className="flex flex-col items-center justify-center text-center p-4 bg-slate-950/40 border border-dashed border-slate-850 rounded-xl">
+                <div className="flex flex-col items-center justify-center text-center p-4 bg-slate-950/40 border border-dashed border-slate-800 rounded-xl">
                   <div className="w-8 h-8 rounded-full border-3 border-t-indigo-550 border-r-slate-800 border-b-slate-800 border-l-slate-800 animate-spin mb-2" />
                   <span className="text-xs font-bold text-slate-300">Gemini-1.5-Flash generating advice report...</span>
                 </div>

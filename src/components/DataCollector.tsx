@@ -117,7 +117,7 @@ export default function DataCollector({ device }: DataCollectorProps) {
     <div className="flex flex-col gap-4 h-full text-slate-200">
 
       {/* Header: Agent Control Bar */}
-      <div className="bg-slate-800/40 border border-slate-800 rounded-2xl p-4 flex flex-wrap items-center justify-between gap-4 shrink-0">
+      <div className="bg-slate-800/30 border border-slate-700/50 rounded-2xl p-4 flex flex-wrap items-center justify-between gap-4 shrink-0">
         <div className="flex items-center gap-3">
           <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center shadow-lg shadow-cyan-500/20">
             <Database className="w-4.5 h-4.5 text-white" />
@@ -158,7 +158,7 @@ export default function DataCollector({ device }: DataCollectorProps) {
 
         {/* Left Panel: Calendar & Script List */}
         <div className="lg:col-span-5 flex flex-col h-full">
-          <div className="bg-slate-800/40 border border-slate-800 rounded-2xl p-4 flex flex-col h-full">
+          <div className="bg-slate-800/30 border border-slate-700/50 rounded-2xl p-4 flex flex-col h-full">
             {!activated ? (
               <div className="flex-1 flex flex-col items-center justify-center h-full">
                 <div className="text-4xl mb-4 opacity-50">🤖</div>
@@ -169,7 +169,7 @@ export default function DataCollector({ device }: DataCollectorProps) {
             ) : (
               <>
                 {/* Calendar Header */}
-                <div className="flex items-center mb-4 bg-slate-900 border border-slate-800 rounded-xl p-1 shadow-inner relative shrink-0">
+                <div className="flex items-center mb-4 bg-slate-900 border border-slate-700/50 rounded-xl p-1 shadow-inner relative shrink-0">
                   <button
                     onClick={() => setCalendarShift(s => s - 7)}
                     className="px-1 py-4 text-slate-500 hover:text-slate-300 hover:bg-slate-800 rounded transition cursor-pointer"
@@ -219,8 +219,8 @@ export default function DataCollector({ device }: DataCollectorProps) {
                 {/* Script List based on selectedDayOffset */}
                 <div className="flex-1 flex flex-col min-h-0">
                   {selectedDayOffset <= 0 ? (
-                    <div className="bg-slate-800/20 rounded-xl border border-slate-800 flex-1 overflow-hidden relative flex flex-col mb-3">
-                      <div className="flex items-center gap-4 p-4 border-b border-slate-800 shrink-0 bg-slate-900/50">
+                    <div className="bg-slate-800/20 rounded-xl border border-slate-700/50 flex-1 overflow-hidden relative flex flex-col mb-3">
+                      <div className="flex items-center gap-4 p-4 border-b border-slate-700/50 shrink-0 bg-slate-900/50">
                         <span className="text-xs bg-emerald-950 border border-emerald-800 text-emerald-400 px-2 py-0.5 rounded font-mono">
                           EXECUTED TASKS
                         </span>
@@ -229,7 +229,7 @@ export default function DataCollector({ device }: DataCollectorProps) {
                       </div>
                       <div className="flex-1 overflow-x-auto overflow-y-auto scrollbar-narrow">
                         <table className="w-full text-left text-xs text-slate-300 font-mono whitespace-nowrap min-w-[600px]">
-                          <thead className="sticky top-0 bg-slate-900/95 backdrop-blur-sm z-10 shadow-sm border-b border-slate-800">
+                          <thead className="sticky top-0 bg-slate-900/95 backdrop-blur-sm z-10 shadow-sm border-b border-slate-700/50">
                             <tr className="text-slate-500 uppercase">
                               <th className="py-2.5 px-3 font-bold">采集脚本</th>
                               <th className="py-2.5 px-2 font-bold">执行时间</th>
@@ -264,7 +264,7 @@ export default function DataCollector({ device }: DataCollectorProps) {
                       </div>
                     </div>
                   ) : (
-                    <div className="bg-slate-800/20 p-4 rounded-xl border border-slate-800 flex-1 flex flex-col justify-start space-y-3 overflow-y-auto scrollbar-narrow mb-3">
+                    <div className="bg-slate-800/20 p-4 rounded-xl border border-slate-700/50 flex-1 flex flex-col justify-start space-y-3 overflow-y-auto scrollbar-narrow mb-3">
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex items-center gap-3">
                           <span className="text-xs bg-cyan-950 border border-cyan-800 text-cyan-400 px-2 py-0.5 rounded font-mono">
@@ -275,7 +275,7 @@ export default function DataCollector({ device }: DataCollectorProps) {
                       </div>
 
                       {PLANNED_SCRIPTS.map((script, idx) => (
-                        <div key={idx} className="flex items-center justify-between p-3.5 rounded-lg border border-slate-850 bg-slate-900/60 hover:border-slate-700 transition group">
+                        <div key={idx} className="flex items-center justify-between p-3.5 rounded-lg border border-slate-800 bg-slate-900/60 hover:border-slate-700 transition group">
                           <div className="flex items-center gap-4 overflow-hidden mr-2">
                             <span className="text-slate-400 font-bold font-mono text-sm">{script.time}</span>
                             <div className="truncate text-left">
@@ -310,10 +310,10 @@ export default function DataCollector({ device }: DataCollectorProps) {
 
         {/* Right Panel: Logs & Results */}
         <div className="lg:col-span-7 flex flex-col h-full">
-          <div className="bg-slate-800/40 border border-slate-800 rounded-2xl p-4 flex flex-col text-left h-full bento-glow-cyan">
+          <div className="bg-slate-800/30 border border-slate-700/50 rounded-2xl p-4 flex flex-col text-left h-full shadow-lg shadow-slate-900/50">
             {(selectedDayOffset <= 0 || isSimulating) ? (
               <>
-                <div className="flex items-center gap-4 border-b border-slate-800 pb-4 mb-2 justify-between">
+                <div className="flex items-center gap-4 border-b border-slate-700/50 pb-4 mb-2 justify-between">
                   <div className="flex items-center gap-4">
 
                     <button
@@ -387,7 +387,7 @@ export default function DataCollector({ device }: DataCollectorProps) {
                     <div className="absolute inset-0 overflow-y-auto bg-slate-900/50 p-4 rounded border border-slate-900 scrollbar-narrow flex flex-col gap-2">
                       {(!isSimulating && resultsData.length === 0) ? (
                         [...MOCK_TRENDING, ...MOCK_OWN_VIDEOS].map(v => (
-                          <div key={v.id} className="group bg-black/30 border border-slate-800 rounded-xl p-3 hover:border-cyan-500/30 hover:bg-cyan-950/10 transition cursor-pointer">
+                          <div key={v.id} className="group bg-black/30 border border-slate-700/50 rounded-xl p-3 hover:border-cyan-500/30 hover:bg-cyan-950/10 transition cursor-pointer">
                             <div className="flex items-start justify-between gap-3">
                               <div className="flex-1 min-w-0">
                                 <div className="flex items-center gap-2 mb-1">
@@ -408,7 +408,7 @@ export default function DataCollector({ device }: DataCollectorProps) {
                         ))
                       ) : (
                         resultsData.map(v => (
-                          <div key={v.id} className="group bg-black/30 border border-slate-800 rounded-xl p-3 hover:border-cyan-500/30 hover:bg-cyan-950/10 transition cursor-pointer">
+                          <div key={v.id} className="group bg-black/30 border border-slate-700/50 rounded-xl p-3 hover:border-cyan-500/30 hover:bg-cyan-950/10 transition cursor-pointer">
                             <div className="flex items-start justify-between gap-3">
                               <div className="flex-1 min-w-0">
                                 <div className="flex items-center gap-2 mb-1">
@@ -446,7 +446,7 @@ export default function DataCollector({ device }: DataCollectorProps) {
                   系统将在规划的时间点自动运行爬虫和同步任务，并将最新的数据沉淀到云端库中。
                 </p>
 
-                <div className="mt-8 flex gap-3 text-xs font-mono bg-slate-900/60 p-3 rounded-lg border border-slate-800 z-10">
+                <div className="mt-8 flex gap-3 text-xs font-mono bg-slate-900/60 p-3 rounded-lg border border-slate-700/50 z-10">
                   <span className="flex items-center gap-1.5 text-slate-300">
                     <div className="w-2 h-2 rounded-full bg-cyan-500 shadow-[0_0_8px_rgba(6,182,212,0.8)]"></div>
                     监测账号: {device.name}

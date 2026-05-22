@@ -274,7 +274,7 @@ export default function ContentPlanner({ device, onAddRecreatedVideo }: ContentP
               {/* Content detail display */}
               <div className="bg-slate-800/20 p-4 rounded-xl border border-slate-800 flex-1 flex flex-col justify-between flex-1 min-h-[280px]">
                 <div>
-                  <div className="flex justify-between items-center mb-2 bg-slate-900/55 p-4 rounded border border-slate-850">
+                  <div className="flex justify-between items-center mb-2 bg-slate-900/55 p-4 rounded border border-slate-800">
                     <span className="text-xs font-mono text-indigo-400 font-bold uppercase">DAY {selectedDayIndex + 1} TOPIC (ENGLISH)</span>
                     <span className="text-xs text-slate-500 font-mono">Month: Cycle #1</span>
                   </div>
@@ -303,7 +303,7 @@ export default function ContentPlanner({ device, onAddRecreatedVideo }: ContentP
                         <span className="text-xs text-slate-500 font-bold block mb-2">
                           ✍️ 脚本大模型推荐提示 (English Writing Prompt)
                         </span>
-                        <div className="p-4 border border-slate-850 bg-slate-900/60 rounded text-xs font-mono text-slate-400 max-h-[80px] overflow-y-auto">
+                        <div className="p-4 border border-slate-800 bg-slate-900/60 rounded text-xs font-mono text-slate-400 max-h-[80px] overflow-y-auto">
                           {currentPlanDay.scriptPrompt}
                         </div>
                       </div>
@@ -314,7 +314,7 @@ export default function ContentPlanner({ device, onAddRecreatedVideo }: ContentP
                         </span>
                         <div className="flex flex-wrap gap-4">
                           {currentPlanDay.suggestedTags.map((t, idx) => (
-                            <span key={idx} className="text-xs bg-slate-850 border border-slate-800 text-slate-400 font-mono px-2 py-0.5 rounded">
+                            <span key={idx} className="text-xs bg-slate-800/80 border border-slate-800 text-slate-400 font-mono px-2 py-0.5 rounded">
                               {t}
                             </span>
                           ))}
@@ -436,7 +436,7 @@ export default function ContentPlanner({ device, onAddRecreatedVideo }: ContentP
                   <span className="text-xs text-slate-500 font-bold block mb-2 font-mono">2. 多模态分析关键帧序列 keyframe timestamps</span>
                   <div className="space-y-4">
                     {analysisReport.keyframes.map((frame, i) => (
-                      <div key={i} className="flex gap-4.5 bg-slate-900/60 p-4 rounded border border-slate-850 text-xs font-mono">
+                      <div key={i} className="flex gap-4.5 bg-slate-900/60 p-4 rounded border border-slate-800 text-xs font-mono">
                         <span className="text-emerald-400 font-bold shrink-0">{frame.time}</span>
                         <div className="flex-1 min-w-0">
                           <span className="text-slate-200 block text-xs leading-tight font-medium">{frame.action}</span>
@@ -520,7 +520,7 @@ export default function ContentPlanner({ device, onAddRecreatedVideo }: ContentP
               </div>
             )}
 
-            <div className="bg-slate-900/50 p-3 rounded border border-slate-850 text-xs text-slate-500 text-left mt-3 flex gap-4 items-start shrink-0">
+            <div className="bg-slate-900/50 p-3 rounded border border-slate-800 text-xs text-slate-500 text-left mt-3 flex gap-4 items-start shrink-0">
               <Info className="w-3.5 h-3.5 shrink-0 text-sky-400 mt-0.5" />
               <p className="leading-normal">
                 本模块模拟对海外多媒体片段中音轨(Audio Extraction)及画面快照转换。多模态在提取文案时已经全自动将可能含有拼写错误的口语化歌词或台词过滤，输出标准、无语法毛病的英文配音提纲。

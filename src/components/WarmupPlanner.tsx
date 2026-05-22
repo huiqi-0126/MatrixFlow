@@ -275,7 +275,7 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
   return (
     <div className="flex flex-col h-full gap-4">
       {/* ─── Agent Control Header ─── */}
-      <div className="bg-slate-800/40 border border-slate-800 rounded-2xl p-4 flex flex-wrap items-center justify-between gap-4 mb-4">
+      <div className="bg-slate-800/30 border border-slate-700/50 rounded-2xl p-4 flex flex-wrap items-center justify-between gap-4 mb-4">
         <div className="flex items-center gap-3">
           <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-purple-500/20">
             <Zap className="w-4 h-4 text-white" />
@@ -311,15 +311,15 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
 
           {/* 2.1 Timeline Selection (Left) */}
           <div className="lg:col-span-5 flex flex-col h-full">
-            <div className="bg-slate-800/40 border border-slate-800 rounded-2xl p-4 flex flex-col text-left bento-glow-indigo flex-1">
-              <div className="flex items-center gap-4 border-b border-slate-800 pb-4 mb-2">
+            <div className="bg-slate-800/30 border border-slate-700/50 rounded-2xl p-4 flex flex-col text-left shadow-lg shadow-slate-900/50 flex-1">
+              <div className="flex items-center gap-4 border-b border-slate-700/50 pb-4 mb-2">
                 <Calendar className="text-indigo-400 w-5 h-5" />
                 <h3 className="text-xs font-bold text-slate-150">5天拟真梯度算法养号计划</h3>
               </div>
 
               {/* Days buttons row */}
               {!hasPlanned ? (
-                <div className="flex-1 flex flex-col items-center justify-center p-8 bg-slate-800/20 rounded-xl border border-slate-800 border-dashed">
+                <div className="flex-1 flex flex-col items-center justify-center p-8 bg-slate-800/20 rounded-xl border border-slate-700/50 border-dashed">
                   {isPlanning ? (
                     <div className="w-full max-w-xs text-center">
                       <div className="text-slate-300 text-xs font-bold mb-3">大模型正在基于人设画像自动规划互动剧本...</div>
@@ -341,7 +341,7 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
               ) : (
                 <>
                   {/* 2.1 Calendar Header (7-Day Agent Execution Planner) */}
-                  <div className="flex items-center mb-4 bg-slate-900 border border-slate-800 rounded-xl p-1 shadow-inner relative">
+                  <div className="flex items-center mb-4 bg-slate-900 border border-slate-700/50 rounded-xl p-1 shadow-inner relative">
                     <button 
                       onClick={() => setCalendarShift(s => s - 7)}
                       className="px-1 py-4 text-slate-500 hover:text-slate-300 hover:bg-slate-800 rounded transition cursor-pointer"
@@ -390,8 +390,8 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
 
                   {/* Panel Content based on Selection */}
                   {selectedDayOffset <= 0 ? (
-                    <div className="bg-slate-800/20 rounded-xl border border-slate-800 flex-1 overflow-hidden relative flex flex-col mb-3">
-                      <div className="flex items-center gap-4 p-4 border-b border-slate-800 shrink-0 bg-slate-900/50">
+                    <div className="bg-slate-800/20 rounded-xl border border-slate-700/50 flex-1 overflow-hidden relative flex flex-col mb-3">
+                      <div className="flex items-center gap-4 p-4 border-b border-slate-700/50 shrink-0 bg-slate-900/50">
                         <span className="text-xs bg-emerald-950 border border-emerald-800 text-emerald-400 px-2 py-0.5 rounded font-mono">
                           EXECUTED TASKS
                         </span>
@@ -400,7 +400,7 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
                       </div>
                       <div className="flex-1 overflow-x-auto overflow-y-auto scrollbar-narrow">
                         <table className="w-full text-left text-xs text-slate-300 font-mono whitespace-nowrap min-w-[600px]">
-                          <thead className="sticky top-0 bg-slate-900/95 backdrop-blur-sm z-10 shadow-sm border-b border-slate-800">
+                          <thead className="sticky top-0 bg-slate-900/95 backdrop-blur-sm z-10 shadow-sm border-b border-slate-700/50">
                             <tr className="text-slate-500 uppercase">
                               <th className="py-2.5 px-3 font-bold">脚本名称</th>
                               <th className="py-2.5 px-2 font-bold">时间</th>
@@ -441,7 +441,7 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
                       </div>
                     </div>
                   ) : (
-                    <div className="bg-slate-800/20 p-4 rounded-xl border border-slate-800 flex-1 flex flex-col justify-start space-y-3 overflow-y-auto scrollbar-narrow mb-3">
+                    <div className="bg-slate-800/20 p-4 rounded-xl border border-slate-700/50 flex-1 flex flex-col justify-start space-y-3 overflow-y-auto scrollbar-narrow mb-3">
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex items-center gap-3">
                           <span className="text-xs bg-purple-950 border border-purple-800 text-purple-400 px-2 py-0.5 rounded font-mono">
@@ -457,7 +457,7 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
                         { time: '18:15', name: 'TikTok点赞+访问感兴趣主页', dur: '25分钟' },
                         { time: '21:00', name: '直播间挂机+随机互动', dur: '30分钟' },
                       ].map((script, idx) => (
-                        <div key={idx} className="flex items-center justify-between p-3.5 rounded-lg border border-slate-850 bg-slate-900/60 hover:border-slate-700 transition group">
+                        <div key={idx} className="flex items-center justify-between p-3.5 rounded-lg border border-slate-800 bg-slate-900/60 hover:border-slate-700 transition group">
                           <div className="flex items-center gap-4 overflow-hidden mr-2">
                             <span className="text-slate-400 font-bold font-mono text-sm">{script.time}</span>
                             <div className="truncate text-left">
@@ -495,10 +495,10 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
           </div>
           {/* 2.2 Terminal Log Simulation display (Right) */}
           <div className="lg:col-span-7 flex flex-col h-full">
-            <div className="bg-slate-800/40 border border-slate-800 rounded-2xl p-4 flex flex-col text-left h-full bento-glow-indigo">
+            <div className="bg-slate-800/30 border border-slate-700/50 rounded-2xl p-4 flex flex-col text-left h-full shadow-lg shadow-slate-900/50">
               {(selectedDayOffset <= 0 || isSimulating) ? (
                 <>
-                  <div className="flex items-center gap-4 border-b border-slate-800 pb-4 mb-2 justify-between">
+                  <div className="flex items-center gap-4 border-b border-slate-700/50 pb-4 mb-2 justify-between">
                     <div className="flex items-center gap-4">
                       <button
                         onClick={() => setViewMode('log')}
@@ -534,7 +534,7 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
                     )}
                   </div>
 
-                  <div className="flex-1 bg-slate-800/20 rounded-xl border border-slate-800 flex flex-col p-4 h-[350px]">
+                  <div className="flex-1 bg-slate-800/20 rounded-xl border border-slate-700/50 flex flex-col p-4 h-[350px]">
                     {/* Viewport */}
                     <div className="flex-1 relative overflow-hidden flex flex-col">
                       {viewMode === 'log' ? (
@@ -620,7 +620,7 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
                     系统将自动探测设备的空闲状态，并在指定的计划时间点，免干预下发并自动执行排队中的脚本。
                   </p>
 
-                  <div className="mt-8 flex gap-3 text-xs font-mono bg-slate-900/60 p-3 rounded-lg border border-slate-800 z-10">
+                  <div className="mt-8 flex gap-3 text-xs font-mono bg-slate-900/60 p-3 rounded-lg border border-slate-700/50 z-10">
                     <span className="flex items-center gap-1.5 text-slate-300">
                       <div className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.8)]"></div>
                       设备在线: {device.name}
@@ -642,7 +642,7 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
       {showParamsModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
           <div className="bg-slate-900 border border-slate-700 rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-hidden flex flex-col shadow-2xl">
-            <div className="flex items-center justify-between p-4 border-b border-slate-800 bg-slate-800/50">
+            <div className="flex items-center justify-between p-4 border-b border-slate-700/50 bg-slate-800/50">
               <div className="flex items-center gap-3">
                 <Sliders className="text-indigo-400 w-5 h-5" />
                 <h3 className="text-sm font-bold text-slate-150">脚本运行参数配置</h3>
@@ -672,11 +672,11 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
                       type="range" min="5" max="60" step="5"
                       value={totalMinutes}
                       onChange={(e) => setTotalMinutes(Number(e.target.value))}
-                      className="w-full accent-purple-500 bg-slate-850 h-1 rounded"
+                      className="w-full accent-purple-500 bg-slate-800/80 h-1 rounded"
                     />
                   </div>
 
-                  <div className="border-t border-slate-800 pt-3">
+                  <div className="border-t border-slate-700/50 pt-3">
                     <span className="text-xs text-slate-500 font-bold block mb-2 uppercase">互动概率参数控制 (Action Rates %)</span>
 
                     <div className="space-y-5">
@@ -689,7 +689,7 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
                           type="range" min="0" max="100" step="5"
                           value={likeProb}
                           onChange={(e) => setLikeProb(Number(e.target.value))}
-                          className="w-full accent-purple-400 bg-slate-850 h-1 rounded"
+                          className="w-full accent-purple-400 bg-slate-800/80 h-1 rounded"
                         />
                       </div>
 
@@ -702,7 +702,7 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
                           type="range" min="1" max="25"
                           value={maxLikes}
                           onChange={(e) => setMaxLikes(Number(e.target.value))}
-                          className="w-full accent-purple-400 bg-slate-850 h-1 rounded"
+                          className="w-full accent-purple-400 bg-slate-800/80 h-1 rounded"
                         />
                       </div>
 
@@ -715,7 +715,7 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
                           type="range" min="0" max="50" step="5"
                           value={bookmarkProb}
                           onChange={(e) => setBookmarkProb(Number(e.target.value))}
-                          className="w-full accent-purple-400 bg-slate-850 h-1 rounded"
+                          className="w-full accent-purple-400 bg-slate-800/80 h-1 rounded"
                         />
                       </div>
 
@@ -728,7 +728,7 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
                           type="range" min="0" max="100" step="5"
                           value={commentAreaProb}
                           onChange={(e) => setCommentAreaProb(Number(e.target.value))}
-                          className="w-full accent-purple-400 bg-slate-850 h-1 rounded"
+                          className="w-full accent-purple-400 bg-slate-800/80 h-1 rounded"
                         />
                       </div>
 
@@ -741,7 +741,7 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
                           type="range" min="0" max="50" step="5"
                           value={forwardProb}
                           onChange={(e) => setForwardProb(Number(e.target.value))}
-                          className="w-full accent-purple-400 bg-slate-850 h-1 rounded"
+                          className="w-full accent-purple-400 bg-slate-800/80 h-1 rounded"
                         />
                       </div>
 
@@ -754,7 +754,7 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
                           type="range" min="0" max="10"
                           value={maxComments}
                           onChange={(e) => setMaxComments(Number(e.target.value))}
-                          className="w-full accent-purple-400 bg-slate-850 h-1 rounded"
+                          className="w-full accent-purple-400 bg-slate-800/80 h-1 rounded"
                         />
                       </div>
 
@@ -767,7 +767,7 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
                           type="range" min="0" max="100" step="5"
                           value={likeCommentProb}
                           onChange={(e) => setLikeCommentProb(Number(e.target.value))}
-                          className="w-full accent-purple-400 bg-slate-850 h-1 rounded"
+                          className="w-full accent-purple-400 bg-slate-800/80 h-1 rounded"
                         />
                       </div>
 
@@ -780,7 +780,7 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
                           type="range" min="0" max="100" step="5"
                           value={replyCreatorProb}
                           onChange={(e) => setReplyCreatorProb(Number(e.target.value))}
-                          className="w-full accent-purple-400 bg-slate-850 h-1 rounded"
+                          className="w-full accent-purple-400 bg-slate-800/80 h-1 rounded"
                         />
                       </div>
 
@@ -793,7 +793,7 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
                           type="range" min="0" max="100" step="5"
                           value={newCommentProb}
                           onChange={(e) => setNewCommentProb(Number(e.target.value))}
-                          className="w-full accent-purple-400 bg-slate-850 h-1 rounded"
+                          className="w-full accent-purple-400 bg-slate-800/80 h-1 rounded"
                         />
                       </div>
 
@@ -806,7 +806,7 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
                           type="range" min="1" max="10"
                           value={failLimit}
                           onChange={(e) => setFailLimit(Number(e.target.value))}
-                          className="w-full accent-purple-400 bg-slate-850 h-1 rounded"
+                          className="w-full accent-purple-400 bg-slate-800/80 h-1 rounded"
                         />
                       </div>
 
@@ -819,14 +819,14 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
                           type="range" min="0" max="50" step="5"
                           value={visitAuthorProb}
                           onChange={(e) => setVisitAuthorProb(Number(e.target.value))}
-                          className="w-full accent-purple-400 bg-slate-850 h-1 rounded"
+                          className="w-full accent-purple-400 bg-slate-800/80 h-1 rounded"
                         />
                       </div>
                     </div>
 
                   </div>
 
-                  <div className="bg-slate-950/60 p-4 rounded-lg border border-slate-850 mt-3 leading-normal text-xs text-slate-400">
+                  <div className="bg-slate-950/60 p-4 rounded-lg border border-slate-800 mt-3 leading-normal text-xs text-slate-400">
                     <span className="font-bold text-slate-300 block mb-2">🛠️ 反反作弊防封设计 (Anti-Ban Design):</span>
                     使用基于特定概率的非固定动作时间（如浏览时长30-50s随机分布），有效模拟海外真实用户在手势滑动、停留聚焦上的不规则行为特征。
                   </div>
@@ -838,7 +838,7 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
 
             </div>
 
-            <div className="p-4 border-t border-slate-800 bg-slate-800/30 flex justify-end gap-3">
+            <div className="p-4 border-t border-slate-700/50 bg-slate-800/30 flex justify-end gap-3">
               <button
                 onClick={() => setShowParamsModal(false)}
                 className="px-4 py-2 rounded text-xs font-bold text-slate-300 hover:bg-slate-800 transition"

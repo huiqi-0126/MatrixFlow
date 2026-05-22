@@ -252,11 +252,11 @@ export default function PersonaManager({
           ) : (
             <div className="space-y-5 flex-1">
               <div className="grid grid-cols-2 gap-3 text-xs font-mono">
-                <div className="bg-slate-950/60 p-3 rounded border border-slate-850">
+                <div className="bg-slate-950/60 p-3 rounded border border-slate-800">
                   <span className="text-slate-500 block mb-1 text-[10px]">TARGET RACE</span>
                   <span className="text-slate-200 font-bold">{persona.race}</span>
                 </div>
-                <div className="bg-slate-950/60 p-3 rounded border border-slate-850">
+                <div className="bg-slate-950/60 p-3 rounded border border-slate-800">
                   <span className="text-slate-500 block mb-1 text-[10px]">GENDER</span>
                   <span className="text-slate-200 font-bold">{persona.gender}</span>
                 </div>
@@ -264,7 +264,7 @@ export default function PersonaManager({
 
               <div>
                 <span className="text-[10px] text-slate-500 font-bold block mb-1.5 uppercase">CORE VALUES (价值观方向)</span>
-                <div className="bg-slate-950/60 p-3 rounded border border-slate-850 text-indigo-300 font-mono italic text-xs leading-relaxed">
+                <div className="bg-slate-950/60 p-3 rounded border border-slate-800 text-indigo-300 font-mono italic text-xs leading-relaxed">
                   "{persona.values}"
                 </div>
               </div>
@@ -282,24 +282,24 @@ export default function PersonaManager({
 
               <div>
                 <span className="text-[10px] text-slate-500 font-bold block mb-1.5 uppercase">COMMENTARY TONE (互动文风)</span>
-                <div className="bg-slate-950/60 p-3 rounded border border-slate-850 text-slate-300 font-mono text-xs flex items-center gap-2">
+                <div className="bg-slate-950/60 p-3 rounded border border-slate-800 text-slate-300 font-mono text-xs flex items-center gap-2">
                   <MessageSquare className="w-3.5 h-3.5 text-purple-400 shrink-0" />
                   {persona.tone}
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-3 text-xs font-mono">
-                <div className="bg-slate-950/60 p-3 rounded border border-slate-850">
+                <div className="bg-slate-950/60 p-3 rounded border border-slate-800">
                   <span className="text-slate-500 block mb-1 text-[10px]">CONTENT STYLE</span>
                   <span className="text-slate-200 font-bold text-[11px] truncate block">{persona.niche === 'aesthetic-cooking' ? 'POV, ASMR, Vlog' : 'Trend, Info, Promo'}</span>
                 </div>
-                <div className="bg-slate-950/60 p-3 rounded border border-slate-850">
+                <div className="bg-slate-950/60 p-3 rounded border border-slate-800">
                   <span className="text-slate-500 block mb-1 text-[10px]">TIMEZONE / POSTING</span>
                   <span className="text-slate-200 font-bold text-[11px]">UTC-5 (EST) Prime</span>
                 </div>
               </div>
 
-              <div className="bg-slate-950/60 p-3 rounded border border-slate-850">
+              <div className="bg-slate-950/60 p-3 rounded border border-slate-800">
                 <span className="text-slate-500 block mb-1 text-[10px] uppercase">Avoidance / Anti-ban Strategy</span>
                 <span className="text-emerald-400 font-bold text-[11px] block">No excessive tagging, native browsing enabled.</span>
               </div>

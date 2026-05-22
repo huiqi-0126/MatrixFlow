@@ -241,7 +241,7 @@ export default function AnalyticsAdvisor({ device, videoAssets }: AnalyticsAdvis
               {aiSuggestions ? (
                 <div className="space-y-3 pr-1">
                   {aiSuggestions.map((sug, i) => (
-                    <div key={i} className="bg-slate-900 p-3 rounded border border-slate-850 border-l-2 border-l-emerald-450 text-left">
+                    <div key={i} className="bg-slate-900 p-3 rounded border border-slate-800 border-l-2 border-l-emerald-450 text-left">
                       <p className="text-[10px] text-slate-200 leading-relaxed font-sans">{sug}</p>
                     </div>
                   ))}

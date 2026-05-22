@@ -312,7 +312,7 @@ export default function AssetManager({ device, videoAssets, onAddVideoAsset, onD
                   <span className="text-xs text-slate-500 font-bold block mb-2 font-mono">2. 多模态分析关键帧序列 keyframe timestamps</span>
                   <div className="space-y-4">
                     {analysisReport.keyframes.map((frame, i) => (
-                      <div key={i} className="flex gap-4.5 bg-slate-900/60 p-4 rounded border border-slate-850 text-xs font-mono">
+                      <div key={i} className="flex gap-4.5 bg-slate-900/60 p-4 rounded border border-slate-800 text-xs font-mono">
                         <span className="text-emerald-400 font-bold shrink-0">{frame.time}</span>
                         <div className="flex-1 min-w-0">
                           <span className="text-slate-200 block text-xs leading-tight font-medium">{frame.action}</span>
@@ -396,7 +396,7 @@ export default function AssetManager({ device, videoAssets, onAddVideoAsset, onD
               </div>
             )}
 
-            <div className="bg-slate-900/50 p-3 rounded border border-slate-850 text-xs text-slate-500 text-left mt-3 flex gap-4 items-start shrink-0">
+            <div className="bg-slate-900/50 p-3 rounded border border-slate-800 text-xs text-slate-500 text-left mt-3 flex gap-4 items-start shrink-0">
               <Info className="w-3.5 h-3.5 shrink-0 text-sky-400 mt-0.5" />
               <p className="leading-normal">
                 本模块模拟对海外多媒体片段中音轨(Audio Extraction)及画面快照转换。多模态在提取文案时已经全自动将可能含有拼写错误的口语化歌词或台词过滤，输出标准、无语法毛病的英文配音提纲。
