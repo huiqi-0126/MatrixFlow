@@ -242,7 +242,7 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
   }, []);
 
   return (
-    <>
+    <div className="flex flex-col h-full gap-4">
       {/* ─── Agent Control Header ─── */}
       <div className="bg-slate-800/40 border border-slate-800 rounded-2xl p-4 flex flex-wrap items-center justify-between gap-4 mb-4">
         <div className="flex items-center gap-3">
@@ -281,7 +281,7 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
         </div>
       </div>
 
-      <div className="grid grid-cols-1 xl:grid-cols-12 gap-4 text-slate-200 h-full min-h-[500px]">
+      <div className="grid grid-cols-1 xl:grid-cols-12 gap-4 text-slate-200 flex-1 min-h-0">
 
         {/* 2. Middle & Right panel: Plan List Planner Timeline + Virtual Simulator Output logs (8 columns) */}
         <div className="xl:col-span-12 grid grid-cols-1 lg:grid-cols-12 gap-4">
@@ -815,6 +815,6 @@ export default function WarmupPlanner({ device, onUpdateDeviceStats }: WarmupPla
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }

@@ -540,25 +540,24 @@ export default function App() {
           </div>
 
           {/* 3. Horizontal tabs selection designed as high-quality Bento Grid cards */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5 gap-3 pb-2 select-none">
+          <div className="grid grid-cols-6 gap-2 pb-2 select-none">
             {[
-              { id: 'persona',      label: '🧠 智能体人设定义', desc: '账号肖像 · 人设 · 养殖环境', isAgent: false },
-              { id: 'warmup',       label: '💬 社交互动智能体',  desc: '模拟真人浏览互动防封号',   isAgent: true  },
-              { id: 'content',      label: '✍️ 内容生成智能体',  desc: '脚本规划 · 关键帧复刻',    isAgent: true  },
-              { id: 'scheduler',    label: '📤 素材发布智能体',  desc: '定时自动发布排期任务',     isAgent: true  },
-              { id: 'datacollect',  label: '🔍 数据采集智能体',  desc: '爆款采集 · 账号数据同步',   isAgent: true  },
-              { id: 'analytics',   label: '📊 数据分析',         desc: '成长趋势 · AI诊断建议',   isAgent: false },
+              { id: 'persona', label: '🧠 人设定义', desc: '肖像 · 人设 · 养殖环境', isAgent: false },
+              { id: 'warmup', label: '💬 社交互动智能体', desc: '浏览互动 · 防封号', isAgent: true },
+              { id: 'content', label: '✍️ 内容生成智能体', desc: '规划 · 关键帧复刻', isAgent: true },
+              { id: 'datacollect', label: '🔍 数据采集智能体', desc: '爆款 · 账号数据同步', isAgent: true },
+              { id: 'scheduler', label: '📤 素材发布', desc: '定时自动发布排期', isAgent: true },
+              { id: 'analytics', label: '📊 数据分析', desc: '成长趋势 · AI诊断', isAgent: false },
             ].map(tab => {
               const isActive = activeTab === tab.id;
               return (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id as any)}
-                  className={`p-3 rounded-xl border transition-all duration-200 cursor-pointer text-left flex flex-col justify-between relative ${
-                    isActive
-                      ? 'bg-indigo-600/20 border-indigo-500/50 text-indigo-400 bento-glow-indigo shadow-lg'
-                      : 'bg-slate-800/40 border-slate-800/60 text-slate-400 hover:text-slate-200 hover:bg-slate-800/60 hover:border-slate-700'
-                  }`}
+                  className={`p-2.5 rounded-xl border transition-all duration-200 cursor-pointer text-left flex flex-col justify-between relative ${isActive
+                    ? 'bg-indigo-600/20 border-indigo-500/50 text-indigo-400 bento-glow-indigo shadow-lg'
+                    : 'bg-slate-800/40 border-slate-800/60 text-slate-400 hover:text-slate-200 hover:bg-slate-800/60 hover:border-slate-700'
+                    }`}
                 >
                   <span className="font-bold text-xs tracking-tight">{tab.label}</span>
                   <span className="text-xs text-slate-500 pt-2 leading-tight font-mono block">{tab.desc}</span>
