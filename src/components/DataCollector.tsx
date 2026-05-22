@@ -228,7 +228,7 @@ export default function DataCollector({ device }: DataCollectorProps) {
                         <span className="text-[10px] text-slate-500 ml-auto">共 {EXECUTED_SCRIPTS.length} 条记录</span>
                       </div>
                       <div className="flex-1 overflow-x-auto overflow-y-auto scrollbar-narrow">
-                        <table className="w-full text-left text-[10px] text-slate-300 font-mono whitespace-nowrap min-w-[600px]">
+                        <table className="w-full text-left text-xs text-slate-300 font-mono whitespace-nowrap min-w-[600px]">
                           <thead className="sticky top-0 bg-slate-900/95 backdrop-blur-sm z-10 shadow-sm border-b border-slate-800">
                             <tr className="text-slate-500 uppercase">
                               <th className="py-2.5 px-3 font-bold">采集脚本</th>
@@ -244,9 +244,9 @@ export default function DataCollector({ device }: DataCollectorProps) {
                                 <td className="py-2 px-3 font-bold text-slate-200">{res.name}</td>
                                 <td className="py-2 px-2 text-slate-400">{res.time}</td>
                                 <td className="py-2 px-2 text-center">
-                                  <div className="flex items-center justify-center gap-1 opacity-0 group-hover:opacity-100 transition">
-                                    <button onClick={() => setViewMode('log')} className="px-1.5 py-0.5 text-[9px] font-bold rounded bg-sky-950/40 text-sky-400 hover:bg-sky-900/60 transition">日志</button>
-                                    <button onClick={() => setViewMode('results')} className="px-1.5 py-0.5 text-[9px] font-bold rounded bg-cyan-950/40 text-cyan-400 hover:bg-cyan-900/60 transition">结果</button>
+                                  <div className="flex items-center justify-center gap-1 transition">
+                                    <button onClick={() => setViewMode('log')} className="px-1.5 py-0.5 text-[10px] font-bold rounded bg-sky-950/40 text-sky-400 hover:bg-sky-900/60 transition cursor-pointer">日志</button>
+                                    <button onClick={() => setViewMode('results')} className="px-1.5 py-0.5 text-[10px] font-bold rounded bg-cyan-950/40 text-cyan-400 hover:bg-cyan-900/60 transition cursor-pointer">结果</button>
                                   </div>
                                 </td>
                                 <td className="py-2 px-2">
