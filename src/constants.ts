@@ -66,7 +66,7 @@ export const INITIAL_DEVICES: Device[] = [
     followerCount: 8900,
     videoCount: 19,
     totalViews: 90420,
-  },,
+  }, ,
   {
     id: 'device-5',
     name: 'iPhone XR #05',
@@ -366,7 +366,7 @@ export const INITIAL_DEVICES: Device[] = [
 export const INITIAL_PERSONAS: Record<string, Persona> = {
   'device-1': {
     id: 'device-1',
-    avatarUrl: '/avatar_ai.png',
+    avatarUrl: '/a001.png',
     interests: ['Aesthetic Cooking', 'Family Recipes', 'Coffee ASMR', 'Home Baking', 'Kitchen Restock'],
     race: 'Caucasian (Western Housewives)',
     gender: 'Female',

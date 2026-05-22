@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { 
   User, Check, Plus, Edit, Trash2, Video, Tag, MessageSquare, 
-  Sparkles, FileText, Info, HelpCircle, HardDrive, UploadCloud,
+  Sparkles, FileText, Info, HelpCircle, HardDrive, UploadCloud, Loader2,
   Flame, Play, Layers
 } from 'lucide-react';
 import { Persona, VideoAsset, Device } from '../types';
@@ -26,6 +26,16 @@ export default function PersonaManager({
 }: PersonaManagerProps) {
   
   const [isEditingPersona, setIsEditingPersona] = useState(false);
+  const [isFetchingCompetitors, setIsFetchingCompetitors] = useState(false);
+  const [showCompetitors, setShowCompetitors] = useState(false);
+
+  const handleFetchCompetitors = () => {
+    setIsFetchingCompetitors(true);
+    setTimeout(() => {
+      setIsFetchingCompetitors(false);
+      setShowCompetitors(true);
+    }, 3000);
+  };
   const [editedPersona, setEditedPersona] = useState<Persona>({ ...persona });
   
   // Video uploading modal/form state
@@ -227,8 +237,8 @@ export default function PersonaManager({
             
             {/* Visual Persona Header Summary */}
             <div className="bg-slate-800/20 p-4 rounded-xl border border-slate-800 flex items-center gap-4">
-              <div className="w-10 h-10 rounded-full border-2 border-white/20 shadow-inner shrink-0 overflow-hidden bg-slate-200">
-                {persona.avatarUrl.startsWith('http') ? (
+              <div className="w-20 h-20 rounded-full border-2 border-white/20 shadow-inner shrink-0 overflow-hidden bg-slate-200">
+                {(persona.avatarUrl.startsWith('http') || persona.avatarUrl.startsWith('/')) ? (
                   <img 
                     src={persona.avatarUrl} 
                     alt="Persona Avatar" 
@@ -321,14 +331,68 @@ export default function PersonaManager({
             <h3 className="text-xs font-bold text-slate-150">近期对标账号爆款视频抓取 (Trending Competitor Content)</h3>
           </div>
           
-          <span className="text-xs text-slate-500 font-mono tracking-wider">
-            AUTO-SYNCED: JUST NOW
-          </span>
+          <div className="flex items-center gap-3">
+            {showCompetitors && (
+              <span className="text-xs text-slate-500 font-mono tracking-wider">
+                AUTO-SYNCED: JUST NOW
+              </span>
+            )}
+            <button
+              onClick={handleFetchCompetitors}
+              disabled={isFetchingCompetitors || showCompetitors}
+              className={`flex items-center gap-2 px-3 py-1.5 rounded text-xs font-bold transition-all ${
+                showCompetitors
+                  ? 'bg-slate-800 text-slate-500 cursor-not-allowed'
+                  : 'bg-indigo-600 hover:bg-indigo-500 text-white shadow-[0_0_10px_rgba(79,70,229,0.3)]'
+              }`}
+            >
+              {isFetchingCompetitors ? (
+                <>
+                  <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                  抓取中...
+                </>
+              ) : showCompetitors ? (
+                <>
+                  <Check className="w-3.5 h-3.5" />
+                  已抓取
+                </>
+              ) : (
+                <>
+                  <UploadCloud className="w-3.5 h-3.5" />
+                  立刻抓取
+                </>
+              )}
+            </button>
+          </div>
         </div>
 
         {/* Assets List Grid */}
-        <div className="flex-1 overflow-y-auto h-full min-h-[460px] pr-1 space-y-3 scrollbar-narrow">
-          {[
+        <div className="flex-1 overflow-y-auto h-full min-h-[460px] pr-1 space-y-3 scrollbar-narrow relative">
+          
+          {!showCompetitors && !isFetchingCompetitors && (
+            <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6 bg-slate-800/20 rounded-xl border border-slate-700/50 border-dashed">
+              <div className="w-16 h-16 bg-slate-800 rounded-full flex items-center justify-center mb-4 shadow-inner">
+                <Flame className="w-8 h-8 text-slate-500" />
+              </div>
+              <h4 className="text-slate-200 font-bold mb-2">等待抓取对标爆款</h4>
+              <p className="text-sm text-slate-400 max-w-xs leading-relaxed">
+                系统将根据当前人设赛道（{device.niche}）和标签特征，自动抓取全网最新高互动量爆款视频作为参考。
+              </p>
+            </div>
+          )}
+
+          {isFetchingCompetitors && (
+            <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6 bg-slate-800/40 rounded-xl backdrop-blur-sm z-10">
+              <Loader2 className="w-10 h-10 text-indigo-500 animate-spin mb-4" />
+              <h4 className="text-indigo-400 font-bold mb-2 animate-pulse">正在全网扫描爆款视频...</h4>
+              <p className="text-xs text-slate-400 font-mono mt-2">
+                Matching tags: {persona.interests.slice(0, 2).join(', ')}...
+              </p>
+            </div>
+          )}
+
+          {showCompetitors && (
+            [
             {
               title: "15s Matcha Latte ASMR for sleepy mornings 🍵",
               creator: "@matcha_muse",
@@ -426,7 +490,8 @@ export default function PersonaManager({
                 </div>
 
               </div>
-          ))}
+          ))
+          )}
         </div>
       </div>
 
