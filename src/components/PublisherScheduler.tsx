@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {
   Calendar, CheckCircle, Clock, Plus, Trash2, Video,
-  Send, AlertTriangle, Play, RefreshCw, HelpCircle, Laptop, Smartphone, Check, Zap, Shield
+  Send, AlertTriangle, Play, RefreshCw, HelpCircle, Laptop, Smartphone, Check, Zap, Shield, BarChart2, TrendingUp, Users, Eye
 } from 'lucide-react';
 import { ScheduleTask, VideoAsset, Device } from '../types';
 
@@ -39,6 +39,10 @@ export default function PublisherScheduler({
   const [activeVisualizerTask, setActiveVisualizerTask] = useState<ScheduleTask | null>(null);
   const [agentActivated, setAgentActivated] = useState<boolean>(false);
   const [agentMode, setAgentMode] = useState<'fullAuto' | 'userConfirm'>('fullAuto');
+
+  // Trend Modal State
+  const [showTrendModal, setShowTrendModal] = useState(false);
+  const [activeTrendTask, setActiveTrendTask] = useState<ScheduleTask | null>(null);
 
   // New task form state
   const [selectedAssetId, setSelectedAssetId] = useState<string>('');
@@ -331,6 +335,19 @@ export default function PublisherScheduler({
                                 </button>
                               )}
 
+                              {task.status === 'success' && (
+                                <button
+                                  onClick={() => {
+                                    setActiveTrendTask(task);
+                                    setShowTrendModal(true);
+                                  }}
+                                  className="p-1 px-2.5 text-indigo-400 bg-indigo-950/40 hover:bg-indigo-900/60 border border-indigo-900/40 rounded font-bold text-xs transition cursor-pointer flex items-center gap-1"
+                                  title="查看数据趋势"
+                                >
+                                  <BarChart2 className="w-3 h-3" /> 数据
+                                </button>
+                              )}
+
                               <button
                                 onClick={() => onDeleteTask(task.id)}
                                 className="p-1 text-slate-500 hover:text-red-400 hover:bg-red-950/20 rounded cursor-pointer transition shrink-0"
@@ -529,6 +546,54 @@ export default function PublisherScheduler({
 
               </div>
 
+            </div>
+          </div>
+        )}
+
+        {/* Modal: Data & Trends for Published Content */}
+        {showTrendModal && activeTrendTask && (
+          <div className="fixed inset-0 bg-black/85 flex items-center justify-center z-50 p-4 font-mono">
+            <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 w-full max-w-2xl text-left shadow-2xl">
+              <div className="flex items-center justify-between border-b border-slate-800 pb-4 mb-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-lg bg-indigo-500/20 flex items-center justify-center border border-indigo-500/30">
+                    <BarChart2 className="w-5 h-5 text-indigo-400" />
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-bold text-white leading-none">内容数据与趋势 (Analytics)</h3>
+                    <p className="text-[10px] text-slate-400 mt-1">发布时间: {activeTrendTask.scheduleTime}</p>
+                  </div>
+                </div>
+                <button onClick={() => setShowTrendModal(false)} className="text-slate-500 hover:text-white cursor-pointer">✕</button>
+              </div>
+
+              <div className="grid grid-cols-3 gap-4 mb-6">
+                <div className="bg-slate-950 border border-slate-800 rounded-xl p-4 flex flex-col items-center justify-center gap-2 relative overflow-hidden">
+                  <Eye className="w-5 h-5 text-emerald-400" />
+                  <span className="text-2xl font-bold text-white">{(Math.random() * 10 + 2).toFixed(1)}k</span>
+                  <span className="text-[10px] text-slate-500">曝光浏览量 (Views)</span>
+                  <div className="absolute -bottom-4 -right-4 w-16 h-16 bg-emerald-500/10 rounded-full blur-xl"></div>
+                </div>
+                <div className="bg-slate-950 border border-slate-800 rounded-xl p-4 flex flex-col items-center justify-center gap-2 relative overflow-hidden">
+                  <CheckCircle className="w-5 h-5 text-sky-400" />
+                  <span className="text-2xl font-bold text-white">{Math.floor(Math.random() * 500 + 100)}</span>
+                  <span className="text-[10px] text-slate-500">点赞互动 (Engagements)</span>
+                  <div className="absolute -bottom-4 -right-4 w-16 h-16 bg-sky-500/10 rounded-full blur-xl"></div>
+                </div>
+                <div className="bg-slate-950 border border-slate-800 rounded-xl p-4 flex flex-col items-center justify-center gap-2 relative overflow-hidden">
+                  <TrendingUp className="w-5 h-5 text-indigo-400" />
+                  <span className="text-2xl font-bold text-white">+{Math.floor(Math.random() * 50 + 5)}</span>
+                  <span className="text-[10px] text-slate-500">净增粉 (Followers)</span>
+                  <div className="absolute -bottom-4 -right-4 w-16 h-16 bg-indigo-500/10 rounded-full blur-xl"></div>
+                </div>
+              </div>
+
+              <div className="bg-slate-950 border border-slate-800 rounded-xl p-4">
+                <span className="text-xs font-bold text-slate-300 block mb-3">AI 爆款潜质诊断 (AI Diagnostics)</span>
+                <p className="text-xs text-slate-400 leading-relaxed bg-black/40 p-3 rounded border border-slate-850">
+                  <strong className="text-emerald-400">系统点评：</strong>该视频的内容方向较好地契合了当前账号人设。前3秒的关键帧留存率达到了 68%，显著优于近期其他稿件的均值。建议在后续发布的视频中，保持相同的 BGM 节奏感和类似的视觉调性以持续吸引该垂直领域的受众。
+                </p>
+              </div>
             </div>
           </div>
         )}

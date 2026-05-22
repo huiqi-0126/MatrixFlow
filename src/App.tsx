@@ -482,72 +482,16 @@ export default function App() {
         <main className="xl:col-span-9 flex flex-col space-y-4 xl:space-y-4 overflow-y-auto max-h-[calc(100vh-100px)] scrollbar-narrow">
 
           {/* Active Device Indicator details */}
-          <div className="bg-slate-800/40 p-4 border border-slate-800 rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-4 text-left bento-glow-indigo">
-            <div>
-              <span className="text-xs text-indigo-455 uppercase font-mono font-bold tracking-wider">
-                ACTIVE CONTROL TARGET (当前选中操控设备)
-              </span>
-              <div className="flex items-center gap-2 mt-1">
-                <Smartphone className="w-5 h-5 text-indigo-400" />
-                <h2 className="text-xs font-bold font-mono text-white leading-none tracking-tight">
-                  {activeDevice.name}
-                </h2>
-                <span className="text-xs text-slate-400 font-mono ml-1">
-                  (IP: {activeDevice.ip} — {activeDevice.region})
-                </span>
-              </div>
-            </div>
 
-            {/* Platform Selection Buttons - Tiktok, Instagram, youtube */}
-            <div className="flex items-center gap-2 text-xs font-mono">
-              <span className="text-slate-500 text-xs mr-1">PLATFORM:</span>
-              {(['TikTok', 'Instagram', 'YouTube'] as const).map(platform => (
-                <button
-                  key={platform}
-                  onClick={() => {
-                    setDevices(prev => prev.map(d =>
-                      d.id === activeDevice.id ? { ...d, platform } : d
-                    ));
-                  }}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border transition-all duration-200 cursor-pointer font-bold text-xs ${activeDevice.platform === platform
-                    ? platform === 'TikTok'
-                      ? 'bg-black border-zinc-700 text-white shadow-lg'
-                      : platform === 'Instagram'
-                        ? 'bg-gradient-to-tr from-amber-400 via-rose-500 to-purple-600 border-rose-500/50 text-white'
-                        : 'bg-red-600 border-red-700 text-white shadow-lg'
-                    : 'bg-slate-900 border-slate-700 text-slate-400 hover:text-white hover:border-slate-600'
-                    }`}
-                >
-                  {platform === 'TikTok' ? <TikTokIcon className="w-3.5 h-3.5" /> : platform === 'Instagram' ? <Instagram className="w-3.5 h-3.5" /> : <Youtube className="w-4 h-4" />}
-                  {platform}
-                </button>
-              ))}
-            </div>
-
-            {/* Quick status attributes badges */}
-            <div className="flex items-center gap-2 text-xs font-mono">
-              <div className="bg-black/40 px-3 py-1.5 rounded-lg border border-slate-800">
-                <span className="text-slate-500 block text-xs leading-tight mb-0.5">NICHE RANGE</span>
-                <span className="font-bold text-indigo-400 uppercase">{activeDevice.niche}</span>
-              </div>
-              <div className="bg-black/40 px-3 py-1.5 rounded-lg border border-slate-800">
-                <span className="text-slate-500 block text-xs leading-tight mb-0.5">TOTAL SCRIPT FLOWS</span>
-                <span className="font-bold text-emerald-400">
-                  {videoAssets.filter(a => a.niche === activeDevice.niche || a.niche === 'all').length + 10} 个 MP4
-                </span>
-              </div>
-            </div>
-          </div>
 
           {/* 3. Horizontal tabs selection designed as high-quality Bento Grid cards */}
-          <div className="grid grid-cols-6 gap-2 pb-2 select-none">
+          <div className="grid grid-cols-5 gap-2 pb-2 select-none">
             {[
-              { id: 'persona', label: '🧠 人设定义', desc: '肖像 · 人设 · 养殖环境', isAgent: false },
+              { id: 'persona', label: '🧠 人设定义', desc: '账号 · 人设 · 养殖环境', isAgent: false },
               { id: 'warmup', label: '💬 社交互动智能体', desc: '浏览互动 · 防封号', isAgent: true },
-              { id: 'content', label: '✍️ 内容生成智能体', desc: '规划 · 关键帧复刻', isAgent: true },
               { id: 'datacollect', label: '🔍 数据采集智能体', desc: '爆款 · 账号数据同步', isAgent: true },
-              { id: 'scheduler', label: '📤 素材发布', desc: '定时自动发布排期', isAgent: true },
-              { id: 'analytics', label: '📊 数据分析', desc: '成长趋势 · AI诊断', isAgent: false },
+              { id: 'assets', label: '📊 素材生成及管理', desc: '素材管理 · 视频复刻', isAgent: false },
+              { id: 'scheduler', label: '📤 内容发布管理', desc: '定时发布 · 数据趋势', isAgent: true },
             ].map(tab => {
               const isActive = activeTab === tab.id;
               return (
@@ -595,12 +539,6 @@ export default function App() {
                 onUpdateDeviceStats={handleUpdateDeviceStats}
               />
             </div>
-            <div className={activeTab === 'content' ? 'block h-full' : 'hidden'}>
-              <ContentPlanner
-                device={activeDevice}
-                onAddRecreatedVideo={handleAddVideoAsset}
-              />
-            </div>
             <div className={activeTab === 'assets' ? 'block h-full' : 'hidden'}>
               <AssetManager
                 device={activeDevice}
@@ -618,12 +556,6 @@ export default function App() {
                 onDeleteTask={handleDeleteTask}
                 onUpdateTaskStatus={handleUpdateTaskStatus}
                 onUpdateDeviceStats={handleUpdateDeviceStats}
-              />
-            </div>
-            <div className={activeTab === 'analytics' ? 'block h-full' : 'hidden'}>
-              <AnalyticsAdvisor
-                device={activeDevice}
-                videoAssets={videoAssets}
               />
             </div>
             <div className={activeTab === 'datacollect' ? 'block h-full' : 'hidden'}>
