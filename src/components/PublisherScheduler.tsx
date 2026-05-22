@@ -377,17 +377,12 @@ export default function PublisherScheduler({
                   className="w-full bg-black text-slate-205 border border-slate-800 rounded px-2.5 py-1.5 text-xs focus:outline-none focus:border-sky-500"
                 >
                   <option value="">-- 请选择视频文件 --</option>
-                  {videoAssets.filter(a => a.niche === device.niche || a.niche === 'all').map(asset => (
+                  {videoAssets.map(asset => (
                     <option key={asset.id} value={asset.id}>
                       {asset.title} (Duration: {asset.duration}s)
                     </option>
                   ))}
                 </select>
-                {videoAssets.filter(a => a.niche === device.niche || a.niche === 'all').length === 0 && (
-                  <span className="text-xs text-red-400 mt-3 block">
-                    ⚠️ 当前人设垂类下无导入视频大纲！请先前往【人设与资源管理】选项导入几份视频文件。
-                  </span>
-                )}
               </div>
 
               <div>
