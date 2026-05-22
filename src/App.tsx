@@ -406,8 +406,8 @@ export default function App() {
                   key={dev.id}
                   onClick={() => setSelectedDeviceId(dev.id)}
                   className={`p-3.5 rounded-xl border transition-all duration-200 cursor-pointer select-none text-left flex flex-col justify-between relative overflow-hidden ${isActive
-                      ? 'bg-indigo-600/20 border-indigo-500/50 shadow-lg bento-glow-indigo'
-                      : 'bg-slate-800/40 border-slate-800/60 hover:bg-slate-800/60 hover:border-slate-700'
+                    ? 'bg-indigo-600/20 border-indigo-500/50 shadow-lg bento-glow-indigo'
+                    : 'bg-slate-800/40 border-slate-800/60 hover:bg-slate-800/60 hover:border-slate-700'
                     }`}
                 >
                   {/* Account Header line (Avatar + Info) */}
@@ -434,12 +434,12 @@ export default function App() {
                       <span className="text-[10px] bg-slate-800 text-slate-300 px-1.5 py-0.5 rounded font-bold">
                         {dev.platform}
                       </span>
-                      <span className={`text-[10px] px-1.5 py-0.5 rounded font-bold ${dev.followerCount > 100000 ? 'bg-orange-950 text-orange-400' : dev.followerCount > 10000 ? 'bg-purple-950 text-purple-400' : 'bg-slate-800 text-slate-300'}`}>
-                        {dev.followerCount > 100000 ? '大V号' : dev.followerCount > 10000 ? '高级号' : '新号'}
+                      <span className={`text-[10px] px-1.5 py-0.5 rounded font-bold ${dev.followerCount > 10000 ? 'bg-orange-950 text-orange-400' : dev.followerCount > 1000 ? 'bg-purple-950 text-purple-400' : 'bg-slate-800 text-slate-300'}`}>
+                        {dev.followerCount > 10000 ? '大V号' : dev.followerCount > 1000 ? '高级号' : '新号'}
                       </span>
                     </div>
                     <span className="text-[10px] text-slate-500">
-                      粉丝: <span className="text-slate-300 font-bold">{dev.followerCount >= 100000 ? (dev.followerCount/1000).toFixed(1) + 'k' : dev.followerCount}</span>
+                      粉丝: <span className="text-slate-300 font-bold">{dev.followerCount >= 100000 ? (dev.followerCount / 1000).toFixed(1) + 'k' : dev.followerCount}</span>
                     </span>
                   </div>
 
@@ -487,12 +487,12 @@ export default function App() {
                     ));
                   }}
                   className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border transition-all duration-200 cursor-pointer font-bold text-xs ${activeDevice.platform === platform
-                      ? platform === 'TikTok'
-                        ? 'bg-black border-zinc-700 text-white shadow-lg'
-                        : platform === 'Instagram'
-                          ? 'bg-gradient-to-tr from-amber-400 via-rose-500 to-purple-600 border-rose-500/50 text-white'
-                          : 'bg-red-600 border-red-700 text-white shadow-lg'
-                      : 'bg-slate-900 border-slate-700 text-slate-400 hover:text-white hover:border-slate-600'
+                    ? platform === 'TikTok'
+                      ? 'bg-black border-zinc-700 text-white shadow-lg'
+                      : platform === 'Instagram'
+                        ? 'bg-gradient-to-tr from-amber-400 via-rose-500 to-purple-600 border-rose-500/50 text-white'
+                        : 'bg-red-600 border-red-700 text-white shadow-lg'
+                    : 'bg-slate-900 border-slate-700 text-slate-400 hover:text-white hover:border-slate-600'
                     }`}
                 >
                   {platform === 'TikTok' ? <TikTokIcon className="w-3.5 h-3.5" /> : platform === 'Instagram' ? <Instagram className="w-3.5 h-3.5" /> : <Youtube className="w-4 h-4" />}
@@ -533,8 +533,8 @@ export default function App() {
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id as any)}
                   className={`p-3 rounded-xl border transition-all duration-200 cursor-pointer text-left flex flex-col justify-between ${isActive
-                      ? 'bg-indigo-600/20 border-indigo-500/50 text-indigo-400 bento-glow-indigo shadow-lg'
-                      : 'bg-slate-800/40 border-slate-800/60 text-slate-400 hover:text-slate-200 hover:bg-slate-800/60 hover:border-slate-700'
+                    ? 'bg-indigo-600/20 border-indigo-500/50 text-indigo-400 bento-glow-indigo shadow-lg'
+                    : 'bg-slate-800/40 border-slate-800/60 text-slate-400 hover:text-slate-200 hover:bg-slate-800/60 hover:border-slate-700'
                     }`}
                 >
                   <span className="font-bold text-xs tracking-tight">{tab.label}</span>
@@ -597,8 +597,8 @@ export default function App() {
               />
             )}
             {activeTab === 'analytics' && (
-              <AnalyticsAdvisor 
-                device={activeDevice} 
+              <AnalyticsAdvisor
+                device={activeDevice}
                 videoAssets={videoAssets}
               />
             )}
