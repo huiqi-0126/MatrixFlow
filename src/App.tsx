@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import {
   Smartphone, Shield, Activity, Users, Flame, Globe, Sliders,
   Calendar, Video, Clock, BarChart, RefreshCw, Layers, Award, Info,
-  Instagram, Youtube, Send
+  Instagram, Youtube, Send, AlertTriangle, TrendingUp
 } from 'lucide-react';
 
 const TikTokIcon = ({ className }: { className?: string }) => (
@@ -298,11 +298,35 @@ export default function App() {
     }));
   };
 
-  // Account-specific metrics
-  const activeFollowersCount = activeDevice.followerCount;
-  const activeViewsCount = activeDevice.totalViews;
-  const activeVideoCount = activeDevice.videoCount;
-  const activeAccountHealth = activeFollowersCount > 500 ? '🟢 极佳 (High)' : '🟢 正常 (Good)';
+  // Matrix-level global statistics
+  const matrixStats = useMemo(() => {
+    const total = devices.length;
+    const active = devices.filter(d => d.accountStatus === 'active').length;
+    const dormant = devices.filter(d => d.accountStatus === 'dormant').length;
+    const banned = devices.filter(d => d.accountStatus === 'banned').length;
+    const totalFollowers = devices.reduce((s, d) => s + d.followerCount, 0);
+    const totalViews = devices.reduce((s, d) => s + d.totalViews, 0);
+    // Deterministic mock safety scores
+    const safetyScores = devices.map((d, i) => {
+      if (d.accountStatus === 'banned') return 12 + (i * 7) % 25;
+      if (d.accountStatus === 'dormant') return 58 + (i * 11) % 20;
+      return 82 + (i * 5) % 15;
+    });
+    const avgSafety = Math.round(safetyScores.reduce((s, v) => s + v, 0) / total);
+    // Nurture coverage: % of non-banned devices actively nurtured
+    const nurturableDevices = devices.filter(d => d.accountStatus !== 'banned');
+    const nurturedDevices = nurturableDevices.filter(d => d.status === 'warmup' || d.videoCount > 5);
+    const nurtureCoverage = nurturableDevices.length > 0 ? Math.round((nurturedDevices.length / nurturableDevices.length) * 100) : 0;
+    // Task stats
+    const pendingTasks = tasks.filter(t => t.status === 'pending').length;
+    const successTasks = tasks.filter(t => t.status === 'success').length;
+    // Mock today follower gain from active devices
+    const todayFollowerGain = devices.filter(d => d.accountStatus === 'active').reduce((s, d) => s + Math.max(2, Math.floor(d.followerCount * 0.02)), 0);
+    return { total, active, dormant, banned, totalFollowers, totalViews, avgSafety, nurtureCoverage, pendingTasks, successTasks, todayFollowerGain };
+  }, [devices, tasks]);
+
+  const safetyColor = matrixStats.avgSafety >= 70 ? 'text-emerald-400' : matrixStats.avgSafety >= 50 ? 'text-amber-400' : 'text-red-400';
+  const safetyBorder = matrixStats.avgSafety >= 70 ? 'border-slate-700/40' : matrixStats.avgSafety >= 50 ? 'border-amber-500/30' : 'border-red-500/30';
 
   return (
     <div className="min-h-screen bg-[var(--color-canvas)] text-slate-100 flex flex-col font-sans select-none antialiased">
@@ -327,45 +351,66 @@ export default function App() {
           </div>
         </div>
 
-        {/* Account-Specific Summary Statistics bar */}
-        <div className="flex items-center gap-3 text-xs">
-          <div className="stat-card bg-slate-800/30 border border-slate-700/40 px-3 py-2 rounded-xl text-left flex items-center gap-2.5">
-            <Users className="w-4 h-4 text-indigo-400" />
+        {/* Matrix Global Statistics bar */}
+        <div className="flex items-center gap-2 text-xs flex-wrap">
+          {/* 矩阵设备 */}
+          <div className="stat-card bg-slate-800/30 border border-slate-700/40 px-2.5 py-1.5 rounded-xl text-left flex items-center gap-2">
+            <Smartphone className="w-3.5 h-3.5 text-indigo-400" />
             <div>
-              <span className="text-slate-500 block text-[9px] leading-none uppercase font-sans">Account Followers</span>
-              <span className="text-sm font-bold font-mono text-white leading-tight">
-                {activeFollowersCount >= 1000 ? (activeFollowersCount / 1000).toFixed(1) + 'k' : activeFollowersCount}
-              </span>
+              <span className="text-slate-500 block text-[9px] leading-none uppercase font-sans">矩阵设备</span>
+              <div className="flex items-baseline gap-1">
+                <span className="text-sm font-bold font-mono text-white leading-tight">{matrixStats.total}</span>
+                <span className="text-[10px] text-emerald-400 font-mono">活跃{matrixStats.active}</span>
+              </div>
             </div>
           </div>
-
-          <div className="stat-card bg-slate-800/30 border border-slate-700/40 px-3 py-2 rounded-xl text-left flex items-center gap-2.5">
-            <Video className="w-4 h-4 text-sky-400" />
+          {/* 风险告警 */}
+          <div className={`stat-card bg-slate-800/30 border px-2.5 py-1.5 rounded-xl text-left flex items-center gap-2 ${matrixStats.banned > 0 ? 'border-red-500/30' : 'border-slate-700/40'}`}>
+            <AlertTriangle className={`w-3.5 h-3.5 ${matrixStats.banned > 0 ? 'text-red-400' : 'text-slate-500'}`} />
             <div>
-              <span className="text-slate-500 block text-[9px] leading-none uppercase font-sans">Posted Videos</span>
-              <span className="text-sm font-bold font-mono text-sky-400 leading-tight">
-                {activeVideoCount} 个
-              </span>
+              <span className="text-slate-500 block text-[9px] leading-none uppercase font-sans">风险告警</span>
+              <div className="flex items-baseline gap-1">
+                <span className={`text-sm font-bold font-mono leading-tight ${matrixStats.banned > 0 ? 'text-red-400' : 'text-slate-300'}`}>{matrixStats.banned}</span>
+                <span className="text-[10px] text-amber-400/80 font-mono">休眠{matrixStats.dormant}</span>
+              </div>
             </div>
           </div>
-
-          <div className="stat-card bg-slate-800/30 border border-slate-700/40 px-3 py-2 rounded-xl text-left flex items-center gap-2.5">
-            <Flame className="w-4 h-4 text-orange-400" />
+          {/* 今日涨粉 */}
+          <div className="stat-card bg-slate-800/30 border border-slate-700/40 px-2.5 py-1.5 rounded-xl text-left flex items-center gap-2">
+            <TrendingUp className="w-3.5 h-3.5 text-emerald-400" />
             <div>
-              <span className="text-slate-500 block text-[9px] leading-none uppercase font-sans">Total Views</span>
-              <span className="text-sm font-bold font-mono text-orange-400 leading-tight">
-                {activeViewsCount >= 1000000 ? (activeViewsCount / 1000000).toFixed(1) + 'M' : activeViewsCount >= 1000 ? (activeViewsCount / 1000).toFixed(1) + 'k' : activeViewsCount}
-              </span>
+              <span className="text-slate-500 block text-[9px] leading-none uppercase font-sans">今日涨粉</span>
+              <div className="flex items-baseline gap-1">
+                <span className="text-sm font-bold font-mono text-emerald-400 leading-tight">+{matrixStats.todayFollowerGain}</span>
+                <span className="text-[10px] text-emerald-500/70 font-mono">↑12%</span>
+              </div>
             </div>
           </div>
-
-          <div className="stat-card bg-slate-800/30 border border-slate-700/40 px-3 py-2 rounded-xl text-left flex items-center gap-2.5">
-            <Activity className="w-4 h-4 text-emerald-400" />
+          {/* 安全均分 */}
+          <div className={`stat-card bg-slate-800/30 border px-2.5 py-1.5 rounded-xl text-left flex items-center gap-2 ${safetyBorder}`}>
+            <Shield className={`w-3.5 h-3.5 ${safetyColor}`} />
             <div>
-              <span className="text-slate-500 block text-[9px] leading-none uppercase font-sans">Account Health</span>
-              <span className="text-sm font-bold font-mono text-emerald-400 leading-tight">
-                {activeAccountHealth}
-              </span>
+              <span className="text-slate-500 block text-[9px] leading-none uppercase font-sans">安全均分</span>
+              <span className={`text-sm font-bold font-mono leading-tight ${safetyColor}`}>{matrixStats.avgSafety}<span className="text-[10px] text-slate-500 ml-0.5">/100</span></span>
+            </div>
+          </div>
+          {/* 养号覆盖 */}
+          <div className="stat-card bg-slate-800/30 border border-slate-700/40 px-2.5 py-1.5 rounded-xl text-left flex items-center gap-2">
+            <Flame className="w-3.5 h-3.5 text-purple-400" />
+            <div>
+              <span className="text-slate-500 block text-[9px] leading-none uppercase font-sans">养号覆盖</span>
+              <span className="text-sm font-bold font-mono text-purple-400 leading-tight">{matrixStats.nurtureCoverage}%</span>
+            </div>
+          </div>
+          {/* 发布队列 */}
+          <div className="stat-card bg-slate-800/30 border border-slate-700/40 px-2.5 py-1.5 rounded-xl text-left flex items-center gap-2">
+            <Activity className="w-3.5 h-3.5 text-sky-400" />
+            <div>
+              <span className="text-slate-500 block text-[9px] leading-none uppercase font-sans">发布队列</span>
+              <div className="flex items-baseline gap-1">
+                <span className="text-sm font-bold font-mono text-sky-400 leading-tight">{matrixStats.pendingTasks}</span>
+                <span className="text-[10px] text-slate-500 font-mono">待发·<span className="text-emerald-500">{matrixStats.successTasks}</span>成功</span>
+              </div>
             </div>
           </div>
         </div>
